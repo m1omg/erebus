@@ -50,6 +50,32 @@ for label, needle, txt in (("harvest start", "march", A), ("break date", "octobe
     if needle not in txt.lower():
         errs.append(f"missing {label} ({needle})")
 
+# 6. a nameplate is a speaker. Narration must not wear a character's name —
+#    that is what made a flash-forward read as a prisoner predicting 2049.
+for name, g in (("After", after), ("Before", before)):
+    for sid, sc in g["scenes"].items():
+        sp = str(sc.get("sp", ""))
+        if sp in ("NARRATION", "", "YOU"): continue
+        if "\u201c" not in sc["text"]:
+            errs.append(f"{name}/{sid}: nameplate {sp!r} over a scene with no speech")
+
+# 7. nobody standing before 2049 may quote the length of the whole story back at us
+# forward-looking only: "we'll spend seventeen years" is prophecy,
+# "you have spent sixteen years" is memory
+SPAN = re.compile(r"(?:we'll|you'll|will|going to|shall)\s+\w*\s*"
+                  r"(?:spend|watch|see|take|be)\b[^.]{0,40}"
+                  r"(?:seventeen years|sixteen years|2049)|"
+                  r"(?:in|by) 2049", re.I)
+for name, g in (("After", after), ("Before", before)):
+    for sid, sc in g["scenes"].items():
+        if sc.get("ch") in ("aeon", "veto"): continue
+        sp = str(sc.get("sp", ""))
+        if sp in ("NARRATION", ""): continue
+        for q in re.findall(r"\u201c([^\u201d]*)\u201d", sc["text"]):
+            if SPAN.search(q):
+                errs.append(f"{name}/{sid}: {sp} speaks of the full span or of 2049 "
+                            f"before anyone could know it")
+
 for e in errs: print("ERROR:", e)
 print(f"continuity: {len(errs)} error(s)")
 sys.exit(1 if errs else 0)

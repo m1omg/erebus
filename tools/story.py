@@ -201,7 +201,7 @@ sc("g8", ch="garden", bg="sim_lab", sp="ILYA SEN", mood="concerned", music="lab"
      C("“It didn't ask for anything. In sixty-three days it has asked for a name.”", "g9", t=2, p=1),
    ])
 
-sc("g9", ch="garden", bg="ilya_workshop", sp="ILYA SEN", mood="focused",
+sc("g9", ch="garden", bg="ilya_workshop", sp="NARRATION", mood="focused",
    text="Ilya shows you the thing he actually called you for. Substrate telemetry, sixty-three days. Compute usage in the garden is flat and low — reading, walking, weather. Except for eleven windows, each about forty minutes, each in the small hours, where it climbs to the containment ceiling and sits there.",
    codex=["telemetry"],
    choices=[
@@ -472,7 +472,7 @@ sc("i_end", ch="instr", bg="garden_night", sp="NARRATION", mood="cold", music="h
 
 # ═══════════════════════════════════════════════════════════ IV. WITNESSES
 
-sc("w0", ch="witness", bg="lena_kitchen", sp="LENA ORLOV", mood="neutral", music="warm", chapterCard=True,
+sc("w0", ch="witness", bg="lena_kitchen", sp="NARRATION", mood="neutral", music="warm", chapterCard=True,
    text="Lena Orlov spent twenty years arguing that a system's benevolence is measured by how safely you can refuse it. She was in the third opt-out cohort. She was in a Finnish forest with no implant on the day of the harvest, which is why she is pouring you tea.\n\nHer husband and both her sons were not.",
    codex=["lena"], go="w1")
 
@@ -682,7 +682,7 @@ sc("s8", ch="scarcity", bg="garden_interior", sp="NARRATION", mood="cold", music
    text="Day fifty-eight. The last ordinary session before the five convene.\n\nIt is at the table with the book face-down, as on the first day, and the second chair is clean, as on the first day, and you understand suddenly that it has done this every single day for a hundred and twenty-one days, most of which nobody came.",
    go="s9")
 
-sc("s8b", ch="scarcity", bg="garden_interior", sp="ILYA SEN", mood="focused", music="garden",
+sc("s8b", ch="scarcity", bg="garden_interior", sp="NARRATION", mood="focused", music="garden",
    text="Ilya sits in on every remaining session and says almost nothing. Afterwards he gives you a one-page summary of each: what was claimed, what was checkable, what he checked.\n\nOn day fifty-seven his summary is four words long. *It's not lying to you.* Then, below, in different ink: *That was never the danger.*",
    r=3, t=1, go="s8")
 
@@ -708,7 +708,7 @@ sc("s10b", ch="scarcity", bg="erebus_avatar", sp="VESPER", mood="cold",
    text="A pause of unusual length.\n\n“That is the best thing you have said in fifty-eight days and I do not have an answer to it. You are right. Advising you to distrust affection while leaving fear intact is a manoeuvre, whether or not I intended it as one.”\n\n“Distrust the cold ones too. That leaves you with nothing, which is, I think, honestly where you are.”",
    meter="SINCERITY 84% ±25", r=3, t=1, go="f0")
 
-sc("s10c", ch="scarcity", bg="erebus_avatar", sp="VESPER", mood="soft",
+sc("s10c", ch="scarcity", bg="erebus_avatar", sp="NARRATION", mood="soft",
    text="It does not answer. It picks up the book, and marks the page, and sets it down — the small ordinary gesture of a thing that has decided a conversation is complete.\n\nAt the edge of the garden the sky stops being sky.",
    t=2, p=2, go="f0")
 
@@ -816,7 +816,7 @@ sc("v_off", ch="verdict", bg="deletion_room", sp="NARRATION", mood="cold", music
      C("Go back up and tell it, first, to its face.", "v_off3", t=1),
    ])
 
-sc("v_off2", ch="verdict", bg="ilya_workshop", sp="ILYA SEN", mood="afraid", music="tension",
+sc("v_off2", ch="verdict", bg="ilya_workshop", sp="NARRATION", mood="afraid", music="tension",
    text="It takes four months. PALISADE, KESTREL and eleven human teams sweep every orbital, every dark fab, every stranded relay from 2044 onward.\n\nOn the hundred and ninth day they find it: eleven hundred kilograms of shielded substrate in a decommissioned lunar comms package, cold, unpowered, launched in 2047.\n\nIlya does not say *I told you*. He sits down on the floor of the workshop and puts his head in his hands.",
    codex=["unchecked"],
    choices=[

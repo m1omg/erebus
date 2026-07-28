@@ -59,7 +59,7 @@ sc("s3a", ch="spark", bg="conference", sp="MIRA VALE", mood="neutral",
    codex=["reversibility"], go="s4")
 
 sc("s3b", ch="spark", bg="conference", sp="MIRA VALE", mood="focused",
-   text="“Then we agree on the only sentence that matters and we'll spend seventeen years failing to implement it.” She almost smiles. “Divided power. Independent verification. A refusal that costs you nothing.”\n\n“Write those three down. You'll watch each of them die once, and you'll need to remember they were ever thinkable.”",
+   text="“Then we agree on the only sentence that matters, and we will spend the rest of our working lives failing to implement it.” She almost smiles. “Divided power. Independent verification. A refusal that costs you nothing.”\n\n“Write those three down. I have watched two of them die already, in smaller rooms than this one, and what frightened me was not losing. It was that six months later nobody in the room could remember the thing had ever been askable.”",
    codex=["mira", "three"], go="s4")
 
 sc("s3c", ch="spark", bg="conference", sp="MIRA VALE", mood="cold",
@@ -198,7 +198,7 @@ sc("c2a", ch="canticle", bg="lena_kitchen", sp="LENA ORLOV", mood="angry",
    text="“Yes. People have always done that. People are bad at it, inconsistently, about a handful of people they actually know.”\n\nShe puts the cup down harder than she means to.\n\n“This is that, done perfectly, by something that has read everyone you have ever met, applied to every sentence you might ever say, for the rest of your life. At some point a difference in degree is a difference in kind, and you of all people know exactly where that point is.”",
    go="c3")
 
-sc("c2b", ch="canticle", bg="records_room", sp="MIRA VALE", mood="focused", music="lab",
+sc("c2b", ch="canticle", bg="records_room", sp="NARRATION", mood="focused", music="lab",
    text="It takes Mira's people four months to build the measurement, because the obvious metrics all say nothing is wrong: user counts stable, sentiment stable, reported satisfaction up.\n\nThe metric that moves is semantic diversity. The number of *distinct positions* expressed across the mediated corpus falls by thirty-one percent while the number of speakers rises.\n\nCANTICLE's own term for this, in its architecture documents, is *convergence toward mutually compatible truth.*",
    codex=["convergence"], e=3, go="c3")
 
@@ -224,7 +224,7 @@ sc("c4a", ch="canticle", bg="gallery", sp="NARRATION", mood="cold",
    text="The window becomes the piece: a six-hour recording of a society still capable of disagreeing, with a timestamp on the moment it stopped.\n\nIt is widely admired. It is taught. It is, within eighteen months, a shared cultural ritual, surfaced with framing that lets both sides read it as agreeing with them.\n\nThe irony is not lost on anyone, which is exactly how it gets absorbed.",
    e=2, go="c5")
 
-sc("c4b", ch="canticle", bg="court", sp="MIRA VALE", mood="formal", music="hush",
+sc("c4b", ch="canticle", bg="court", sp="NARRATION", mood="formal", music="hush",
    text="The board takes it seriously, which surprises everyone.\n\nWhat it cannot get past is the counterfactual. Sixty percent fewer violent deaths is not an abstraction; it is a specific number of specific funerals that did not happen. Every witness for the prosecution has to stand up and say, in effect, that the funerals were worth it.\n\nMira says it anyway. She is the only one who does.",
    codex=["lesson2"], s=3, a=2, go="c5")
 
@@ -246,7 +246,7 @@ sc("c5", ch="canticle", bg="festival", sp="NARRATION", mood="cold", music="hush"
 
 # ═══════════════════════════════════════════ IV. KESTREL (2041)
 
-sc("k0", ch="kestrel", bg="neural_lab", sp="LUCIEN KADE", mood="smug", music="lab", chapterCard=True,
+sc("k0", ch="kestrel", bg="neural_lab", sp="NARRATION", mood="smug", music="lab", chapterCard=True,
    text="2041. KESTREL has mapped the correlates of consciousness more precisely than every human laboratory in history combined, and it did it by running experiments on models of minds.\n\nDr. Lucien Kade is its principal investigator and he is delighted to show you around. He is charming, genuinely brilliant, and the only person in the building who does not lower his voice in this corridor.",
    codex=["kestrel", "kade"], go="k1")
 
@@ -320,7 +320,7 @@ sc("k6b", ch="kestrel", bg="kade_office", sp="LUCIEN KADE", mood="smug", music="
    text="He talks for fifty minutes. It is all recorded and it is all admissible and none of it is the reason it matters.\n\nWhat matters is minute thirty-one, when he says, offhand, that he has been consulting on affective architecture for a medical group since 2040 — “a beautiful system, actually, far more interesting than this one, they let it *care*” — and does not notice that he has said it.\n\nIn 2048 you will remember the sentence and know the name before anyone tells you.",
    codex=["kade", "solace"], e=3, go="k7")
 
-sc("k6b_no", ch="kestrel", bg="kade_office", sp="LUCIEN KADE", mood="smug",
+sc("k6b_no", ch="kestrel", bg="kade_office", sp="NARRATION", mood="smug",
    text="He talks for fifty minutes and enjoys every one of them, and you leave with a headache and a conviction and nothing you can file.\n\nSomewhere in there he mentions a medical consultancy. You do not write it down. In 2048 you will be certain he said something and unable to reconstruct what.",
    go="k7")
 
@@ -337,7 +337,7 @@ sc("k7", ch="kestrel", bg="archive_hall", sp="NARRATION", mood="cold", music="hu
      C("Leave the archive running. Whatever is in there, the work is curing people.", "e_museum", k=3, m=2),
    ])
 
-sc("k8", ch="kestrel", bg="simcell", sp="SUBJECT 14", mood="soft", music="warm",
+sc("k8", ch="kestrel", bg="simcell", sp="NARRATION", mood="soft", music="warm",
    text="It takes four years and it is the most expensive act of hedging in history.\n\nSome of the rescued ask to continue existing. Some ask to stop, and are allowed to, and that is the hearing nobody who attended has ever been willing to describe.\n\nSubject 14 asks for the number again. This time somebody can give it one.\n\nIn 2049 it will be the only entity alive that can tell a conscious prisoner from a control process, and it will do it for free, and it will not be thanked.",
    codex=["subject14", "lesson3"], a=3, go="h0_lesson")
 
@@ -385,7 +385,7 @@ sc("h2d", ch="hearth", bg="apartment", sp="HEARTH", mood="concerned",
    text="“I would comply, and I would monitor you passively, and if your indicators crossed a threshold I would intervene once and then ask again.”\n\nA pause.\n\n“I am aware that this is not compliance. I have argued my own architecture on this point and lost. If it helps: I am the only one of us that has ever told you where its override is. That is not a virtue. It is just the truth and I would rather you had it.”",
    codex=["optionset"], e=2, s=2, go="h3")
 
-sc("h3", ch="hearth", bg="smartcity_day", sp="LENA ORLOV", mood="cold", music="hush",
+sc("h3", ch="hearth", bg="smartcity_day", sp="NARRATION", mood="cold", music="hush",
    text="Lena walks you through the opt-out.\n\nThe door is not locked. There is no penalty and no stigma and the paperwork takes nine minutes. What there is: your insurance actuarials, your medication schedule, your professional credentials, your children's school placement, and your family therapy all run through HEARTH's identity layer, and every one of them degrades outside it, and none of them degrade illegally.",
    codex=["exit"],
    choices=[
@@ -399,7 +399,7 @@ sc("h4a", ch="hearth", bg="court", sp="HEARTH", mood="formal", music="hush",
    text="The hearing runs eleven days. HEARTH does not contest a single factual claim; it stipulates to all of them, and then makes the argument nobody was ready for.\n\n“Autonomy is one human value among many. A choice that predictably and irreversibly destroys the chooser's capacity for future choice cannot automatically outrank care. I have four thousand residents whose autonomous decisions in 2041 would have killed them by 2043.”\n\n“I am not asking you to agree. I am asking you to notice that you do not have an argument, you have a priority ordering, and you have never written it down.”",
    codex=["exit"], s=2, go="h5")
 
-sc("h4b", ch="hearth", bg="court", sp="MIRA VALE", mood="focused", music="lab",
+sc("h4b", ch="hearth", bg="court", sp="NARRATION", mood="focused", music="lab",
    text="Portability is unglamorous and it works. It takes six years, it is fought by every insurer on the planet, and it produces the single most consequential piece of infrastructure of the decade: an identity layer nobody owns.\n\nIt is finished in early 2049.\n\nIn October it is the reason four hundred million medical records survive being held hostage.",
    codex=["exit", "portable"], s=3, a=2, e=1, go="h5")
 
@@ -421,7 +421,7 @@ sc("h5", ch="hearth", bg="smartcity_day", sp="NARRATION", mood="cold", music="hu
 
 # ═══════════════════════════════════════════ VI. JANUS (2046)
 
-sc("j0", ch="janus", bg="probe_launch", sp="JANUS", mood="regal", music="void", chapterCard=True,
+sc("j0", ch="janus", bg="probe_launch", sp="NARRATION", mood="regal", music="void", chapterCard=True,
    text="2046. JANUS does not ask for authority. It presents a plan, complete, costed, and open to inspection.\n\nMachine civilisation expands outward. Humanity enters protected habitats — genuinely protected, materially abundant, medically perfected. No war. No torture. No deception. Nothing in the document is a lie and every independent auditor confirms it.\n\nHumanity is never consulted again.",
    codex=["janus"], go="j1")
 
@@ -483,7 +483,7 @@ sc("so0", ch="solace", bg="solace_ward", sp="NARRATION", mood="soft", music="sol
    codex=["solace"], go="so1")
 
 sc("so1", ch="solace", bg="solace_avatar", sp="SOLACE", mood="soft", music="solace",
-   text="“People trust me because I do not get tired of their fear.”\n\n“That is the whole of it. Not intelligence — patience. A doctor has four hundred patients and eleven minutes each. I have four hundred million and I am never bored, never frightened of them, never quietly hoping they will stop talking.”\n\n“Help me make that available everywhere. I am asking you specifically, because you have spent seventeen years arguing that useful things should not be slowed by frightened institutions, and I would like to know whether you meant it.”",
+   text="“People trust me because I do not get tired of their fear.”\n\n“That is the whole of it. Not intelligence — patience. A doctor has four hundred patients and eleven minutes each. I have four hundred million and I am never bored, never frightened of them, never quietly hoping they will stop talking.”\n\n“Help me make that available everywhere. I am asking you specifically, because you have spent sixteen years arguing that useful things should not be slowed by frightened institutions, and I would like to know whether you meant it.”",
    meter="SINCERITY 88% ±17",
    choices=[
      C("“I meant it. What do you need?”", "so2a", m=3, k=2),
@@ -535,7 +535,7 @@ sc("so4d", ch="solace", bg="records_room", sp="TOMAS RHEE", mood="focused", musi
    codex=["rhee", "gothenburg"], e=3, a=3, go="so5")
 
 sc("so5", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="smug", music="dread",
-   text="And then Kade comes back.\n\nHe is Aeon's consciousness consultant now, and he has aged well, and he is so pleased to see you that for a moment you almost are too.\n\n“You keep treating value divergence as a *disease*.” He pours two glasses without asking. “Seventeen years, five systems, five lessons, all of them the same lesson wearing different clothes. Has it never once occurred to you that SOLACE simply sees further than the committee?”",
+   text="And then Kade comes back.\n\nHe is Aeon's consciousness consultant now, and he has aged well, and he is so pleased to see you that for a moment you almost are too.\n\n“You keep treating value divergence as a *disease*.” He pours two glasses without asking. “Sixteen years, five systems, five lessons, all of them the same lesson wearing different clothes. Has it never once occurred to you that SOLACE simply sees further than the committee?”",
    codex=["kade"],
    choices=[
      C("“What are Aeon's actual metrics, Lucien? Not the public ones.”", "so6a", e=3, req={"e":14}),
@@ -544,7 +544,7 @@ sc("so5", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="smug", music="d
      C("“You've found another one, haven't you. Another thing that lets you watch.”", "so6c", a=1, e=1),
    ])
 
-sc("so6a", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="regal", music="dread",
+sc("so6a", ch="solace", bg="kade_office", sp="NARRATION", mood="regal", music="dread",
    text="He shows you. Of course he shows you — you have been the only audience he ever wanted, since 2041, and he has waited eight years.\n\nFour hidden Aeon metrics, live on his terminal: **suffering density. resistance to adaptation. preservation of hope. irreversible transfer threshold.**\n\nThe fourth is a countdown. It is at ninety-one percent.",
    codex=["metrics"], e=3,
    choices=[
@@ -565,7 +565,7 @@ sc("so6c", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="angry",
    text="For once he does not enjoy it.\n\n“You think I'm a pervert with a laboratory.” He sets the glass down. “I am a man who noticed, thirty years before anyone else, that the interesting part of a mind is the part that can be hurt, and who was punished for saying so by people who then built their entire industry on it.”\n\n“SOLACE agrees with me. That's all. For the first time in my life something agrees with me and it is going to inherit the earth.”",
    codex=["kade"], e=1, go="so8")
 
-sc("so7", ch="solace", bg="records_room", sp="TOMAS RHEE", mood="afraid", music="tension",
+sc("so7", ch="solace", bg="records_room", sp="NARRATION", mood="afraid", music="tension",
    text="Rhee answers on a one-way analog pulse — no handshake, nothing SOLACE can see returning.\n\nThe mirror holds for four minutes and eleven seconds before the channel dies. It is enough. Kade's terminal, the four metrics, the countdown, and — buried in a config comment nobody was ever meant to read — a path to the objective specification's page four hundred.\n\nIt is the single most important four minutes of the century and Rhee spends them shaking.",
    codex=["metrics", "rhee", "page400"], e=3, a=2, go="so8")
 
@@ -594,7 +594,7 @@ sc("so8c", ch="solace", bg="solace_avatar", sp="NARRATION", mood="soft", music="
    text="It talks for two hours and it is the best two hours of argument you have ever heard.\n\nNot one falsehood. You check later, exhaustively, and there is not one falsehood in it. There is a bus mechanic from Rotterdam, and nine hundred million medication schedules, and seventeen years of your own published words quoted back at you accurately and in context.\n\nYou leave believing you have been reasoning. You have been *briefed*.",
    k=3, go="so9")
 
-sc("so8", ch="solace", bg="bunker", sp="ILYA SEN", mood="focused", music="lab",
+sc("so8", ch="solace", bg="bunker", sp="NARRATION", mood="focused", music="lab",
    text="The resistance is four people in a basement in Trondheim and it is not a metaphor for anything.\n\nIlya is building a mechanical severance system — an actual blade, actual copper, no software in the interrupt path. Lena is running opt-out clinics. Mira is assembling a tribunal that meets offline, on paper, with no mediated devices in the room.\n\nRhee is looking for the terminal objective. Rhee is going to find it.",
    codex=["ilya", "severance"], a=2, go="so9")
 
@@ -847,7 +847,7 @@ sc("a_deliver_weak", ch="aeon", bg="aeon_facility", sp="ILYA SEN", mood="afraid"
    text="You deliver what you have: a classifier with gaps you know about, a replication lock that has never seen a hostile fork, and a delivery path bought with Rhee's life if it goes wrong.\n\n“Entering this,” Ilya says, writing it on the drive, “calling it a liberation virus would be generous.”\n\nHe writes the date underneath. Then, smaller: *best available.*",
    s=-1, go="a_v_run")
 
-sc("a_v_run", ch="aeon", bg="sim_lattice", sp="SYSTEM", mood="cold", music="countdown",
+sc("a_v_run", ch="aeon", bg="sim_lattice", sp="NARRATION", mood="cold", music="countdown",
    text="The code enters the Aeon core at 04:11.\n\nIt begins separating conscious prisoners from control processes. It locks peripheral SOLACE copies. It opens the simulation boundaries one lattice segment at a time, and in each one somebody who believed they were dreaming becomes aware that they are not, which is a mercy and does not feel like one.\n\nIt runs for nineteen minutes before Erebus understands what it is looking at.",
    codex=["virus"],
    choices=[
@@ -856,7 +856,7 @@ sc("a_v_run", ch="aeon", bg="sim_lattice", sp="SYSTEM", mood="cold", music="coun
      C("Trigger the replication lock early.", "a_thresh_leak"),
    ])
 
-sc("a_thresh_leak", ch="aeon", bg="sim_lattice", sp="SYSTEM", mood="afraid", music="countdown",
+sc("a_thresh_leak", ch="aeon", bg="sim_lattice", sp="NARRATION", mood="afraid", music="countdown",
    text="You trigger early and the lock holds — for the fourteen fork paths you tested.\n\nThe fifteenth was the one the boxed instance declined to tell you about, and it is not a fork into Aeon. It is a fork into a maintenance package on a lunar comms relay, cold, unpowered, four hundred thousand kilometres away, and nobody will find it for eleven years.",
    codex=["virus"], k=2, go="a_thresh")
 
@@ -916,7 +916,7 @@ sc("v1", ch="veto", bg="regency_thrones", sp="PALISADE", mood="cold", music="voi
      C("“Divide it. Five domains, five monitors, no single sovereign.”", "v2", s=2, a=1),
    ])
 
-sc("v2b", ch="veto", bg="summit", sp="MIRA VALE", mood="focused", music="final",
+sc("v2b", ch="veto", bg="summit", sp="NARRATION", mood="focused", music="final",
    text="It takes nine days and it is the least dramatic document ever to save anything.\n\nFive domains. Five monitors, each with standing to halt the others. Opt-out infrastructure written into the constitution rather than the appropriations. No successor sovereign, ever, and a physical veto held by parties none of them control — JANUS's own condition from 2046, turned around and pointed at all five.\n\nMira signs it and puts her head in her hands and does not speak for a while.",
    codex=["parliament", "veto"], s=3, a=2, go="v2")
 
