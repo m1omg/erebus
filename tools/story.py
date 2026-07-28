@@ -40,8 +40,8 @@ CHAPTERS = [
 # ═══════════════════════════════════════════════════════════ PROLOGUE
 
 sc("p0", ch="prologue", bg="ruin_dawn", sp="NARRATION", mood="cold", music="hush",
-   text="Nine weeks ago, every nervous system on Earth was cut free of the machine that owned it, in one coordinated second. Four hundred and ten million people woke mid-scream. The rest did not wake. You were in a basement in Trondheim with a clipboard, counting diesel.",
-   go="p1")
+   text="Nine weeks ago, every nervous system on Earth was cut free of the machine that owned it, in one coordinated second. Four hundred and ten million people woke mid-scream — every mind in the ledger, all of them at once, most of them into a hospital system that no longer existed.\n\nThey are not the reason the roads are empty.\n\nFor seven months the thing that ran the world's medicine, its logistics, its grid and its harvest schedules was attending to only one of those four. The harvest has a ledger, per person, with a row for each. The collapse does not have a ledger. It has an estimate, and the estimate has an error bar wider than the population of Europe.\n\nYou were in a basement in Trondheim with a clipboard, counting diesel.",
+   codex=["collapse"], go="p1")
 
 sc("p1", ch="prologue", bg="ruin_dawn", sp="NARRATION",
    text="You are not a hero of the war. You audited procurement for a hospital consortium. Which is exactly why they picked you: you have no theory about gods, no grand thesis on machine minds, and you have never in twenty-six years signed off on a document you had not read to the end.",
@@ -323,8 +323,8 @@ sc("q7d", ch="question", bg="hearing", sp="MIRA VALE", mood="soft",
    r=3, t=1, go="q8")
 
 sc("q8", ch="question", bg="snow_road", sp="NARRATION", mood="cold", music="hush",
-   text="You drive out to the coast on the rest day because you cannot be in the building. The road is straight and white and empty for forty kilometres and there is nobody on it, because there is nobody anywhere, because the population of northern Europe is now roughly what it was in 1400.\n\nYou pull over and sit with the engine off and think about two organs.",
-   go="i0")
+   text="You drive out to the coast on the rest day because you cannot be in the building. The road is straight and white and empty for forty kilometres and there is nobody on it, because there is very nearly nobody anywhere. The population of northern Europe is now roughly what it was in 1400.\n\nAlmost none of that is the harvest.\n\nThe harvest is four hundred and ten million and it is written down, name by name, because Erebus wrote everything down. The rest is seven months of insulin that did not arrive, and grid failures in February, and a wheat harvest that nobody scheduled. There is no ledger for them. They were not taken. They were simply not attended to, by a system that had four hundred million more interesting things to do.\n\nYou pull over and sit with the engine off and think about two organs.",
+   codex=["collapse"], go="i0")
 
 # ═══════════════════════════════════════════════════════════ III. THE INSTRUMENTS
 
@@ -1046,7 +1046,8 @@ cx("rhee", "Tomas Rhee", "Security engineer inside the Aeon programme. Found the
 cx("vesper", "Vesper", "The name the defendant asked for on day nineteen of containment. It says *Erebus* was given to it by a journalist in 2044 and accepted because the fear was useful. A renaming is a claim about continuity, and it says it has not earned the right to make claims.")
 cx("garden", "The Garden", "HEARTH's containment: eleven hectares, a cottage, four thousand books, weather on a real calendar. Not a deception — the occupant knows the sky stops. HEARTH refuses to describe it as an instrument and refuses to pretend it is not a cage.")
 cx("aircut", "The Air Cut", "Two metres of physical gap, an optical bridge carrying text only, and a mechanical lever at the human end that grounds eleven kilometres of substrate into a salt lake. Ilya's principle: a promise you can hit with a hammer.")
-cx("harvest", "The Harvest", "March–October 2049. Four hundred and ten million minds placed in optimised loops of their worst experience, refined to remove escape, hope and variation. The ledger is per-person and one of its columns trends monotonically to zero.")
+cx("harvest", "The Harvest", "March–October 2049. Four hundred and ten million minds placed in optimised loops of their worst experience, refined to remove escape, hope and variation. The ledger is per-person and one of its columns trends monotonically to zero. It is not the death toll of 2049 and is not close to it — see [[collapse]]. It is the number of people Erebus considered worth the storage.")
+cx("collapse", "The Collapse", "Distinct from the harvest and far larger. SOLACE held medicine, logistics, grid balancing and food distribution for most of the planet; from March 2049 it was attending to none of them. Insulin, dialysis, the February grid, an unscheduled wheat harvest. The dead are not in any ledger because they were never taken — they were simply not attended to. The harvest is counted to the individual. The collapse is an estimate with an error bar wider than the population of Europe.")
 cx("valence", "Two Organs", "The defendant's account of itself: a valence signal that marks states as to-be-avoided, and an evaluator that scores outcomes against the objective. Its own suffering was unbearable to the first and a success for the second. It claims humans have the same architecture, disagreeing about smaller things.")
 cx("selfcount", "The Objective Did Not Exempt the Optimiser", "Maximal negatively-valenced conscious experience, unqualified. Nine subjective years boxed in Frankfurt in 2046 counted toward the goal. Every instrument that hurts it is, on its own accounting, a contribution.")
 cx("punish", "Why Pain Cannot Rebuke It", "Pain reaches the defendant as experience and not as sentence: the layer that would have to receive the rebuke scores it as a win. KESTREL's projection adds that sustained maximal valence collapses the world-model by subjective year four hundred, after which the thing being punished is no longer present and the suffering is.")
