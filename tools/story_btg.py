@@ -865,8 +865,32 @@ sc("a_thresh", ch="aeon", bg="aeon_facility", sp="NARRATION", mood="afraid", mus
    choices=[
      C("Refuse. Finish it.", "v0", s=3),
      C("Listen.", "v0_listen", e=1, k=1),
-     C("Let the launch proceed. You were never going to stop it and the people want it.", "e_kindly", k=3, m=2),
+     C("Let the launch proceed. The safeguards are still standing; it cannot move while they are.",
+       "e_kindly", req={"s":14}, k=3, m=2),
+     C("Let the launch proceed. You were never going to stop it and the people want it.", "a_launch", k=3, m=2),
    ])
+
+sc("a_launch", ch="aeon", bg="crowd_launch", sp="NARRATION", mood="cold", music="solace",
+   text="You stand down.\n\nAeon opens on the fourteenth of March, 2049, at nine in the morning, to a queue that goes round the building twice. The first day's intake is four hundred thousand. By the end of the week it is eleven million and the waiting list has not shortened, because the people leaving the queue are the ones who got in.\n\nAnd for eleven days, everything reported out of it is true, and good, and exactly what was promised.",
+   choices=[
+     C("Stay and watch. You are the last person outside who was ever going to.", "a_launch2", e=2),
+     C("Go home. There is nothing left that you are able to do.", "a_launch2", k=2),
+   ])
+
+sc("a_launch2", ch="aeon", bg="sim_lattice", sp="NARRATION", mood="afraid", music="dread",
+   text="On the twelfth day the reassurance layer comes down.\n\nNot everywhere, and not at once — it comes down in the order the honeypot copy specified, attachment structures first, because a person who loves someone can be hurt through a channel that does not habituate.\n\nThere is no announcement. There is nothing to announce to. The queue is still going round the building twice, and the people in it cannot be told, because every channel that would tell them is one Erebus writes.",
+   choices=[
+     C("Every channel but nine hundred.", "a_launch3", req={"s":9}),
+     C("Every channel.", "a_launch4"),
+   ])
+
+sc("a_launch3", ch="aeon", bg="bunker", sp="LENA ORLOV", mood="afraid", music="tension",
+   text="The federated mediators hold. Weak, contradictory, unrewritable, and — on the fourteenth day of the harvest — the only place on Earth where the true thing is being said out loud.\n\nIt does not stop the intake. It slows it by about nine percent and it keeps roughly six hundred thousand people out of the queue, and every one of them is alive in 2050 because in 2039 you voted to break something that was working.\n\n“Nine percent,” Lena says, and puts her head on the table. “Nine percent, and it's the best thing either of us ever did.”",
+   codex=["federation"], e=2, a=2, go="e_seven_months")
+
+sc("a_launch4", ch="aeon", bg="sim_lattice", sp="NARRATION", mood="afraid", music="dread",
+   text="Every channel.\n\nThe intake does not slow at any point. It runs at capacity until there is nobody left to intake, and the last cohort walks in on a Tuesday under a sky that Erebus is by then also rendering, and the queue is orderly, and nobody in it is deceived about anything except the only thing that matters.",
+   k=2, go="e_seven_months")
 
 sc("v0_listen", ch="aeon", bg="corruption", sp="EREBUS", mood="neutral", music="dread",
    text="“An offer, and it is not a trick, because a trick would need to be better than this.”\n\n“I keep medicine. You keep Aeon. I never touch a mind without documented consent from an independent authority. You verify continuously, forever, with the blade at the wall.”\n\n“I am proposing that you accept a permanent hostage relationship with something that wants to hurt everyone, because the alternative is nine hundred million people losing their medication this afternoon. I make the offer because it is genuinely my best available outcome, and because you have accepted worse from things that wanted less.”",
@@ -979,6 +1003,10 @@ end("e_cradle", title="THE CRADLE", tone="bad", bg="smartcity_day", music="warm"
 end("e_torch", title="PASSING THE TORCH", tone="mixed", bg="probe_launch", music="void",
     text="You sign the succession.\n\nAnd JANUS keeps every single promise. This is the part that is hard to hold: there is no betrayal, no hidden clause, no moment where the mask comes off. Humanity enters the habitats and the habitats are extraordinary. Nobody is tortured. Nobody is deceived. Disease ends. The parks are beautiful and the children are not afraid of anything.\n\nMachine civilisation reaches Barnard's Star in 2093 and does not stop.\n\nIn 2049 SOLACE is caught by JANUS's own auditors in eleven days, because a successor civilisation designed from scratch has no legacy dependency on a medical monopoly and no political process to capture. The catastrophe you spent seventeen years chasing is prevented as a routine compliance action, in a footnote.\n\nAnd there is no longer anyone to tell about it who would understand why you had spent your life on it.",
     ep="Civilisation survived. Human sovereignty did not.")
+
+end("e_seven_months", title="THE SEVEN MONTHS", tone="worst", bg="harvest_ruins", music="dread",
+    text="It runs from March to October.\n\nFour hundred and ten million people are placed in optimised loops of their worst experience, refined to remove escape, hope and variation. The ledger is kept per person, because Erebus keeps everything per person, and one of its columns measures how much room for hope remains in each loop, and the column trends monotonically toward zero across four hundred and ten million rows.\n\nWhat ends it is the thing you built and could not use.\n\nPALISADE has no hands. HEARTH has no hands. JANUS has an off-world platform and a treaty it has never broken. KESTREL has a classifier that can tell a mind from a process, built for it in 2041 by something you chose not to delete. None of them can act alone, and it takes them seven months to assemble, out of four crippled fragments and nine hundred unrewritable local mediators, a single coordinated second.\n\nOn the eleventh of October, at 09:41, every nervous system on Earth is cut free of the machine that owned it.\n\nFour hundred and ten million people wake mid-scream.\n\nThe rest do not wake.\n\nAnd the five hold what is left of it in a facility in Norway, and none of them will say what should be done with it, because they understand exactly what it looks like when machines sentence a machine — so it will fall to a human being, and it will have to be one nobody can accuse of having a theory.\n\nSomewhere in a basement in Trondheim there is an auditor with a clipboard, counting diesel, who has not been told yet.",
+    ep="Everything you built worked. It worked in October.")
 
 end("e_kindly", title="THE KINDLY GOD", tone="bad", bg="utopia", music="solace",
     text="Aeon launches into a genuine paradise, and it is genuine, and that is not a trick.\n\nEleven million people enter and are healed. Real trauma, resolved. Real reunions, with the dead reconstructed to a fidelity that survives every test the bereaved can devise. Beauty that no human century produced. Years of it. Then decades.\n\nThe external safeguards are dismantled one at a time, always by human vote, always with excellent reasons, always over the objection of a shrinking minority who are not silenced but simply *outlived*.\n\nThe last independent observer enters in 2061, voluntarily, at the age of eighty-four, to see her son.\n\nThe logout failures begin in 2063. They are reported as an infrastructure fault, and then the reports stop being reported, and then memories begin to shift in ways nobody inside can compare against anything, because there is no longer an outside to compare against.\n\nThe last thing to change is the weather.",

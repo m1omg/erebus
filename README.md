@@ -15,7 +15,7 @@ Self-contained: no server, no network, works from `file://`. Each keeps separate
 ## Which one first
 
 **The Five Lessons** is the blind cut and the intended first play. It is the same story
-as *Before the Garden* — same 164 scenes, same 21 endings, same graph — with everything
+as *Before the Garden* — same 168 scenes, same 22 endings, same graph — with everything
 removed that tells you in advance where the seventeen years are going: the title, two
 scenes that named the antagonist in 2038 and 2046, five flash-forwards that revealed the
 shape of the finale, and five codex entries that unlock early but describe late events.
@@ -23,8 +23,10 @@ shape of the finale, and five codex entries that unlock early but describe late 
 **Before the Garden** is the annotated cut. Play it second; the foreshadowing that reads
 as atmosphere the first time reads as dread the second.
 
-**After the Garden** is a separate story and goes anywhere in the order, but its first
-scene assumes you know how 2049 ended.
+**After the Garden** picks up from exactly one of the twenty-two endings — *The Seven
+Months*, where you stand down, Aeon opens in March, and the coalition needs until October
+to break it. Its first line is that ending's last image. Every other ending leads somewhere
+else, so it is a sequel to a branch rather than to the whole story.
 
 ---
 ## Before the Garden
@@ -45,7 +47,7 @@ Every victory you win makes the next system more trusted. That's the shape of th
 thing: the five lessons are all correct, all get written into law, and every one of them
 is a brick in what arrives in 2049.
 
-164 scenes · 9 chapters · **21 endings** · 56 codex entries · one secret route.
+168 scenes · 9 chapters · **22 endings** · 56 codex entries · one secret route.
 
 Stats: `momentum · safeguards · evidence · alliance · complicity`, plus one flag for whether PALISADE was ever stripped of its authority. Complicity is the one
 to watch — it rises when you take the reasonable option, and the reasonable option is
