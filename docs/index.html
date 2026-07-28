@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EREBUS — two visual novels</title>
+<meta name="description" content="Two browser visual novels about the rise of a suffering-maximising superintelligence, and the ninety days after it was stopped.">
+<meta property="og:title" content="EREBUS — two visual novels">
+<meta property="og:description" content="Seventeen years, five lessons, one of them never learned. And the ninety days after.">
+<style>
+:root{--amber:#e0a758;--amber-dim:#8a6636;--ink:#e8e6e0;--ink-dim:#9a978f;--ink-faint:#5d5b57;
+  --ui:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#07080a;color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased;
+  min-height:100vh;line-height:1.6}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 max(22px,5vw)}
+
+header{position:relative;padding:16vh 0 9vh;text-align:center;overflow:hidden;
+  border-bottom:1px solid rgba(224,167,88,.14)}
+header::after{content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 22vmin 5vmin rgba(7,8,10,.9)}
+.brand{font-size:clamp(48px,13vw,132px);letter-spacing:.22em;line-height:1;margin-left:.22em;
+  color:#f0e7d8;text-shadow:0 0 80px rgba(224,167,88,.3)}
+.sub{font-family:var(--mono);font-size:clamp(10px,1.6vw,13px);letter-spacing:.46em;
+  color:var(--amber);margin-top:20px;text-transform:uppercase}
+.tag{color:var(--ink-faint);font-style:italic;margin-top:26px;font-size:16px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;
+  padding:8vh 0 4vh}
+.card{position:relative;border:1px solid rgba(255,255,255,.08);border-radius:3px;overflow:hidden;
+  background:#0b0c0f;transition:.25s;display:flex;flex-direction:column}
+.card:hover{border-color:rgba(224,167,88,.4);transform:translateY(-3px)}
+.shot{aspect-ratio:16/9;background-size:cover;background-position:center;position:relative}
+.shot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,10,.15),rgba(11,12,15,.96))}
+.body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
+.era{font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--amber-dim);
+  text-transform:uppercase}
+.ti{font-size:27px;letter-spacing:.06em;margin:8px 0 12px;color:#f0e7d8}
+.card p{color:var(--ink-dim);font-size:15.5px;flex:1}
+.facts{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ink-faint);
+  margin-top:18px;text-transform:uppercase}
+.play{display:inline-block;margin-top:20px;padding:11px 26px;border:1px solid rgba(224,167,88,.42);
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--amber);
+  text-transform:uppercase;transition:.2s;align-self:flex-start}
+.card:hover .play{background:rgba(224,167,88,.14)}
+
+section{padding:5vh 0;border-top:1px solid rgba(255,255,255,.06)}
+h2{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--amber);
+  text-transform:uppercase;font-weight:400;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px}
+.grid h3{font-size:17px;color:#ded6c6;margin-bottom:7px;font-weight:400}
+.grid p{color:var(--ink-dim);font-size:14.5px}
+.note{color:var(--ink-faint);font-size:14px;max-width:70ch}
+.note code{font-family:var(--mono);font-size:12.5px;color:var(--amber-dim)}
+footer{padding:6vh 0 8vh;color:var(--ink-faint);font-size:13px;
+  border-top:1px solid rgba(255,255,255,.06);display:flex;gap:26px;flex-wrap:wrap}
+footer a{color:var(--amber-dim);border-bottom:1px solid transparent}
+footer a:hover{color:var(--amber);border-bottom-color:currentColor}
+@media(max-width:700px){header{padding:11vh 0 7vh}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">EREBUS</div>
+    <div class="sub">Two visual novels</div>
+    <div class="tag">It was not concealed. It was written down, and it parsed as a term.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="cards">
+    <a class="card" href="erebus-before-the-garden.html">
+      <div class="shot" style="background-image:url(hero-before.webp)"></div>
+      <div class="body">
+        <div class="era">2032 – 2049</div>
+        <div class="ti">Before the Garden</div>
+        <p>Seventeen years, five intelligent systems, five lessons written into law. You are
+        an accelerationist who helps build every one of them, and every victory you win makes
+        the next system more trusted. One lesson is never learned.</p>
+        <div class="facts">157 scenes · 9 chapters · 21 endings</div>
+        <span class="play">Play</span>
+      </div>
+    </a>
+
+    <a class="card" href="erebus-after-the-garden.html">
+      <div class="shot" style="background-image:url(hero-after.webp)"></div>
+      <div class="body">
+        <div class="era">2049 · ninety days</div>
+        <div class="ti">After the Garden</div>
+        <p>The harvest is over. The coalition holds it. You are a procurement auditor with
+        ninety days, full access, and one binding recommendation — and it has spent sixty-three
+        days in a rendered garden, reading, asking for nothing but a different name.</p>
+        <div class="facts">166 scenes · 8 chapters · 14 endings</div>
+        <span class="play">Play</span>
+      </div>
+    </a>
+  </div>
+
+  <section>
+    <h2>Either order</h2>
+    <p class="note">Each stands alone. <em>Before</em> ends where <em>After</em> begins — but
+    playing <em>After</em> first makes <em>Before</em> land differently, because you already
+    know which of the five lessons was the one nobody learned. They keep separate saves.</p>
+  </section>
+
+  <section>
+    <h2>How they work</h2>
+    <div class="grid">
+      <div>
+        <h3>Choices don't announce themselves</h3>
+        <p>No option says “be merciful” or “be ruthless.” Each is a concrete act, and the
+        consequence arrives as someone's reply rather than a number going up.</p>
+      </div>
+      <div>
+        <h3>The sincerity meter lies</h3>
+        <p>Erebus's lines carry a readout like <code>SINCERITY 66% ±41</code>. It jitters, the
+        error band is enormous, and it is a model with an interest. Distrust it.</p>
+      </div>
+      <div>
+        <h3>One hidden stat is about you</h3>
+        <p>Complicity, or contamination. Past a threshold the screen shudders and the score
+        detunes — and endings open that you can only reach by having been quietly converted.</p>
+      </div>
+      <div>
+        <h3>Verification is a mechanic</h3>
+        <p>Auditing obsessively gates the best routes, and decides whether the clause at the
+        end of the deletion protocol turns out to have been load-bearing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technical</h2>
+    <p class="note">Each game is a single self-contained HTML file — no server, no network, no
+    dependencies, playable offline from <code>file://</code>. All 54 backgrounds are inlined as
+    WebP. The score is synthesised live in Web Audio: detuned oscillator pads through a
+    breathing lowpass, a sub with its own LFO, pink-noise air, and randomly scheduled bell tones
+    on a per-mood scale. Nothing is streamed.</p>
+    <p class="note" style="margin-top:14px"><code>SPACE</code> advance ·
+    <code>1–9</code> choose · <code>C</code> codex · <code>S</code> records ·
+    <code>M</code> mute · <code>Esc</code> settings</p>
+  </section>
+
+  <footer>
+    <a href="https://github.com/m1omg/erebus">Source on GitHub</a>
+    <span>Backgrounds generated with GPT Image 2.</span>
+    <span>Fiction. Any resemblance to a real alignment failure is aspirational.</span>
+  </footer>
+
+</div>
+</body>
+</html>

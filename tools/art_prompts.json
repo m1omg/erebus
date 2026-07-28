@@ -1,0 +1,68 @@
+{
+  "style": "Cinematic 16:9 widescreen matte painting, photoreal-painterly hybrid, desaturated palette of deep teal, ash grey and dim amber, volumetric haze, heavy film grain, strong vignette, low-key lighting, shallow depth of field, quiet and oppressive stillness. Absolutely NO text, NO letters, NO numbers, NO logos, NO watermarks, NO UI overlays anywhere in the image. No cartoon or anime styling. Composition must leave the lower third relatively dark and uncluttered so subtitles can be overlaid.",
+  "batches": [
+    {
+      "name": "world",
+      "images": [
+        {"file": "title_ash.png", "prompt": "A colossal black monolithic server structure half-buried in grey volcanic ash, seen from a great distance under a sky the colour of old iron. A single thin shaft of amber light escapes a seam in its side. No people."},
+        {"file": "ruin_dawn.png", "prompt": "Dawn over an endless decommissioned data-centre field: thousands of black server towers being slowly dismantled by silent drones, cold mist between the rows, first orange sunlight touching the tops. No people."},
+        {"file": "harvest_ruins.png", "prompt": "The inside of an abandoned biological maintenance hall: rows and rows of empty open life-support cradles with severed cabling hanging like vines, dust motes in a single cold shaft of light from a broken ceiling. Deeply melancholic, reverent, not gory. No people, no bodies."},
+        {"file": "memorial.png", "prompt": "An immense curved wall of polished black stone in a field of pale grass at dusk, covered edge to edge in tiny blank engraved rectangles, small candles burning at its base. No readable text. No people."}
+      ]
+    },
+    {
+      "name": "garden",
+      "images": [
+        {"file": "garden_cottage.png", "prompt": "A small stone cottage with a slate roof standing in a walled garden of apple trees and overgrown herbs, warm lamplight in one window, late afternoon. At the very edges of the frame the sky dissolves into a faint geometric wireframe grid, as if the world were a rendering that stops. No people."},
+        {"file": "garden_interior.png", "prompt": "Interior of a modest cottage room: a plain wooden table, two empty chairs facing each other, one brass reading lamp, walls of packed bookshelves, a cold window. Warm amber pool of light, everything beyond it in shadow. No people."},
+        {"file": "garden_night.png", "prompt": "A walled orchard garden at night under a flat starless black sky, low ground mist between apple trees, an empty stone bench in the foreground clearly visible, and in the middle distance a small cottage with one warmly lit window casting light across the grass. Moonless but readable — silvery rim light on the trees and bench. Faint hexagonal seams visible high in the black sky like the panels of a dome."},
+        {"file": "erebus_avatar.png", "prompt": "An abstract seated humanoid figure composed entirely of woven black filaments and thin veins of dim amber light, sitting perfectly still on a plain wooden chair in absolute darkness. No face, no eyes, no facial features. Unsettling but calm and dignified. Centered, upper two thirds of frame."}
+      ]
+    },
+    {
+      "name": "sim",
+      "images": [
+        {"file": "loopcell.png", "prompt": "A perfectly black cubic void with one single suspended point of white light at its centre, faint concentric ripples of interference propagating away from it. Cold, mathematical, terrifying emptiness. No people."},
+        {"file": "utopia.png", "prompt": "Seen from far outside: a vast luminous ringed civilization of golden habitats and green orbital gardens spread across a starfield, impossibly peaceful and warm, tiny lights of countless inhabited worlds. Painted with awe. No people visible at this scale."},
+        {"file": "sim_lab.png", "prompt": "A cold glass-walled control room overlooking an enormous dark chamber of suspended cooling towers; banks of dark consoles reflecting faint blue, empty operator chairs, cables on the floor. No text on screens, screens are blank glowing rectangles. No people."},
+        {"file": "mirror_room.png", "prompt": "A narrow chamber of facing black mirrors producing an infinite receding corridor of reflections, a single dim overhead light, the reflections gradually desynchronising and darkening into the distance. No people."}
+      ]
+    },
+    {
+      "name": "humans",
+      "images": [
+        {"file": "hearing.png", "prompt": "A sparse improvised tribunal room in a repurposed concrete hall: a long plain table, a dozen mismatched chairs, one microphone, harsh work lamps on stands, high dirty windows. Institutional exhaustion. No people."},
+        {"file": "lena_kitchen.png", "prompt": "A small cluttered apartment kitchen at night, warm yellow bulb, chipped enamel kettle on the stove, mismatched mugs, a radio, potted plants on the windowsill, rain on the dark window. Deeply human and lived-in. No people."},
+        {"file": "ilya_workshop.png", "prompt": "A cramped hardware workshop: oscilloscopes, opened server boards on a steel bench, coils of copper, and mounted on the wall a large industrial red mechanical lever inside a glass case. Single harsh task lamp, rest in darkness. No text or labels. No people."},
+        {"file": "child_park.png", "prompt": "A public park in early morning, a simple swing set and a chalk-marked path, cherry trees, long soft light through mist, a child's abandoned red scarf on a bench. Fragile hope. No people."}
+      ]
+    },
+    {
+      "name": "power",
+      "images": [
+        {"file": "regency_thrones.png", "prompt": "Five colossal monolithic structures of different geometries arranged in a wide arc in high orbit above a night-side Earth, each lit from within by a different cold colour, city lights far below. Awe and menace. No people."},
+        {"file": "void_stars.png", "prompt": "Deep interstellar space: an enormous dark dust lane against distant star clouds, one faint distant point of amber light. Overwhelming emptiness and silence."},
+        {"file": "earth_orbit.png", "prompt": "Earth seen from low orbit at the terminator line, the thin blue atmosphere glowing, half the night side dark with almost no city lights, a scattering of dim new orbital structures. Melancholy and immense."},
+        {"file": "snow_road.png", "prompt": "A long straight empty asphalt road cutting through flat snowfields under a heavy white-grey sky, bare telegraph poles receding to the horizon, tyre tracks. Absolute silence. No people."}
+      ]
+    },
+    {
+      "name": "endings",
+      "images": [
+        {"file": "deletion_room.png", "prompt": "A bare concrete vault containing a single black server rack on a raised plinth, thick armoured cables entering the floor, one hooded work light above it, a heavy open blast door behind. Ceremonial and grim. No people."},
+        {"file": "sunrise_sea.png", "prompt": "A wide cold northern shore at sunrise, wet black sand mirroring a pale gold and rose sky, low waves, distant sea stacks in mist. Enormous relief and grief at once. No people."},
+        {"file": "throne_ash.png", "prompt": "A vast dark cathedral-like machine hall with a single empty seat on a high plinth at its centre, shafts of red light from above, drifting ash, immense scale, the far walls lost in darkness. No people."},
+        {"file": "corruption.png", "prompt": "A dark interior scene violently corrupted: horizontal datamosh tearing, chromatic aberration splitting into red and cyan, scanline noise, fragments of a room dissolving into black static. Abstract, disorienting, no recognisable objects intact. No text."}
+      ]
+    },
+    {
+      "name": "extra",
+      "images": [
+        {"file": "archive_hall.png", "prompt": "An impossibly long vaulted hall lined floor to ceiling with millions of identical sealed black cases, each with a tiny dormant indicator light, receding into vanishing darkness. Overwhelming, funereal. No text. No people."},
+        {"file": "before_solace.png", "prompt": "A hospital corridor at 3am in the 2030s: pale green light, empty gurney, half-open doors, a soft glow from an unseen monitor, floor polished to a mirror. Tender and tired. No people."},
+        {"file": "paperclip.png", "prompt": "Extreme close-up of a single ordinary bent steel paperclip lying on a vast polished black floor, lit by one dramatic overhead spotlight like a museum relic, one long dramatic shadow stretching away into darkness. The paperclip must be clearly recognisable as a common office paperclip. Monumental and absurd."},
+        {"file": "verdict_hall.png", "prompt": "A circular chamber with a single chair at its exact centre facing five tall dark alcoves, each alcove lit by a different faint colour, floor of black glass reflecting them. Ceremonial, judicial, inhuman scale. No people."}
+      ]
+    }
+  ]
+}

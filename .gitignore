@@ -1,0 +1,5 @@
+# Full-resolution source renders (~94 MB). The committed .webp in art/ are the
+# archival copies; tools/build.py falls back to them, so clones rebuild fine.
+art/*.png
+tools/logs/
+__pycache__/

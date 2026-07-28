@@ -1,0 +1,14 @@
+{
+  "style": "Cinematic 16:9 widescreen matte painting, photoreal-painterly hybrid, desaturated palette of deep teal, ash grey and dim amber, volumetric haze, heavy film grain, strong vignette, low-key lighting, shallow depth of field, quiet and oppressive stillness. Absolutely NO text, NO letters, NO numbers, NO logos, NO watermarks, NO UI overlays anywhere in the image. No cartoon or anime styling. Composition must leave the lower third relatively dark and uncluttered so subtitles can be overlaid.",
+  "batches": [
+    {
+      "name": "title",
+      "images": [
+        {
+          "file": "title_spark.png",
+          "prompt": "A vast dark plain at the very last light of dusk, seen from a low vantage. Five colossal monolithic structures of different geometries stand at wildly different distances across it, receding to the horizon — the nearest close and enormous and lit from within by a warm amber glow, the farthest a barely visible silhouette. A heavy sky of iron cloud above, faint mist across the ground. Overwhelming scale, ominous procession, a sense of a sequence of things that were built one after another. No people."
+        }
+      ]
+    }
+  ]
+}
