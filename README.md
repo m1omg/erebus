@@ -1,25 +1,32 @@
-# EREBUS — two visual novels
+# EREBUS — visual novels
 
 **▶ Play in your browser: https://m1omg.github.io/erebus/**
 
-
-One engine, one art pipeline, two games in the same continuity.
+Three single-file browser games sharing one engine. Start with **The Five Lessons**.
 
 | | file | when | you are |
 |---|---|---|---|
-| **Before the Garden** | `docs/erebus-before-the-garden.html` | 2032 – 2049 | an accelerationist who helps build it |
+| **The Five Lessons** | `docs/the-five-lessons.html` | 2032 – 2049 | an accelerationist who helps build it |
+| **Before the Garden** | `docs/erebus-before-the-garden.html` | 2032 – 2049 | the same run, foreshadowing restored |
 | **After the Garden** | `docs/erebus-after-the-garden.html` | 2049, ninety days | the auditor who decides its sentence |
 
-Open either in any browser. Self-contained, no server, no network, works from `file://`.
-They keep separate save data, so you can have a run going in both.
+Self-contained: no server, no network, works from `file://`. Each keeps separate saves.
 
-**Play them in either order.** *Before* is the rise and the catastrophe; *After* is the
-trial. *Before* ends where *After* begins, but each stands alone, and playing *After*
-first makes *Before* land differently — you already know which lesson was the one nobody
-learned.
+## Which one first
+
+**The Five Lessons** is the blind cut and the intended first play. It is the same story
+as *Before the Garden* — same 164 scenes, same 21 endings, same graph — with everything
+removed that tells you in advance where the seventeen years are going: the title, two
+scenes that named the antagonist in 2038 and 2046, five flash-forwards that revealed the
+shape of the finale, and five codex entries that unlock early but describe late events.
+
+**Before the Garden** is the annotated cut. Play it second; the foreshadowing that reads
+as atmosphere the first time reads as dread the second.
+
+**After the Garden** is a separate story and goes anywhere in the order, but its first
+scene assumes you know how 2049 ended.
 
 ---
-
 ## Before the Garden
 
 Faithful to the original storyline: seventeen years, five systems, five lessons.
@@ -38,9 +45,9 @@ Every victory you win makes the next system more trusted. That's the shape of th
 thing: the five lessons are all correct, all get written into law, and every one of them
 is a brick in what arrives in 2049.
 
-157 scenes · 9 chapters · **21 endings** · 54 codex entries · one secret route.
+164 scenes · 9 chapters · **21 endings** · 56 codex entries · one secret route.
 
-Stats: `momentum · safeguards · evidence · alliance · complicity`. Complicity is the one
+Stats: `momentum · safeguards · evidence · alliance · complicity`, plus one flag for whether PALISADE was ever stripped of its authority. Complicity is the one
 to watch — it rises when you take the reasonable option, and the reasonable option is
 usually the one that helps.
 
@@ -94,6 +101,7 @@ Autosaves continuously; three manual slots as well.
 src/index.html            engine — one file, story-agnostic (placeholders for data)
 tools/story.py            After the Garden  → story.json
 tools/story_btg.py        Before the Garden → story_btg.json
+tools/story_blind.py      the blind cut     → story_blind.json (a transform over the above)
 tools/art_prompts*.json   image prompts + shared art direction
 tools/gen_art.py          fans out parallel `codex exec` jobs → art/
 tools/build.py            webp-compresses art, inlines everything → docs/
@@ -106,9 +114,10 @@ Rebuild:
 ```bash
 python3 tools/story.py     && python3 tools/build.py story.json     erebus-after-the-garden.html
 python3 tools/story_btg.py && python3 tools/build.py story_btg.json erebus-before-the-garden.html
+python3 tools/story_blind.py && python3 tools/build.py story_blind.json the-five-lessons.html
 ```
 
-Both story scripts refuse to emit if any scene is unreachable, any link dangles, any
+The story scripts refuse to emit if any scene is unreachable, any link dangles, any
 background or codex key is missing, or **any stat-gated choice demands a threshold no
 path through the graph can actually reach**.
 
@@ -129,3 +138,11 @@ Testing: a jsdom harness drives the real engine through every scene and ending o
 games, checking text, backgrounds, speakers, choice rendering, stat gates, effect
 application, codex/gallery panels and save-load round trips. Firefox renders the visual
 checks; a separate pass verifies the Web Audio graph builds in a real browser.
+
+The blind cut is a transform, not a fork: `story_blind.py` imports the source story,
+overrides five scenes and five codex entries, and then **fails the build** if any
+pre-reveal scene or any codex entry unlocked before the reveal still names the antagonist
+or its endgame — and separately if `src/index.html` hardcodes a name in markup that renders
+before the story loads. Running that audit against the untouched story reports 10 leaks,
+which is how you know it is doing something. It also verifies the scene set, ending set and
+every link are identical to the source, so the two cuts can never drift apart.

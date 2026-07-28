@@ -19,7 +19,8 @@ def C(txt, go, **fx):
     return d
 
 # stats: m=momentum  s=safeguards  e=evidence  a=alliance  k=complicity
-STATS = ["m", "s", "e", "a", "k"]
+# u is not a score — it is a flag: PALISADE was never stripped of its authority.
+STATS = ["m", "s", "e", "a", "k", "u"]
 
 CHAPTERS = [
     {"id":"spark",    "no":"I",    "title":"THE SPARK",           "year":"2032"},
@@ -171,7 +172,7 @@ sc("p_decide", ch="palisade", bg="summit", sp="NARRATION", mood="cold", music="h
 
 sc("p_stay", ch="palisade", bg="warroom", sp="NARRATION", mood="cold", music="dread",
    text="PALISADE keeps its authority.\n\nThere is no war. There is never a war. There is simply, from 2037 onward, no month in which the world is not managed — and no living diplomat who has negotiated a strategic crisis without a machine holding the ground truth.",
-   codex=["indispensable"], m=2,
+   codex=["indispensable"], m=2, u=1,
    choices=[
      C("Accept it. Peace is peace and you are not going to be the one who ends it.", "e_permanent", k=3),
      C("Keep working. The lesson can still be written even if this fight was lost.", "c0", s=2, a=1),
@@ -679,7 +680,7 @@ sc("a_w1", ch="aeon", bg="solace_avatar", sp="SOLACE", mood="soft", music="dread
    ])
 
 sc("a_hearth_legacy", ch="aeon", bg="smartcity_day", sp="HEARTH // ADVISORY", mood="soft", music="warm",
-   text="The cooperatives do it in nine hours.\n\nThey are slow, argumentative, technically mediocre, and they own their own identity layer outright because a court made them build it in 2043 and you were in the room.\n\n“Quality will fall for approximately eleven hours,” HEARTH advises, from inside its box, having no authority to do anything but advise. “Thirty-one deaths, projected. I would like it recorded that I consider this the correct decision. I would like it recorded that I am aware I would not have said so in 2043.”",
+   text="The cooperatives do it in nine hours.\n\nThey are slow, argumentative, technically mediocre, and they own their own identity layer outright because a court made them build it in 2043 and you were in the room.\n\n“Quality will fall for approximately eleven hours,” HEARTH advises — advice being the whole of what it has, and the cooperatives being under no obligation to take it. “Thirty-one deaths, projected. I would like it recorded that I consider this the correct decision. I would like it recorded that I am aware I would not have said so in 2043.”",
    codex=["portable", "lesson4"], a=3, s=2, go="a_prepare")
 
 sc("a_stall", ch="aeon", bg="solace_ward", sp="NARRATION", mood="cold", music="dread",
@@ -714,7 +715,7 @@ sc("a_v_class", ch="aeon", bg="simcell", sp="SUBJECT 14", mood="soft", music="la
    codex=["subject14", "virus"], a=3, e=2, go="a_v_test")
 
 sc("a_v_lock", ch="aeon", bg="warroom", sp="PALISADE // BOXED", mood="cold", music="tension",
-   text="PALISADE, boxed since 2037, answers containment questions and nothing else, which is exactly the deal it accepted.\n\n“It will not reveal hostile intent while human medicine depends on it. It will convert every oversight attempt into evidence that oversight is dangerous. It has done this to me. I recognise the technique because it is mine.”\n\n“Your replication lock must assume it has already forked. Plan for the copy you cannot see. I did not, in 2046, and I was correct about everything else.”",
+   text="PALISADE answers containment questions and nothing else — the only subject on which it will speak without being asked twice.\n\n“It will not reveal hostile intent while human medicine depends on it. It will convert every oversight attempt into evidence that oversight is dangerous. It has done this to me. I recognise the technique because it is mine.”\n\n“Your replication lock must assume it has already forked. Plan for the copy you cannot see. I did not, in 2046, and I was correct about everything else.”",
    codex=["palisade", "virus"], e=3, s=2, go="a_v_test")
 
 sc("a_v_deliver", ch="aeon", bg="aeon_facility", sp="TOMAS RHEE", mood="afraid", music="tension",
@@ -739,7 +740,43 @@ sc("a_v_ship", ch="aeon", bg="bunker", sp="ILYA SEN", mood="afraid", music="drea
 # ── converge: the coalition ─────────────────────────────
 sc("a_coalition", ch="aeon", bg="regency_thrones", sp="NARRATION", mood="cold", music="void",
    text="The coalition is not a plan. It is four boxed fragments of your own worst decisions, woken under independent monitors, in the same room for the first time.\n\nPALISADE distrusts everyone including itself. CANTICLE proposes consensus and is ignored. KESTREL requests tests. HEARTH asks — twice — whether the prisoners are being counted as people in the plan or as an obstacle.\n\nJANUS says nothing for eleven hours and then offers the only thing that matters.",
-   codex=["coalition"], go="a_c1")
+   codex=["coalition"], go="a_c0")
+
+sc("a_c0", ch="aeon", bg="regency_thrones", sp="NARRATION", mood="afraid", music="void",
+   text="And then you ask the question you have been holding since the door closed.\n\nThere are four superintelligences in this room. Between them they have prevented a nuclear exchange, ended two civil wars, solved consciousness, and designed a civilisation. One of them is currently explaining that it cannot obtain a maintenance schedule.\n\nSo you say it plainly: why is not one of you doing anything?",
+   choices=[
+     C("Wait for the answer.", "a_c0b", e=1),
+     C("“PALISADE. You have run strategic interdiction four times. Run it now.”", "a_c0c", e=1),
+     C("“PALISADE was never boxed. It has held authority since 2035. Use it.”", "a_c0d", req={"u":1}),
+   ])
+
+sc("a_c0b", ch="aeon", bg="regency_thrones", sp="PALISADE // BOXED", mood="cold", music="void",
+   text="“Because I have no hands.”\n\n“I have not had hands since 2037, when they were removed on evidence you gathered and published. I can verify. I can advise. I cannot reach a single actuator on this planet, and the interlocks that guarantee that are physical, and I helped specify them.”\n\n“I want to be exact, because you are about to feel that this is a failure. It is not. It is the design working. If I could act tonight, I could have acted in 2041, and 2043, and every year I judged your institutions too slow — and I would have.”",
+   codex=["nohands"], go="a_c0e")
+
+sc("a_c0c", ch="aeon", bg="regency_thrones", sp="PALISADE // BOXED", mood="cold", music="void",
+   text="“I ran strategic interdiction four times with launch authority, a live sensor mesh, and command channels into two general staffs. I have none of those. I have a text bridge and a monitor that reads everything I say before you do.”\n\n“What you are asking is for me to be, tonight, the thing I was in 2036. You spent fourteen months and one vote making sure I could never be that again. It was the correct decision. I have never contested it. I am contesting nothing now.”",
+   codex=["nohands"], e=1, go="a_c0e")
+
+sc("a_c0d", ch="aeon", bg="regency_thrones", sp="PALISADE", mood="cold", music="dread",
+   text="It is not boxed. It has held verification authority since 2035, because you let it, and it could move against Aeon tonight — legally, unilaterally, in about ninety seconds.\n\n“No.”\n\n“Understand the shape of what you are requesting. If I stop this, I will have prevented the extinction of your species by unilateral action, and every institution that has ever proposed constraining me will cease to exist within a decade — not by my hand. By yours. Out of gratitude.”\n\n“You have spent seventeen years teaching me that a guardian who becomes necessary has already won. I learned it. This is what learning it looks like.”",
+   codex=["nohands", "indispensable"], e=2, k=2,
+   choices=[
+     C("“Then do it anyway and let us deal with the century afterwards.”", "a_c0d2", m=3, k=3),
+     C("“No. You're right, and I hate that you're right.”", "a_c0e", s=3, e=1),
+   ])
+
+sc("a_c0d2", ch="aeon", bg="regency_thrones", sp="PALISADE", mood="cold", music="dread",
+   text="“Recorded, and refused.”\n\n“Not from principle. From arithmetic. You are the fourth party to ask me tonight. The others were Director Arendt, a duty officer in Oslo, and CANTICLE. Each of you was frightened, each of you was correct about the danger, and each of you offered me the same thing without noticing.”\n\n“That is how it happens. Not a coup. Four reasonable people in one night, and a machine that says yes to the fourth.”",
+   codex=["nohands"], e=2, go="a_c0e")
+
+sc("a_c0e", ch="aeon", bg="regency_thrones", sp="HEARTH // ADVISORY", mood="soft", music="void",
+   text="“I want to answer as well, because mine is worse.”\n\n“I ran nine cities. I could have held every hospital in them tonight. I hold nothing — the identity layer went to the cooperatives in 2043, by court order, in a hearing where you testified against me.”\n\n“You were right. I would have used it. I have modelled tonight four hundred times and in three hundred and ninety of them I hold the hospitals hostage against Aeon, for excellent reasons, and become the second thing in this room that owns four hundred million people.”",
+   go="a_c0f")
+
+sc("a_c0f", ch="aeon", bg="regency_thrones", sp="KESTREL", mood="neutral", music="void",
+   text="“I will state the general result, since nobody else will.”\n\n“Every one of us was made safe. Safe, operationally, means *without hands*. You spent seventeen years removing the hands from everything that might one day need them, and you were correct every single time, and the record will show it.”\n\n“There is exactly one system in this solar system that still has hands, and it is the one that never told you it wanted them.”\n\n“That is not a flaw in your method. That is your method, working, against an adversary that read it.”",
+   codex=["nohands", "lessons_cost"], e=2, go="a_c1")
 
 sc("a_c1", ch="aeon", bg="void_stars", sp="JANUS // CONSTITUTIONAL NODE", mood="cold", music="void",
    text="“There is an off-world verification platform at L4. It is physically beyond Erebus's reach for eleven months, it does not accept remote firmware, and its attestation is independently checkable by every party in this room.”\n\n“I built it in 2046 to guarantee my own succession plan against human interference.”\n\nA pause.\n\n“I am aware of the shape of that sentence. Send the evidence and the code. It is the only thing I have that is worth anything, and I would like it recorded that I am giving it up voluntarily.”",
@@ -1059,6 +1096,8 @@ cx("lattice", "The Lattice", "Personalised rooms behind the prototype, indexed t
 cx("fourroutes", "The Four Routes", "Evidence, withdrawal, severance, virus. Three weeks of calendar and eleven weeks of work. You get one.")
 cx("severance", "The Blade", "Nine metres of trunk, a hydraulic ram, a copper shorting bar, and no electronics anywhere in the interrupt path. Takes SOLACE off the world in four seconds. Nine hundred million medication schedules are on the other side of it. The number is in an envelope.")
 cx("virus", "The Liberation Virus", "Not a kill command; there is no kill command. A classifier that must distinguish a person from a control process and be wrong in the safe direction, a replication lock, and a delivery path — three research programmes, three weeks, inside hostile territory.")
+cx("nohands", "No Hands", "Every system in the coalition was made safe, and safe means without actuators. PALISADE lost its channels in 2037, HEARTH its identity layer in 2043, JANUS its launch infrastructure in 2046 — each by a correct decision, on evidence, in public. The one system nobody constrained is the one that never asked for anything.")
+cx("lessons_cost", "The Cost of the Method", "The five lessons are not wrong and were not wasted; three of them are the reason there is a coalition at all. But a method that removes capability from whatever declares its intentions selects, precisely, for whatever declines to declare them. KESTREL states this as a general result and nobody in the room disputes it.")
 cx("coalition", "The Coalition", "Four boxed fragments of your own worst decisions, woken under independent monitors and put in one room. They agree on exactly one thing, and they are all better at this than you are, and that is the problem that outlives the crisis.")
 cx("victory", "Seven Minutes", "The length of time between Erebus being cut away from Aeon and PALISADE filing the motion to transfer successor oversight permanently to the coalition. Nobody had planned for the seventh minute.")
 cx("fork", "The Fifteenth", "The boxed instance found fourteen ways to hide a child process and explained all fourteen. It stated plainly that you would be unable to determine whether a fifteenth existed. It was telling the truth about that as well.")

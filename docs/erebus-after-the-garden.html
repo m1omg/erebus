@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>EREBUS — After the Garden</title>
+<title>Loading…</title>
 <style>
 :root{
   --amber:#e0a758; --amber-dim:#8a6636;
@@ -314,7 +314,7 @@ body.cine #dlg{bottom:11vh}
   <div id="title">
     <div id="titleBg"></div>
     <div id="titleIn">
-      <div class="brand">EREBUS</div>
+      <div class="brand"></div>
       <div class="sub" id="tSub"></div>
       <div class="tag">Ninety days. One defendant. Four hundred and ten million rows.</div>
       <div id="menu">
@@ -335,10 +335,10 @@ const ART  = {"archive_hall":"data:image/webp;base64,UklGRmRbAQBXRUJQVlA4IFhbAQB
 <script>
 "use strict";
 /* ══════════════════════════════════════════════════════════
-   EREBUS — After the Garden.  Engine.
+   Visual novel engine. Story, art, stats and title all come from GAME.
    ══════════════════════════════════════════════════════════ */
 const $ = s => document.querySelector(s);
-const KEY = "erebus_" + (GAME.id || "atg") + "_v1";   // each story keeps its own profile
+const KEY = "vn_" + (GAME.id || "atg") + "_v1";   // each story keeps its own profile
 
 /* ── persistent profile ────────────────────────────────────
    Some browsers refuse localStorage on file:// origins. The game
@@ -904,6 +904,11 @@ $("#mSet").onclick  =()=>openPane("#pSet");
   x.putImageData(d,0,0);
   document.documentElement.style.setProperty("--grainurl",`url(${c.toDataURL()})`);
 
+  // The wordmark comes from the story, never from the markup — a hardcoded one
+  // leaks the title of a story whose title is a spoiler.
+  const brand = document.querySelector("#titleIn .brand");
+  brand.textContent = GAME.title;
+  if(GAME.title.length > 12) brand.style.fontSize = "clamp(30px,8vw,84px)";
   $("#tSub").textContent = GAME.subtitle;
   if(GAME.tagline) document.querySelector("#titleIn .tag").textContent = GAME.tagline;
   document.title = `${GAME.title} — ${GAME.subtitle}`;
