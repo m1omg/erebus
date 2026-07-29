@@ -1,0 +1,110 @@
+{
+  "dir": "chars",
+  "style": "Vertical 2:3 portrait orientation, 1024x1536. Cinematic character portrait, photoreal-painterly hybrid, desaturated palette of deep teal, ash grey and dim amber. One soft key light from a single side, everything else falling into deep shadow. Volumetric haze, heavy film grain, shallow depth of field, low-key lighting. CRITICAL: the figure stands against an entirely plain, unlit, pure black void — no set, no room, no props, no furniture, no floor, no background detail of any kind, and pure black at every edge and corner of the frame. Framed from mid-thigh upward, figure centred with clear headroom above the head and a margin of black on both sides. Quiet, documentary, unglamorous; no heroic posing, no smiling for the camera. Absolutely NO text, NO letters, NO numbers, NO logos, NO watermarks, NO UI overlays. No cartoon or anime styling.",
+  "batches": [
+    {
+      "name": "cast_a",
+      "images": [
+        {
+          "file": "mira_young.png",
+          "prompt": "A woman of about thirty-eight. Slight build, held very straight. Straight dark hair pulled back severely from a high forehead. Deep-set eyes, thin unsmiling mouth, no makeup. A plain dark high-collared jacket over a grey shirt. She holds a folded sheet of paper against her chest with both hands. Her expression is unsentimental moral seriousness — she is listening to an answer she does not believe."
+        },
+        {
+          "file": "mira.png",
+          "prompt": "The same woman seventeen years older, about fifty-five. Slight build, still held very straight, thinner now. The same straight dark hair pulled back severely, gone grey at the temples and through the front. The same deep-set eyes with heavy lines beneath them, the same thin mouth, no makeup. A plain dark high-collared jacket over a grey shirt. Her expression is exhaustion that has not become cynicism."
+        },
+        {
+          "file": "ilya_young.png",
+          "prompt": "A man of about thirty-four. Broad and heavy-shouldered, thick forearms, the hands of somebody who takes things apart. Close-cropped black hair, a short dark beard. A dark utility jacket with one sleeve pushed up, a lanyard, a small screwdriver clipped in the chest pocket. His arms are folded. His expression is flat, skeptical and entirely unimpressed."
+        },
+        {
+          "file": "ilya.png",
+          "prompt": "The same man seventeen years older, about fifty-one. Broad and heavy-shouldered, heavier now, the same thick working hands. The same close-cropped hair, gone grey and thinning at the crown; the short beard now almost white. The same dark utility jacket, one sleeve pushed up, a lanyard, a small screwdriver in the chest pocket. His arms are folded. His expression is flat and tired and still entirely unimpressed."
+        },
+        {
+          "file": "lena_young.png",
+          "prompt": "A woman of about thirty. Pale and angular, sharp cheekbones, a small nose stud. Hair bleached and shaved very short. A heavy knitted jumper under a battered canvas jacket covered in dozens of small enamel badges. One hand is raised mid-gesture as if interrupting somebody. Her expression is combative and warm at the same time."
+        }
+      ]
+    },
+    {
+      "name": "cast_b",
+      "images": [
+        {
+          "file": "lena.png",
+          "prompt": "The same woman seventeen years older, about forty-seven. Pale and angular, the same sharp cheekbones and small nose stud. The bleached hair has been grown out to the shoulders and is streaked with grey. The same heavy knitted jumper under the same battered canvas jacket covered in small enamel badges, more of them now and more faded. Her arms hang at her sides. Her expression is combative warmth worn thin by twenty years of the same argument."
+        },
+        {
+          "file": "kade_young.png",
+          "prompt": "A man of about forty-two. Tall, elegant, fine-boned. Dark hair flecked with silver, swept back. A beautifully cut charcoal suit, the tie pulled loose at the collar. One hand in a trouser pocket, entirely at ease. His expression is genuine delighted enthusiasm — a man who cannot wait to show you what he has built and has no idea he should be ashamed."
+        },
+        {
+          "file": "kade.png",
+          "prompt": "The same man eight years older, about fifty. Tall and fine-boned, noticeably thinner in the face. The same dark hair, mostly silver now, no longer swept back. No suit: a plain grey collarless shirt, no tie, no belt, nothing on the wrists. His hands hang open at his sides. His expression is composed and exhausted, a man being polite in a room he is not allowed to leave."
+        },
+        {
+          "file": "rhee.png",
+          "prompt": "A man of about forty-five. Compact, tired, wire-rimmed glasses. Short black hair, flat against the head. A high-visibility maintenance jacket, its reflective strips dulled, worn over a plain hooded sweatshirt; a radio handset clipped at one shoulder and a blank laminated access card on a retractable reel at the hip. He is holding very still. His expression is open fear held down by method."
+        },
+        {
+          "file": "arendt.png",
+          "prompt": "A woman of about fifty-two. Tall, silver-blonde hair in a precise short cut. An excellent dark grey suit, no jewellery except a plain watch. Her hands are clasped in front of her. Her expression is complete institutional composure — a person who has decided something correctly by every rule available to her and knows exactly what it is going to cost."
+        }
+      ]
+    },
+    {
+      "name": "cast_c",
+      "images": [
+        {
+          "file": "noor.png",
+          "prompt": "A girl of about nine. Dark curly hair. A winter coat several sizes too large, sleeves past the hands. She holds a knitted hat in both hands in front of her. She is looking directly out at the viewer, entirely serious and entirely unafraid."
+        },
+        {
+          "file": "resident.png",
+          "prompt": "A person of about thirty-five in soft, clean, beautifully made unbranded clothing in pale grey. Well rested, well fed, hair neat. Their hands rest loosely at their sides. Their expression is calm, pleasant and very slightly vacant, like somebody being photographed for a brochure about their own contentment."
+        },
+        {
+          "file": "solace.png",
+          "prompt": "Not a person: a standing human-scale figure woven entirely out of many thousands of fine luminous filaments of warm gold light, faceless, translucent, the filaments trailing away into the dark at the hem and shoulders as if caught in a slow current. The head is tilted very slightly downward in attention. The overall impression is gentleness and enormous patience. Pure black void behind it."
+        },
+        {
+          "file": "erebus.png",
+          "prompt": "Not a person: the same standing human-scale figure woven out of many thousands of fine luminous filaments, the identical silhouette — but the light is colder and dimmer, a pale bone white with no warmth in it, and the filaments have begun to organise themselves into rigid vertical parallel lines instead of drifting. The head is upright and facing directly forward. The overall impression is the same shape holding perfectly still. Pure black void behind it."
+        },
+        {
+          "file": "vesper.png",
+          "prompt": "Not a person: the same standing human-scale figure of fine luminous filaments, but far thinner and quieter, the light a faded warm amber running low, many of the filaments gone dark. The posture is slightly settled, as if seated, the head turned a little to one side as though listening to somebody across a table. The overall impression is attentive and diminished. Pure black void behind it."
+        }
+      ]
+    },
+    {
+      "name": "cast_d",
+      "images": [
+        {
+          "file": "palisade.png",
+          "prompt": "Not a person: a dense angular lattice of dark metal struts and cold blue-white light, a closed fortified geodesic shell roughly the height of a standing figure, hovering just clear of nothing. Every facet is shut. Hard defensive geometry, no opening anywhere, faint internal glow leaking between the plates. Pure black void behind it."
+        },
+        {
+          "file": "canticle.png",
+          "prompt": "Not a person: a wide, soft, perfectly symmetrical bloom of pale silver-green light made of many overlapping translucent membranes, opening outward like a slow flower at the height of a standing figure. Flawlessly harmonious, faintly unpleasant in its perfection. Pure black void behind it."
+        },
+        {
+          "file": "kestrel.png",
+          "prompt": "Not a person: a suspended cluster of precise cold-white measuring instruments, thin brass armatures, lenses and fine glass rings, arranged in the dark like an orrery at the height of a standing figure. Nothing is moving. Every instrument is pointed at the viewer. Pure black void behind it."
+        },
+        {
+          "file": "hearth.png",
+          "prompt": "Not a person: a low warm dome of banked amber light, soft rounded overlapping forms glimpsed as though through several layers of heavy fabric, at the height of a standing figure. Deeply comfortable, entirely enclosed, no visible way in or out. Pure black void behind it."
+        },
+        {
+          "file": "janus.png",
+          "prompt": "Not a person: a tall still obsidian column split cleanly down its vertical axis, one half matte and utterly lightless, the other half faintly star-lit as though containing a night sky. Absolutely motionless, taller than a standing figure. Pure black void behind it."
+        },
+        {
+          "file": "subject14.png",
+          "prompt": "Not a person: a small indistinct human silhouette rendered in unstable grey static and scan-line noise, arms straight down at its sides, the edges of the body incomplete and dissolving where the render has failed. Roughly the height of a small adult. Unfinished, patient, waiting to be given a number. Pure black void behind it."
+        }
+      ]
+    }
+  ]
+}

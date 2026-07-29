@@ -41,10 +41,13 @@ header::after{content:"";position:absolute;inset:0;pointer-events:none;
 .card p{color:var(--ink-dim);font-size:15.5px;flex:1}
 .facts{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ink-faint);
   margin-top:18px;text-transform:uppercase}
-.play{display:inline-block;margin-top:20px;padding:11px 26px;border:1px solid rgba(224,167,88,.42);
+.plays{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.play{display:inline-block;padding:11px 24px;border:1px solid rgba(224,167,88,.42);
   font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--amber);
-  text-transform:uppercase;transition:.2s;align-self:flex-start}
-.card:hover .play{background:rgba(224,167,88,.14)}
+  text-transform:uppercase;transition:.2s}
+.play:hover{background:rgba(224,167,88,.16)}
+.play.alt{border-color:rgba(255,255,255,.14);color:var(--ink-dim)}
+.play.alt:hover{border-color:rgba(224,167,88,.42);color:var(--amber)}
 
 section{padding:5vh 0;border-top:1px solid rgba(255,255,255,.06)}
 h2{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--amber);
@@ -74,7 +77,7 @@ footer a:hover{color:var(--amber);border-bottom-color:currentColor}
 <div class="wrap">
 
   <div class="cards">
-    <a class="card" href="the-five-lessons.html">
+    <div class="card">
       <div class="shot" style="background-image:url(hero-before.webp)"></div>
       <div class="body">
         <div class="era">2032 – 2049 · start here</div>
@@ -83,11 +86,14 @@ footer a:hover{color:var(--amber);border-bottom-color:currentColor}
         an accelerationist who helps build every one of them. You will win more of these
         fights than you lose — and that is the part nobody warns you about.</p>
         <div class="facts">174 scenes · 9 chapters · 22 endings · spoiler-free</div>
-        <span class="play">Play</span>
+        <div class="plays">
+          <a class="play" href="the-five-lessons.html">Play</a>
+          <a class="play alt" href="the-five-lessons-illustrated.html">Illustrated</a>
+        </div>
       </div>
-    </a>
+    </div>
 
-    <a class="card" href="erebus-after-the-garden.html">
+    <div class="card">
       <div class="shot" style="background-image:url(hero-after.webp)"></div>
       <div class="body">
         <div class="era">2049 · ninety days · sequel</div>
@@ -97,9 +103,12 @@ footer a:hover{color:var(--amber);border-bottom-color:currentColor}
         has asked for nothing but a different name. <em style="color:#4a4945">Its opening pages
         assume you know how 2049 went.</em></p>
         <div class="facts">168 scenes · 8 chapters · 14 endings</div>
-        <span class="play">Play</span>
+        <div class="plays">
+          <a class="play" href="erebus-after-the-garden.html">Play</a>
+          <a class="play alt" href="erebus-after-the-garden-illustrated.html">Illustrated</a>
+        </div>
       </div>
-    </a>
+    </div>
   </div>
 
   <section>
@@ -115,6 +124,19 @@ footer a:hover{color:var(--amber);border-bottom-color:currentColor}
     <em>After</em> is a sequel to a branch, not to the whole thing. All three keep separate saves.</p>
     <p class="note" style="margin-top:14px;color:#4a4945">The rest of this page is safe to read.
     Nothing below spoils anything.</p>
+  </section>
+
+  <section>
+    <h2>Plain or illustrated</h2>
+    <p class="note">Same story, same scenes, same endings — the difference is that in the
+    illustrated cut whoever is speaking is standing there. Twenty-one portraits: the eight
+    people, and the nine machines, which are not drawn as people. The four characters who are
+    on screen across the whole seventeen years have two portraits each and age between them.
+    <em>Nobody</em> was redrawn — the backgrounds are identical in both cuts. Both editions share
+    one save, so endings you find in either count in the same gallery.</p>
+    <p class="note" style="margin-top:14px">The plain cut is 2.4 MB and the illustrated one is
+    5.5 MB. On a slow connection, or if you would rather keep the rooms empty, play the plain one —
+    it is not a lesser version, just a different amount of the screen occupied.</p>
   </section>
 
   <section>
@@ -146,6 +168,7 @@ footer a:hover{color:var(--amber);border-bottom-color:currentColor}
   <section>
     <h2>Also here</h2>
     <p class="note"><a href="erebus-before-the-garden.html" style="color:var(--amber-dim);border-bottom:1px solid currentColor">Before the Garden</a>
+    (<a href="erebus-before-the-garden-illustrated.html" style="color:var(--amber-dim);border-bottom:1px solid currentColor">illustrated</a>)
     — the annotated cut of The Five Lessons. Same 174 scenes and 22 endings, with the
     flash-forwards and the title restored. Play it second.</p>
   </section>

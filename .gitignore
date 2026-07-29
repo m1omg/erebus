@@ -3,3 +3,5 @@
 art/*.png
 tools/logs/
 __pycache__/
+
+chars/*.png

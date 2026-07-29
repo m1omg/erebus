@@ -3,6 +3,9 @@
 """EREBUS: AFTER THE GARDEN — story data. Builds story.json."""
 import json, os, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cast
+
 S = {}          # scenes
 E = {}          # endings
 CODEX = {}
@@ -1095,6 +1098,7 @@ GAME = {
     "title": TITLE, "subtitle": SUB, "version": "1.0",
     "start": "p0", "chapters": CHAPTERS,
     "scenes": S, "endings": E, "codex": CODEX,
+    "chars": cast.chars_for(sc.get("sp") for sc in S.values()),
 }
 
 def validate():

@@ -3,6 +3,9 @@
 """EREBUS: BEFORE THE GARDEN — the seventeen years. Builds story_btg.json."""
 import json, os, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cast
+
 S, E, CODEX = {}, {}, {}
 
 def sc(sid, **kw):
@@ -1184,6 +1187,7 @@ GAME = {
     "stats": STATS, "taint": "k", "taintAt": 9,
     "start": "s0", "chapters": CHAPTERS,
     "scenes": S, "endings": E, "codex": CODEX,
+    "chars": cast.chars_for(sc.get("sp") for sc in S.values()),
 }
 
 # ═══════════════════════════════════════════ VALIDATION
