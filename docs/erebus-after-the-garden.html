@@ -387,7 +387,7 @@ let saved = {};
 try { saved = JSON.parse(STORE.getItem(KEY) || "{}") || {}; } catch(e){}
 const P = Object.assign({
   vol:.34, spd:26, cine:1, fx:1, runs:0,
-  endings:{}, codex:{}, slots:[null,null,null], auto:null
+  endings:{}, codex:{}, slots:[null,null,null], auto:null, act:null
 }, saved);
 const persist = () => { try { STORE.setItem(KEY, JSON.stringify(P)); } catch(e){} };
 
@@ -406,9 +406,35 @@ let R = null;
    the run's state on entering that act is kept, and once the story has
    been finished once the player can drop back into it carrying every
    choice they had made by then.                              */
+/* ── adopting an older save ─────────────────────────────────
+   The profile key is never versioned away, so a save can predate a stat
+   axis the story has since grown. A missing axis is not zero, it is
+   `undefined`, and `undefined + 1` is NaN — after which every gate that
+   reads it fails silently for the rest of the run and the player just
+   sees fewer choices than they earned. Backfill on the way in, and
+   refuse a save whose scene no longer exists rather than stranding the
+   player on a blank stage. */
+function fillStats(st){
+  const out = {};
+  STATS.forEach(k => { const v = Number(st && st[k]); out[k] = Number.isFinite(v) ? v : 0; });
+  return out;
+}
+function adoptRun(r){
+  if(!r || typeof r !== "object") return null;
+  if(!GAME.scenes[r.id] && !GAME.endings[r.id]) return null;
+  return {
+    id: r.id,
+    st: fillStats(r.st),
+    path: Array.isArray(r.path) ? r.path.filter(id => GAME.scenes[id]) : [],
+    marks: (Array.isArray(r.marks) ? r.marks : [])
+      .filter(m => m && GAME.scenes[m.id])
+      .map(m => ({ id:m.id, st:fillStats(m.st), path:m.path|0 })),
+  };
+}
+
 const ACT = GAME.act || null;
 const actChapter = () => ACT && GAME.chapters.find(c => c.id === ACT);
-const actReady = () => !!(ACT && P.runs > 0 && P.act);
+const actReady = () => !!(ACT && P.runs > 0 && adoptRun(P.act));
 function actLabel(){
   const c = actChapter();
   return c ? `Replay ${c.no} · ${c.title}` : "Replay the closing act";
@@ -894,7 +920,10 @@ function saveFill(){
       P.slots[i]=Object.assign(JSON.parse(JSON.stringify(R)),{when:new Date().toLocaleString()});
       persist(); saveFill(); toast("saved to slot "+(i+1)); };
     const b=document.createElement("button"); b.className="btn ghost"; b.textContent="Load";
-    b.onclick=()=>{ if(!P.slots[i]) return; R=JSON.parse(JSON.stringify(P.slots[i]));
+    b.onclick=()=>{ if(!P.slots[i]) return;
+      const carried = adoptRun(P.slots[i]);
+      if(!carried){ toast("slot "+(i+1)+" was written by an older version"); return; }
+      R = carried;
       closePanes(); $("#endScr").classList.remove("on"); $("#title").classList.add("gone"); go(R.id); };
     if(!s) b.style.opacity=".3";
     row.appendChild(a); row.appendChild(b); w.appendChild(row);
@@ -930,7 +959,7 @@ function toTitle(){
   $("#endScr").classList.remove("on");
   $("#title").classList.remove("gone");
   $("#dlg").classList.add("hide");
-  $("#mCont").classList.toggle("dis", !P.auto);
+  $("#mCont").classList.toggle("dis", !adoptRun(P.auto));
   const act = $("#mAct");
   act.style.display = actReady() ? "" : "none";
   if(actReady()) act.textContent = actLabel();
@@ -941,15 +970,21 @@ function toTitle(){
 function start(fresh){
   $("#title").classList.add("gone");
   document.body.classList.remove("tainted");
-  if(fresh || !P.auto){ R=newRun(); go(GAME.start); }
-  else { R=JSON.parse(JSON.stringify(P.auto)); go(R.id); }
+  const carried = fresh ? null : adoptRun(P.auto);
+  if(!fresh && P.auto && !carried){
+    P.auto = null; persist();
+    toast("that save was written by an older version — starting over");
+  }
+  if(carried){ R = carried; go(R.id); }
+  else { R = newRun(); go(GAME.start); }
 }
 function resumeAct(){
   if(!actReady()) return;
   closePanes();
   $("#endScr").classList.remove("on");
   $("#title").classList.add("gone");
-  R = JSON.parse(JSON.stringify(P.act));
+  R = adoptRun(P.act);
+  if(!R) return;
   const c = actChapter();
   go(R.id);
   toast(`${c.no} · ${c.title} — your earlier choices are intact`);
@@ -993,7 +1028,15 @@ $("#tSave").onclick =()=>openPane("#pSave",saveFill);
 $("#tSet").onclick  =()=>openPane("#pSet");
 $("#tMute").onclick =toggleMute;
 $("#mNew").onclick  =()=>start(true);
-$("#mCont").onclick =()=>{ if(P.auto) start(false); };
+$("#mCont").onclick =()=>{
+  if(!P.auto) return;
+  if(adoptRun(P.auto)) return start(false);
+  // Don't silently drop them into chapter one — say so and leave them on the
+  // title screen to choose. A toast fired from start() would be overwritten by
+  // the opening scene's own notices in the same tick and never be seen.
+  P.auto = null; persist(); toTitle();
+  toast("that save was written by an older version of this story");
+};
 $("#mAct").onclick  =resumeAct;
 $("#mGal").onclick  =()=>openPane("#pEnds",galleryFill);
 $("#mSet").onclick  =()=>openPane("#pSet");
