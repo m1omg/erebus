@@ -76,6 +76,39 @@ for name, g in (("After", after), ("Before", before)):
                 errs.append(f"{name}/{sid}: {sp} speaks of the full span or of 2049 "
                             f"before anyone could know it")
 
+# 8. nobody may be named — in prose or, worse, in a choice the player must pick
+#    blind — on any path that has not already introduced them.
+from collections import deque
+CAST = {"Ilya": "Ilya Sen", "Lena": "Lena Orlov", "Mira": "Mira Vale",
+        "Kade": "Lucien Kade", "Rhee": "Tomas Rhee", "Arendt": "Selene Arendt",
+        "Noor": "Noor", "Peder": "Peder"}
+for name, g in (("After", after), ("Before", before)):
+    S, E = g["scenes"], g["endings"]
+    def succ(sid):
+        sc = S[sid]
+        return ([sc["go"]] if "go" in sc else []) + [c["go"] for c in sc.get("choices", [])]
+    for first, full in CAST.items():
+        intro = {sid for sid, sc in S.items() if full in sc["text"]}
+        if not intro: continue
+        word = re.compile(rf"\b{first}\b")
+        uses = {sid for sid, sc in S.items()
+                if word.search(sc["text"] + " " +
+                               " ".join(c["t"] for c in sc.get("choices", [])))} - intro
+        if not uses: continue
+        # walk from the start without ever passing through an introduction
+        seen, q = {g["start"]}, deque([g["start"]])
+        while q:
+            n = q.popleft()
+            if n in E: continue
+            for t in succ(n):
+                if t in intro or t in seen or t in E: continue
+                seen.add(t); q.append(t)
+        for sid in sorted(uses & (seen | {g["start"]})):
+            in_choice = any(word.search(c["t"]) for c in S[sid].get("choices", []))
+            errs.append(f"{name}/{sid}: names {first} "
+                        f"{'in a choice' if in_choice else 'in prose'} on a path "
+                        f"where they have never been introduced")
+
 for e in errs: print("ERROR:", e)
 print(f"continuity: {len(errs)} error(s)")
 sys.exit(1 if errs else 0)

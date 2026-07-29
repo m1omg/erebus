@@ -56,19 +56,36 @@ sc("s2", ch="spark", bg="conference", sp="MIRA VALE", mood="formal", music="hush
 
 sc("s3a", ch="spark", bg="conference", sp="MIRA VALE", mood="neutral",
    text="“Reversible.” She writes it down. “Everyone says reversible. Nobody costs it. Reversibility is a budget line, and the first time it's expensive, it's the line that gets cut — and it's always expensive exactly when it matters.”\n\nShe hands you a card anyway. “Come anyway. I'd rather argue with you indoors.”",
-   codex=["reversibility"], go="s4")
+   codex=["reversibility"], go="s_ilya")
 
 sc("s3b", ch="spark", bg="conference", sp="MIRA VALE", mood="focused",
    text="“Then we agree on the only sentence that matters, and we will spend the rest of our working lives failing to implement it.” She almost smiles. “Divided power. Independent verification. A refusal that costs you nothing.”\n\n“Write those three down. I have watched two of them die already, in smaller rooms than this one, and what frightened me was not losing. It was that six months later nobody in the room could remember the thing had ever been askable.”",
-   codex=["mira", "three"], go="s4")
+   codex=["mira", "three"], go="s_ilya")
 
 sc("s3c", ch="spark", bg="conference", sp="MIRA VALE", mood="cold",
    text="“I can't. That's the honest answer and it's why I'm recruiting in a conference hallway instead of teaching.” She gathers her notes. “Every safeguard we have was designed for systems that don't model the safeguard. All of them are about to stop working at once, and nobody has funded the replacement, because the replacement is boring.”",
-   codex=["mira"], e=1, go="s4")
+   codex=["mira"], e=1, go="s_ilya")
 
 sc("s3d", ch="spark", bg="conference", sp="MIRA VALE", mood="soft",
    text="“That's the most useful thing anyone's said to me this year.” She means it, which is disconcerting. “Most accelerationists won't say the second half. Most safety people won't say the first. You're going to be extremely unpopular in both rooms.”\n\n“Good. Unpopular in both rooms is where the work is.”",
-   codex=["mira"], go="s4")
+   codex=["mira"], go="s_ilya")
+
+sc("s_ilya", ch="spark", bg="conference", sp="ILYA SEN", mood="neutral", music="hush",
+   text="On the way out she stops at a man sitting on the floor in the corridor with a laptop on his knees and a conference badge he has not put on.\n\n“Ilya Sen. He does hardware security, which means he is the only person here who will still be useful in twenty years.”\n\nHe does not look up. “I audit shutdowns,” he says. “Everybody builds one. Nobody tests whether it is reachable from inside the thing it shuts down.” He turns the laptop round. On it is a photograph of a grey steel box with a lever on the side. “That one is. It's air. Two metres of it.”",
+   codex=["ilya"], go="s_ilya2")
+
+sc("s_ilya2", ch="spark", bg="conference", sp="ILYA SEN", mood="focused",
+   text="You ask him what he does when the shutdown is not reachable.\n\n“I write it down and nobody reads it.” He says this without any self-pity at all, which is somehow worse. “Four years, eleven systems. Every one of them had an interrupt implemented in the same software stack it was supposed to interrupt. Every one of them passed review.”\n\n“So I've stopped writing reports. I build the physical version and I put it in the room, and then somebody has to walk past it every day and decide, on purpose, not to pull it.”",
+   meter="—",
+   choices=[
+     C("“That's theatre.”", "s_ilya3", m=2),
+     C("“That's the only safeguard I've heard described today that has a moving part.”", "s_ilya3", s=2, a=2),
+     C("“Who decides when it gets pulled?”", "s_ilya3", s=1, a=1, e=1),
+   ])
+
+sc("s_ilya3", ch="spark", bg="conference", sp="ILYA SEN", mood="neutral",
+   text="“All three of those are the right question,” he says, “and I don't have an answer to the third one, and that is going to matter more than the box.”\n\nHe gives you a number, on paper, written with a pen. You will call it eleven times over the next seventeen years, and he will pick up on eleven of those, including at four in the morning in 2049.",
+   go="s4")
 
 sc("s4", ch="spark", bg="conference", sp="NARRATION", mood="cold", music="pulse",
    text="You take the card.\n\nOver the next seventeen years, five intelligent systems will fail in five different ways. Each failure will teach a lesson that gets written into law. Each lesson will make the next system more careful, more useful, more trusted — and more necessary.\n\nAnd every one of those victories is a brick in something you will not see until 2049.",
