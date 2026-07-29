@@ -1185,6 +1185,9 @@ GAME = {
     "tagline": "Seventeen years. Five lessons. One of them was never learned.",
     "titleArt": "title_spark",
     "stats": STATS, "taint": "k", "taintAt": 9,
+    # Chapter VII is where SOLACE arrives and the endgame starts; a finished run
+    # can drop back in here rather than replay seventeen years for one verdict.
+    "act": "solace",
     "start": "s0", "chapters": CHAPTERS,
     "scenes": S, "endings": E, "codex": CODEX,
     "chars": cast.chars_for(sc.get("sp") for sc in S.values()),

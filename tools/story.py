@@ -1097,6 +1097,8 @@ S["v3"]["choices"].append(
 GAME = {
     "title": TITLE, "subtitle": SUB, "version": "1.0",
     "start": "p0", "chapters": CHAPTERS,
+    # every one of the fourteen endings branches out of the verdict chapter
+    "act": "verdict",
     "scenes": S, "endings": E, "codex": CODEX,
     "chars": cast.chars_for(sc.get("sp") for sc in S.values()),
 }

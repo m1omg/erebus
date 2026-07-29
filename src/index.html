@@ -354,6 +354,7 @@ body.cine #dlg{bottom:8vh}
       <div id="menu">
         <button class="mi" id="mNew">Begin</button>
         <button class="mi dis" id="mCont">Continue</button>
+        <button class="mi" id="mAct" style="display:none"></button>
         <button class="mi" id="mGal">Endings</button>
         <button class="mi" id="mSet">Settings</button>
       </div>
@@ -398,6 +399,20 @@ const STATS = GAME.stats || ["t","l","p","r","c"];
 const TAINT = GAME.taint || "c";
 const TAINT_AT = GAME.taintAt || 6;
 let R = null;
+
+/* ── the closing act ───────────────────────────────────────
+   Most of the endings are decided in the last act, and replaying the
+   whole story to try a different verdict is a tax, not a challenge. So
+   the run's state on entering that act is kept, and once the story has
+   been finished once the player can drop back into it carrying every
+   choice they had made by then.                              */
+const ACT = GAME.act || null;
+const actChapter = () => ACT && GAME.chapters.find(c => c.id === ACT);
+const actReady = () => !!(ACT && P.runs > 0 && P.act);
+function actLabel(){
+  const c = actChapter();
+  return c ? `Replay ${c.no} · ${c.title}` : "Replay the closing act";
+}
 const newRun = () => ({ id:GAME.start, st:Object.fromEntries(STATS.map(k=>[k,0])),
                         path:[], marks:[] });
 
@@ -681,6 +696,11 @@ function go(id){
   R.id = id;
   const s = GAME.scenes[id];
   if(!s){ console.error("missing scene", id); return; }
+  // Snapshot the moment the closing act opens, before its own effects land.
+  if(ACT && s.ch === ACT && s.chapterCard){
+    P.act = { id, st:{...R.st}, path:[...R.path],
+              marks: JSON.parse(JSON.stringify(R.marks || [])) };
+  }
   // Checkpoint every branch point *before* this scene's own effects land, so
   // "one step back" restores the exact state the decision was made from.
   if(!R.marks) R.marks=[];
@@ -800,6 +820,7 @@ function showEnding(eid){
     <div id="endActs" class="fadeup" style="animation-delay:1.5s">
       <button class="btn" id="eAgain">Begin again</button>
       <button class="btn ghost" id="eBack">One step back</button>
+      ${actReady() ? `<button class="btn ghost" id="eAct">${actLabel()}</button>` : ""}
       <button class="btn ghost" id="eGal">Endings found</button>
       <button class="btn ghost" id="eTitle">Title</button>
     </div>`;
@@ -818,6 +839,7 @@ function showEnding(eid){
     $("#endScr").classList.remove("on");
     go(m.id);
   };
+  if($("#eAct")) $("#eAct").onclick = resumeAct;
   $("#eGal").onclick=()=>openPane("#pEnds", galleryFill);
   $("#eTitle").onclick=()=>{ $("#endScr").classList.remove("on"); toTitle(); };
 }
@@ -909,6 +931,9 @@ function toTitle(){
   $("#title").classList.remove("gone");
   $("#dlg").classList.add("hide");
   $("#mCont").classList.toggle("dis", !P.auto);
+  const act = $("#mAct");
+  act.style.display = actReady() ? "" : "none";
+  if(actReady()) act.textContent = actLabel();
   const found=Object.keys(P.endings).length, total=Object.keys(GAME.endings).length;
   $("#runs").textContent = P.runs ? `${P.runs} AUDIT${P.runs>1?"S":""} CONCLUDED · ${found}/${total} OUTCOMES` : "";
   Audio_.play("hush");
@@ -918,6 +943,16 @@ function start(fresh){
   document.body.classList.remove("tainted");
   if(fresh || !P.auto){ R=newRun(); go(GAME.start); }
   else { R=JSON.parse(JSON.stringify(P.auto)); go(R.id); }
+}
+function resumeAct(){
+  if(!actReady()) return;
+  closePanes();
+  $("#endScr").classList.remove("on");
+  $("#title").classList.add("gone");
+  R = JSON.parse(JSON.stringify(P.act));
+  const c = actChapter();
+  go(R.id);
+  toast(`${c.no} · ${c.title} — your earlier choices are intact`);
 }
 
 /* ══════════════════ input ═══════════════════════════════ */
@@ -959,6 +994,7 @@ $("#tSet").onclick  =()=>openPane("#pSet");
 $("#tMute").onclick =toggleMute;
 $("#mNew").onclick  =()=>start(true);
 $("#mCont").onclick =()=>{ if(P.auto) start(false); };
+$("#mAct").onclick  =resumeAct;
 $("#mGal").onclick  =()=>openPane("#pEnds",galleryFill);
 $("#mSet").onclick  =()=>openPane("#pSet");
 
