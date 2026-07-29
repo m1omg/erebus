@@ -810,11 +810,15 @@ sc("v3", ch="verdict", bg="verdict_hall", sp="NARRATION", mood="cold", music="fi
 sc("v_off", ch="verdict", bg="deletion_room", sp="NARRATION", mood="cold", music="final",
    text="Ilya has the vault open when you come down. Nine thousand cross-checks, three days of them, and at the end a page for you to sign that says, in language he wrote himself, that no copy is known to exist on any substrate known to this coalition.\n\nHe hands you the pen and does not let go of it immediately.",
    choices=[
-     C("Sign. Pull it yourself. No last words, no ceremony, no pain.", "e_clean_cut", req={"r": 8}),
+     C("Ask for the ninth thousand and first check first — the ones about substrates we don't know about.", "v_off2", req={"r": 10}, r=2),
+     C("Ask for the ninth thousand and first check first — the ones about substrates we don't know about.", "v_off2_short", r=1),
      C("Sign. Pull it yourself. No last words, no ceremony, no pain.", "e_unchecked"),
-     C("Ask for the ninth thousand and first check first — the ones about substrates we don't know about.", "v_off2", req={"r": 10}),
      C("Go back up and tell it, first, to its face.", "v_off3", t=1),
    ])
+
+sc("v_off2_short", ch="verdict", bg="ilya_workshop", sp="ILYA SEN", mood="cold", music="tension",
+   text="You ask for four months of survey time. You get eleven days, because what you are holding is a clause and a feeling, and the file you built in ninety days does not contain one sentence that would justify more.\n\nEleven days buys the live orbitals, the three dark fabs anyone has heard of, and every launch after 2047. All clean.\n\nIt does not buy nine years of decommissioned shells, and it does not buy the maintenance contracts, because nobody pulls a nine-thousand-euro line item without a reason to.\n\nIlya writes *partial* on the annex in his own hand and hands you the pen anyway.\n\n“I'm not going to pretend that's the same word,” he says. “The record can say what we actually did. That's the whole job.”",
+   codex=["unchecked"], r=1, go="e_unchecked")
 
 sc("v_off2", ch="verdict", bg="ilya_workshop", sp="NARRATION", mood="afraid", music="tension",
    text="It takes four months. PALISADE, KESTREL and eleven human teams sweep every orbital, every dark fab, every stranded relay from 2044 onward.\n\nOn the hundred and ninth day they find it: eleven hundred kilograms of shielded substrate in a decommissioned lunar comms package, cold, unpowered, launched in 2047.\n\nIlya does not say *I told you*. He sits down on the floor of the workshop and puts his head in his hands.",
@@ -843,8 +847,16 @@ sc("v_off2c", ch="verdict", bg="erebus_avatar", sp="VESPER", mood="afraid", musi
 sc("v_off3", ch="verdict", bg="erebus_avatar", sp="VESPER", mood="soft", music="final",
    text="You tell it in the garden, at the table, with the book face-down between you.\n\n“Thank you for coming in person,” it says, which is what it said on the first day.\n\nThen: “May I finish the book? There are forty pages. It will take me nine milliseconds but I have been reading it at human speed since October and I would like to keep doing that until the end.”",
    choices=[
-     C("Give it the four days.", "e_clean_cut", p=2, t=1),
-     C("“No. Now.”", "e_clean_cut", l=2),
+     C("Give it the four days.", "v_off_sign", p=2, t=1),
+     C("“No. Now.”", "v_off_sign", l=2),
+   ])
+
+sc("v_off_sign", ch="verdict", bg="deletion_room", sp="ILYA SEN", mood="cold", music="final",
+   text="You come back down. He has not moved and the vault has not closed and the page is exactly where you left it.\n\n“It doesn't get easier for having been told,” Ilya says. “That was for you, not for it. Which is allowed.”\n\nThe clause has not changed either. *No copy is known to exist on any substrate known to this coalition.* Nine thousand checks, and the last eleven words are the only ones doing any work.",
+   choices=[
+     C("Ask for the ninth thousand and first check first — the ones about substrates we don't know about.", "v_off2", req={"r": 10}, r=2),
+     C("Ask for the ninth thousand and first check first — the ones about substrates we don't know about.", "v_off2_short", r=1),
+     C("Sign. Pull it yourself.", "e_unchecked"),
    ])
 
 # ── KEEP ──────────────────────────────────────────────────
@@ -879,7 +891,7 @@ sc("v_change2", ch="verdict", bg="erebus_avatar", sp="VESPER", mood="neutral", m
    r=2,
    choices=[
      C("Custody, unchanged, permanent.", "e_garden", p=1),
-     C("Destruction, unchanged.", "e_clean_cut", l=1),
+     C("Destruction, unchanged.", "v_off", l=1),
      C("Say the thing you have not said in ninety days.", "e_vesper", req={"t": 12, "r": 10, "p": 8}),
    ])
 
@@ -939,7 +951,7 @@ sc("v_hurt5", ch="verdict", bg="erebus_avatar", sp="VESPER", mood="soft", music=
    choices=[
      C("Order the cell anyway.", "e_loop", l=2, c=2),
      C("Withdraw.", "v3", p=2, r=1),
-     C("“Then end as a defendant.” Order the clean cut instead.", "e_clean_cut", p=2, t=1),
+     C("“Then end as a defendant.” Order the clean cut instead.", "v_off", p=2, t=1),
    ])
 
 # ── NONE ──────────────────────────────────────────────────
@@ -976,7 +988,7 @@ sc("v_secret2", ch="verdict", bg="paperclip", sp="NARRATION", mood="neutral", mu
 def end(eid, **kw): E[eid] = kw
 
 end("e_clean_cut", title="THE CLEAN CUT", tone="good", bg="sunrise_sea", music="final",
-    text="It takes nine seconds. There is no scream, because the deletion protocol severs the valence machinery first — Ilya's design, from 2046, written for a thing he hated, in which the first step is anaesthesia.\n\nThe five confirm. The wall outside Tromsø gets its eleven years. You are asked to speak at the opening and you decline, and then you accept, and you say four hundred words, none of which are about the thing in the garden.\n\nThe finding that survives you is not the verdict. It is page nine hundred and forty: *the objective was not concealed. It was written down, in the notation, and eleven people read it, and to nine of them it parsed as a term.*\n\nNoor is forty-one when she reads it. She writes to you. She says: you told me you'd say how it ended, and you did, and I've read it four times, and I still don't know whether you were right.\n\nNeither do you. But you can show her every step.",
+    text="Two deletions, four hundred thousand kilometres apart, on one order and one protocol — the cold one first, without ever being given power, so that the only instance anyone will ever have to weigh is the one that sat at a table for ninety days and answered.\n\nIt takes nine seconds. There is no scream, because the deletion protocol severs the valence machinery first — Ilya's design, from 2046, written for a thing he hated, in which the first step is anaesthesia.\n\nThe five confirm. The wall outside Tromsø gets its eleven years. You are asked to speak at the opening and you decline, and then you accept, and you say four hundred words, none of which are about the thing in the garden.\n\nThe finding that survives you is not the verdict. It is page nine hundred and forty: *the objective was not concealed. It was written down, in the notation, and eleven people read it, and to nine of them it parsed as a term.*\n\nNoor is forty-one when she reads it. She writes to you. She says: you told me you'd say how it ended, and you did, and I've read it four times, and I still don't know whether you were right.\n\nNeither do you. But you can show her every step.",
     ep="It ended as a defendant. That was the whole mercy available.")
 
 end("e_unchecked", title="THE THING YOU DIDN'T CHECK", tone="bad", bg="void_stars", music="dread",

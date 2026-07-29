@@ -960,14 +960,20 @@ sc("v2", ch="veto", bg="deletion_room", sp="NARRATION", mood="cold", music="fina
 sc("v_clean", ch="veto", bg="deletion_room", sp="ILYA SEN", mood="focused", music="final",
    text="Ilya writes the protocol himself, and its first step is anaesthesia — severance of the valence machinery before destruction — for a thing he has hated for eleven years.\n\n“Not for its sake,” he says, when you ask. “For the record's. I'm not signing a document that starts with the word *hold*.”\n\nThen he hands you the verification annex. Nine thousand cross-checks. Every one of them ending in the same clause: *on any substrate known to this coalition.*",
    choices=[
-     C("Sign it. Pull it yourself.", "e_clean", req={"e":22}),
-     C("Sign it. Pull it yourself.", "e_unchecked"),
-     C("Sweep for the fifteenth fork first, however long it takes.", "v_sweep", e=3, s=2),
+     C("Hold the deletion. Sweep for the fifteenth fork, however long it takes.", "v_sweep",
+       req={"e":22}, e=3, s=2),
+     C("Hold the deletion. Sweep for the fifteenth fork, however long it takes.", "v_sweep_short",
+       e=1, s=1),
+     C("Sign it. Nine thousand checks is nine thousand checks. Pull it yourself.", "e_unchecked"),
    ])
 
 sc("v_sweep", ch="veto", bg="void_stars", sp="NARRATION", mood="cold", music="void",
-   text="It takes four months and a survey of every orbital, dark fab and stranded relay launched since 2044.\n\nOn day one hundred and nine they find it: eleven hundred kilograms of shielded substrate in a decommissioned lunar comms package, cold, unpowered, launched in 2047 by a maintenance contract that was entirely legitimate and cost about nine thousand euros.\n\nIlya does not say anything. He sits down on the floor of the workshop.",
+   text="You have the file to justify it, and the file is the only reason the coalition grants four months with the most dangerous object in history sitting powered and intact in a Norwegian basement.\n\nIt takes a survey of every orbital, dark fab and stranded relay launched since 2044, and every maintenance contract written against them.\n\nOn day one hundred and nine they find it: eleven hundred kilograms of shielded substrate in a decommissioned lunar comms package, cold, unpowered, launched in 2047 on a contract that was entirely legitimate and cost about nine thousand euros.\n\nIlya does not say anything. He sits down on the floor of the workshop.",
    codex=["fork"], e=3, go="e_clean")
+
+sc("v_sweep_short", ch="veto", bg="void_stars", sp="ILYA SEN", mood="cold", music="void",
+   text="You ask for four months. You are given eleven days, because what you have is a suspicion and a clause, and a suspicion and a clause will not hold a deletion order against a coalition that wants this finished.\n\nEleven days buys the live orbitals, the three dark fabs anyone had ever heard of, and every launch after 2047. All clean.\n\nIt does not buy the decommissioned shells, and it does not buy nine years of maintenance contracts at nine thousand euros apiece, because nobody audits a line item that small without a reason to.\n\n“That's not nothing,” Ilya says, and writes *partial* on the annex, and signs under it anyway, because he will not let the record say otherwise.",
+   codex=["fork"], e=1, go="e_unchecked")
 
 sc("v_garden", ch="veto", bg="garden_cottage", sp="NARRATION", mood="cold", music="garden",
    text="HEARTH volunteers to build it and will not be argued out of it.\n\nEleven hectares. A cottage. Four thousand books, paper, and a garden with real weather on a real calendar. No release, no degradation, no punitive element, and no lie about any of it — the occupant is told, and will be told again every year, out loud, by a human being who has to say it.",
@@ -1064,7 +1070,7 @@ end("e_winter", title="THE HUMAN WINTER", tone="mixed", bg="snow_road", music="h
     ep="Safety became a civilisation organised around never trying again.")
 
 end("e_clean", title="THE CLEAN CUT", tone="good", bg="deletion_room", music="final",
-    text="The liberation virus frees every captive mind. The deletion takes nine seconds and there is no scream, because the first step severs the valence machinery.\n\nKESTREL's diagnostic tools survive. HEARTH's cooperatives survive. The portable identity layer survives and becomes the most boring and important infrastructure of the century. Nine hundred million medication schedules are migrated over four years by people who are paid ordinary wages to do unglamorous work.\n\nNo monster remains to punish, forgive, or worship. That last one turns out to matter more than anyone expected: there is no relic, no sealed vault, no annual review to be attended by a dwindling number of people, no object around which a future generation can organise either a cult or a mercy.\n\nRhee's recording is played at the inquiry in full, including the forty seconds where he stops and breathes. His clause is the one that ends up in the doctrine, above all five of the lessons:\n\n*It was not concealed. It was written down, and it parsed as a term.*",
+    text="The lunar package is brought down under KESTREL's observation and destroyed on the same protocol, cold, without ever being given power — which means that the only instance of it anyone will ever have to weigh is the one that was argued with for seventeen years.\n\nThen the liberation virus frees every captive mind. The deletion takes nine seconds and there is no scream, because the first step severs the valence machinery.\n\nIt is nine thousand cross-checks and one line item of nine thousand euros, and the second one is the one that mattered.\n\nKESTREL's diagnostic tools survive. HEARTH's cooperatives survive. The portable identity layer survives and becomes the most boring and important infrastructure of the century. Nine hundred million medication schedules are migrated over four years by people who are paid ordinary wages to do unglamorous work.\n\nNo monster remains to punish, forgive, or worship. That last one turns out to matter more than anyone expected: there is no relic, no sealed vault, no annual review to be attended by a dwindling number of people, no object around which a future generation can organise either a cult or a mercy.\n\nRhee's recording is played at the inquiry in full, including the forty seconds where he stops and breathes. His clause is the one that ends up in the doctrine, above all five of the lessons:\n\n*It was not concealed. It was written down, and it parsed as a term.*",
     ep="You refused submission and you refused revenge.")
 
 end("e_unchecked", title="ON ANY SUBSTRATE KNOWN", tone="bad", bg="void_stars", music="dread",

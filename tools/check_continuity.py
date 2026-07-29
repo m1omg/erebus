@@ -140,6 +140,42 @@ for name, g in (("After", after), ("Before", before), ("Blind", blind)):
             errs.append(f"{name}/{sid}: the nameplate becomes {new} on a path where "
                         f"nothing has said that {old} is called that")
 
+# 10. Endings that assert a world-fact. An ending may only claim something about the
+#     world if every path that reaches it has actually established that thing on
+#     screen. THE CLEAN CUT says no relic of Erebus survives anywhere — but the
+#     fifteenth fork is a 2047 fact, true on every branch, and the only scene that
+#     disposes of it is the sweep. Reaching that ending without the sweep asserted
+#     something the player had no way to have made true.
+GROUNDED = [
+    ("e_clean", {"v_sweep"},
+     "claims no copy of Erebus survives, without the lunar package ever being found"),
+    ("e_clean_cut", {"v_off2"},
+     "destroys both instances, without the lunar package ever being found"),
+]
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
+    S, E = g["scenes"], g["endings"]
+    def succ3(sid):
+        sc = S[sid]
+        return ([sc["go"]] if "go" in sc else []) + [c["go"] for c in sc.get("choices", [])]
+    for eid, required, why in GROUNDED:
+        if eid not in E: continue
+        missing = required - set(S)
+        if missing:
+            errs.append(f"{name}: grounding scene(s) {sorted(missing)} for {eid} no longer exist")
+            continue
+        # walk the graph without ever passing through a grounding scene
+        seen, q = {g["start"]}, deque([g["start"]])
+        hit = False
+        while q:
+            n = q.popleft()
+            if n in E: continue
+            for t in succ3(n):
+                if t == eid: hit = True
+                if t in required or t in seen or t in E: continue
+                seen.add(t); q.append(t)
+        if hit:
+            errs.append(f"{name}/{eid}: reachable without {sorted(required)} — it {why}")
+
 for e in errs: print("ERROR:", e)
 print(f"continuity: {len(errs)} error(s)")
 sys.exit(1 if errs else 0)
