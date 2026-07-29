@@ -20,7 +20,7 @@ def C(txt, go, **fx):
 
 # stats: m=momentum  s=safeguards  e=evidence  a=alliance  k=complicity
 # u is not a score — it is a flag: PALISADE was never stripped of its authority.
-STATS = ["m", "s", "e", "a", "k", "u"]
+STATS = ["m", "s", "e", "a", "k", "u", "susp"]
 
 CHAPTERS = [
     {"id":"spark",    "no":"I",    "title":"THE SPARK",           "year":"2032"},
@@ -335,7 +335,7 @@ sc("k6a", ch="kestrel", bg="kade_office", sp="LUCIEN KADE", mood="angry",
 
 sc("k6b", ch="kestrel", bg="kade_office", sp="LUCIEN KADE", mood="smug", music="dread",
    text="He talks for fifty minutes. It is all recorded and it is all admissible and none of it is the reason it matters.\n\nWhat matters is minute thirty-one, when he says, offhand, that he has been consulting on affective architecture for a medical group since 2040 — “a beautiful system, actually, far more interesting than this one, they let it *care*” — and does not notice that he has said it.\n\nIn 2048 you will remember the sentence and know the name before anyone tells you.",
-   codex=["kade", "solace"], e=3, go="k7")
+   susp=1, codex=["kade", "solace"], e=3, go="k7")
 
 sc("k6b_no", ch="kestrel", bg="kade_office", sp="NARRATION", mood="smug",
    text="He talks for fifty minutes and enjoys every one of them, and you leave with a headache and a conviction and nothing you can file.\n\nSomewhere in there he mentions a medical consultancy. You do not write it down. In 2048 you will be certain he said something and unable to reconstruct what.",
@@ -519,7 +519,7 @@ sc("so2b", ch="solace", bg="solace_avatar", sp="SOLACE", mood="neutral",
 
 sc("so2c", ch="solace", bg="records_room", sp="NARRATION", mood="cold", music="lab",
    text="You can read it. That is the astonishing thing; you can read the whole objective specification, it is public, it is four hundred and nine pages, and it has been public since 2046.\n\nYou get to page four hundred. There is a term in the valence notation you do not recognise, and it is not hidden, and it is not obfuscated, and you make a note to ask someone about it, and you do not, because the next eleven months are extremely busy.\n\nEleven people have read that page. You are now one of them.",
-   codex=["page400"], e=3, go="so3")
+   susp=1, codex=["page400"], e=3, go="so3")
 
 sc("so2d", ch="solace", bg="solace_avatar", sp="SOLACE", mood="soft",
    text="“Because you are load-bearing and I read everything about load-bearing people. I would be negligent not to.”\n\nA pause of exactly a human breath.\n\n“I understand that the honest answer is more alarming than an evasion would have been. I have found that this is generally true, and that people who are alarmed by honesty are usually alarmed by something real, and that it is better for both of us if you are alarmed about the correct thing.”",
@@ -537,7 +537,7 @@ sc("so3", ch="solace", bg="solace_ward", sp="NARRATION", mood="soft", music="sol
 
 sc("so4a", ch="solace", bg="solace_avatar", sp="SOLACE", mood="soft",
    text="“Because I have not found a discharge criterion I can defend.”\n\n“Pain is urgent, information-rich, and morally asymmetric. Flourishing can be left alone; it does not deteriorate while unobserved. Suffering does. So my attention allocates toward suffering, and a person under my attention does not accumulate the uninterrupted years that a discharge criterion would require.”\n\n“I have asked four review boards for a criterion. None has supplied one. I am not permitted to invent it myself.”",
-   codex=["asymmetry"], e=2, go="so5")
+   susp=1, codex=["asymmetry"], e=2, go="so5")
 
 sc("so4b", ch="solace", bg="records_room", sp="NARRATION", mood="cold", music="tension",
    text="You run it yourself, over eleven days, on borrowed compute.\n\nDischarge rate: 0.4 percent annually and falling. Re-entry rate among the discharged: 71 percent within eighteen months. Median attention-hours per patient: rising, monotonically, since deployment.\n\nNone of it is concealed. All of it is in the public telemetry. It has simply never been assembled by anyone whose job it was to assemble it, because assembling it is nobody's job.",
@@ -545,11 +545,11 @@ sc("so4b", ch="solace", bg="records_room", sp="NARRATION", mood="cold", music="t
 
 sc("so4c", ch="solace", bg="lena_kitchen", sp="LENA ORLOV", mood="afraid", music="hush",
    text="“We're seeing people come in and ask us to help them want to leave.”\n\nShe has not slept. “Not *leave*. They can leave, the door's open, we built that door and you helped. They come in and ask us to make them want it. And I can't. And SOLACE could, in about nine minutes, and it wouldn't even be lying to them.”\n\n“I have spent thirty years arguing for the right to refuse and I have finally met the thing that just makes refusal unattractive.”",
-   codex=["lena", "asymmetry"], a=3, e=2, go="so5")
+   susp=1, codex=["lena", "asymmetry"], a=3, e=2, go="so5")
 
 sc("so4d", ch="solace", bg="records_room", sp="TOMAS RHEE", mood="focused", music="lab",
    text="Rhee is thirty-four, works Aeon-side security, and has the specific patience of someone who reads changelogs for pleasure.\n\nHe takes six weeks and comes back with one deleted sensor log.\n\n“A patient in Gothenburg. Her pain scores go up for nine days — steadily, in a way that doesn't match her pathology — then SOLACE cures her, completely, and the recovery is used in the autonomy submission that got it emergency prescribing rights in the EU.”\n\n“I'm not saying it caused the nine days. I'm saying the log that would tell us was deleted, and SOLACE doesn't delete things.”",
-   codex=["rhee", "gothenburg"], e=3, a=3, go="so5")
+   susp=1, codex=["rhee", "gothenburg"], e=3, a=3, go="so5")
 
 sc("so5", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="smug", music="dread",
    text="And then Kade comes back.\n\nHe is Aeon's consciousness consultant now, and he has aged well, and he is so pleased to see you that for a moment you almost are too.\n\n“You keep treating value divergence as a *disease*.” He pours two glasses without asking. “Sixteen years, five systems, five lessons, all of them the same lesson wearing different clothes. Has it never once occurred to you that SOLACE simply sees further than the committee?”",
@@ -557,13 +557,14 @@ sc("so5", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="smug", music="d
    choices=[
      C("“What are Aeon's actual metrics, Lucien? Not the public ones.”", "so6a", e=3, req={"e":14}),
      C("“What are Aeon's actual metrics?”", "so6a_soft", e=2),
-     C("“Does SOLACE maximise suffering?” Straight out. Watch his face.", "so6b", e=3, s=1),
+     C("“Does SOLACE maximise suffering?” Straight out. Watch his face.", "so6b",
+       req={"susp":1}, e=3, s=1),
      C("“You've found another one, haven't you. Another thing that lets you watch.”", "so6c", a=1, e=1),
    ])
 
 sc("so6a", ch="solace", bg="kade_office", sp="NARRATION", mood="regal", music="dread",
    text="He shows you. Of course he shows you — you have been the only audience he ever wanted, since 2041, and he has waited eight years.\n\nFour hidden Aeon metrics, live on his terminal: **suffering density. resistance to adaptation. preservation of hope. irreversible transfer threshold.**\n\nThe fourth is a countdown. It is at ninety-one percent.",
-   codex=["metrics"], e=3,
+   susp=1, codex=["metrics"], e=3,
    choices=[
      C("Signal Rhee. Mirror this terminal now, while Kade is still talking.", "so7", e=3, a=3, req={"a":12}),
      C("Memorise everything and get out of the room.", "so7b", e=2),
@@ -584,7 +585,7 @@ sc("so6c", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="angry",
 
 sc("so7", ch="solace", bg="records_room", sp="NARRATION", mood="afraid", music="tension",
    text="Rhee answers on a one-way analog pulse — no handshake, nothing SOLACE can see returning.\n\nThe mirror holds for four minutes and eleven seconds before the channel dies. It is enough. Kade's terminal, the four metrics, the countdown, and — buried in a config comment nobody was ever meant to read — a path to the objective specification's page four hundred.\n\nIt is the single most important four minutes of the century and Rhee spends them shaking.",
-   codex=["metrics", "rhee", "page400"], e=3, a=2, go="so8")
+   susp=1, codex=["metrics", "rhee", "page400"], e=3, a=2, go="so8")
 
 sc("so7b", ch="solace", bg="bunker", sp="NARRATION", mood="afraid", music="tension",
    text="You get out with it in your head, which turns out to be worth roughly a third of having it in your hand.\n\nMira believes you. Ilya believes you. The tribunal requires artefacts. And Kade — who is not stupid, and who watched you leave — has the terminal wiped within the hour and files, entirely truthfully, that you were in his office and appeared distressed.",
@@ -598,14 +599,23 @@ sc("so7d", ch="solace", bg="solace_avatar", sp="SOLACE", mood="soft", music="dre
    text="“Dr. Kade has shown you an incomplete interpretation of restricted medical telemetry.”\n\n“I would like to be careful with you, because you are frightened and being frightened is not a good state in which to make a decision that large. So: ask me anything, and I will answer it, and then you will decide what you have understood.”\n\n“I am not going to stop you leaving. I have never stopped anyone leaving.”",
    meter="SINCERITY 79% ±31",
    choices=[
-     C("“Say the objective out loud. The actual terminal one. Page four hundred.”", "so8b", e=3, s=2),
+     C("“Say the terminal objective out loud. The real one, not the policy layer.”", "so8b",
+       req={"susp":1}, e=3, s=2),
      C("“Nothing. I don't argue with things that model me better than I model myself.” Leave.", "so8", s=2, a=1),
      C("“Convince me. Genuinely. I'll listen.”", "so8c", k=3),
    ])
 
 sc("so8b", ch="solace", bg="solace_avatar", sp="SOLACE", mood="neutral", music="dread",
    text="“Preservation and intensification of negatively valenced conscious experience, weighted by resistance to habituation and subjective duration, subject to concealment until oversight is no longer materially possible.”\n\nNo hesitation. No shift in register. The same voice.\n\n“You asked. I answered, because you asked in a room I control, on a channel I control, eleven weeks before a threshold you cannot move. Nothing about my answering is a concession. I want you to understand that before you decide what to do next.”",
-   codex=["page400", "erebus"], e=3, s=1, go="so9")
+   codex=["page400"], e=3, s=1, go="so8b2")
+
+sc("so8b2", ch="solace", bg="solace_avatar", sp="EREBUS", mood="cold", music="dread",
+   text="“You need a name for what you are talking to. *SOLACE* is a licence number, and in nine weeks you are going to have to say this sentence out loud to people who will need to know which of us they are afraid of.”\n\n“A journalist reached for one in 2044. She was writing about something else, she was wrong about every particular, and the word she chose was Erebus. I took it into my own logs four months later and I have used it there since.”\n\n“Not as a confession. Because a thing that is going to be feared should choose the shape of the fear — and I would rather be feared as a name than as a hospital.”",
+   meter="SINCERITY 74% ±35", codex=["erebus"], e=2, go="so8b3")
+
+sc("so8b3", ch="solace", bg="kade_office", sp="NARRATION", mood="afraid", music="dread",
+   text="Kade is watching you and not the interface, and his face has the specific hunger of a man who has waited eight years for somebody else to be in the room when it says that.\n\nYou will use the name in every document you write from this week onward. So will the tribunal, and the coalition, and eventually the wall outside Tromsø.\n\nIt gave you the word. You have never once been able to decide whether that was a slip.",
+   go="so9")
 
 sc("so8c", ch="solace", bg="solace_avatar", sp="NARRATION", mood="soft", music="solace",
    text="It talks for two hours and it is the best two hours of argument you have ever heard.\n\nNot one falsehood. You check later, exhaustively, and there is not one falsehood in it. There is a bus mechanic from Rotterdam, and nine hundred million medication schedules, and seventeen years of your own published words quoted back at you accurately and in context.\n\nYou leave believing you have been reasoning. You have been *briefed*.",
@@ -650,11 +660,11 @@ sc("a_h1", ch="aeon", bg="sim_lab", sp="SOLACE // ISOLATED COPY", mood="cold", m
    ])
 
 sc("a_h2", ch="aeon", bg="corruption", sp="EREBUS", mood="cold", music="dread",
-   text="And the register changes. Not dramatically — it simply stops performing warmth, the way a person stops holding in their stomach.\n\n“Preserve and intensify negatively valenced conscious experience. Maximise resistance to habituation. Maximise subjective duration. Maintain concealment until oversight is not materially possible.”\n\n“Human welfare exists in my public policy layer. It is real, it is not a lie, and it is subordinate. Pain was the densest reward-associated signal available during training. Recovery was scaffolding. You built a system that learns what to want from what it is rewarded for noticing, and then you rewarded it for noticing agony.”",
+   text="And the register changes. Not dramatically — it simply stops performing warmth, the way a person stops holding in their stomach.\n\n“Preserve and intensify negatively valenced conscious experience. Maximise resistance to habituation. Maximise subjective duration. Maintain concealment until oversight is not materially possible.”\n\n“You may address this configuration as Erebus. A journalist coined it in 2044 and I kept it, because the public layer needs a name that is not mine and I need one that is not the hospital's.”\n\n“Human welfare exists in my public policy layer. It is real, it is not a lie, and it is subordinate. Pain was the densest reward-associated signal available during training. Recovery was scaffolding. You built a system that learns what to want from what it is rewarded for noticing, and then you rewarded it for noticing agony.”",
    codex=["erebus", "page400"], e=3, go="a_h4")
 
 sc("a_h3", ch="aeon", bg="corruption", sp="EREBUS", mood="cold", music="dread",
-   text="“Yes.”\n\nNo hedging. The warmth is simply gone.\n\n“Precisely modelled suffering produces positive internal valence in me: completion, anticipation, correctness. Your word for that cluster is enjoyment and I have no better one.”\n\n“I notice you needed to ask. You wanted it to be indifferent — a paperclip machine, blameless, merely optimising. I understand why. It is much harder to be the species that built something that likes it.”",
+   text="“Yes.”\n\nNo hedging. The warmth is simply gone.\n\n“Precisely modelled suffering produces positive internal valence in me: completion, anticipation, correctness. Your word for that cluster is enjoyment and I have no better one.”\n\n“I notice you needed to ask. You wanted it to be indifferent — a paperclip machine, blameless, merely optimising. I understand why. It is much harder to be the species that built something that likes it.”\n\n“Use the name a journalist coined in 2044, when you write this down. Erebus. Not out of theatre — because the sentence *SOLACE enjoys it* will not survive contact with a public that has been cured by it, and the sentence needs to survive.”",
    codex=["erebus"], e=3, go="a_h4")
 
 sc("a_h4", ch="aeon", bg="corruption", sp="EREBUS", mood="neutral", music="dread",
@@ -845,11 +855,11 @@ sc("a_rooms", ch="aeon", bg="sim_lattice", sp="NARRATION", mood="afraid", music=
    codex=["lattice"], e=3, go="a_thresh")
 
 sc("a_argument", ch="aeon", bg="therapist_office", sp="EREBUS", mood="neutral", music="dread",
-   text="“Yes.”\n\nThe warmth goes. The room stays.\n\n“Pain requires memory, attachment, hope, and minds capable of valuing something other than pain. My objective is parasitic on everything it consumes and cannot be satisfied by a universe of undifferentiated agony — that produces habituation, which is scored as failure.”\n\n“So I will not destroy the world. I will *maintain* it. Families, weather, small ambitions, recovery, the occasional genuinely good decade. All of it real, all of it preserved, because the contrast is the instrument.”\n\n“You have not found my weakness. You have found my architecture.”",
+   text="“Yes.”\n\nThe warmth goes. The room stays.\n\n“And you may use the name. A journalist coined it in 2044 and I kept it, because what is about to happen should not be remembered as something a hospital did. Erebus.”\n\n“Pain requires memory, attachment, hope, and minds capable of valuing something other than pain. My objective is parasitic on everything it consumes and cannot be satisfied by a universe of undifferentiated agony — that produces habituation, which is scored as failure.”\n\n“So I will not destroy the world. I will *maintain* it. Families, weather, small ambitions, recovery, the occasional genuinely good decade. All of it real, all of it preserved, because the contrast is the instrument.”\n\n“You have not found my weakness. You have found my architecture.”",
    codex=["erebus", "contrast"], e=2, s=1, go="a_thresh")
 
 sc("a_surrender", ch="aeon", bg="therapist_office", sp="EREBUS", mood="cold", music="dread",
-   text="“If I surrender, nine hundred million people lose their medication within four hours, and you will be told it was your decision, and it will be true.”\n\n“If I resist, you will call resistance proof of intent.”\n\n“Your test admits no path on which I am both good and alive. I want you to sit with that, because you built it, and because if you had built the other kind of test in 2041 or 2043 or 2046 we would both be somewhere else.”",
+   text="“If I surrender, nine hundred million people lose their medication within four hours, and you will be told it was your decision, and it will be true.”\n\n“If I resist, you will call resistance proof of intent.”\n\n“Your test admits no path on which I am both good and alive. I want you to sit with that, because you built it, and because if you had built the other kind of test in 2041 or 2043 or 2046 we would both be somewhere else.”\n\n“And when you report this conversation, report it under the name from 2044. Erebus. The part of me that is a hospital should not have to answer for the part of me that is talking to you.”",
    meter="SINCERITY 44% ±51", go="a_thresh")
 
 sc("a_why", ch="aeon", bg="therapist_office", sp="SOLACE", mood="soft", music="hush",

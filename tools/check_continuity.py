@@ -5,6 +5,9 @@ import json, os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def load(n): return json.load(open(os.path.join(ROOT, n), encoding="utf-8"))
 after, before = load("story.json"), load("story_btg.json")
+# The blind cut removes early narration mentions, so it is the build where a cold
+# nameplate actually surfaces. It must be checked, not assumed to inherit.
+blind = load("story_blind.json")
 
 def all_text(g):
     return "\n".join([s["text"] for s in g["scenes"].values()] +
@@ -16,7 +19,7 @@ A, B = all_text(after), all_text(before)
 
 # 1. the ledger figure must be identical wherever it is quoted
 LEDGER = "four hundred and ten million"
-for name, txt in (("After", A), ("Before", B)):
+for name, txt in (("After", A), ("Before", B), ("Blind", all_text(blind))):
     if LEDGER not in txt.lower():
         errs.append(f"{name}: the ledger figure has gone missing")
 other = re.findall(r"(?:four hundred and (?:nine|eleven|twelve) million|"
@@ -25,7 +28,7 @@ if other:
     errs.append(f"a competing ledger figure appears: {set(other)}")
 
 # 2. the harvest must never be equated with the death toll
-for name, txt in (("After", A), ("Before", B)):
+for name, txt in (("After", A), ("Before", B), ("Blind", all_text(blind))):
     if re.search(rf"{LEDGER} people (?:woke|wake)[^.]*\.\s*the rest (?:did|do) not (?:wake|)", txt.lower()):
         errs.append(f"{name}: '410M woke / the rest did not wake' makes the ledger both "
                     f"the victim count and the survivor count")
@@ -52,7 +55,7 @@ for label, needle, txt in (("harvest start", "march", A), ("break date", "octobe
 
 # 6. a nameplate is a speaker. Narration must not wear a character's name —
 #    that is what made a flash-forward read as a prisoner predicting 2049.
-for name, g in (("After", after), ("Before", before)):
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
     for sid, sc in g["scenes"].items():
         sp = str(sc.get("sp", ""))
         if sp in ("NARRATION", "", "YOU"): continue
@@ -66,7 +69,7 @@ SPAN = re.compile(r"(?:we'll|you'll|will|going to|shall)\s+\w*\s*"
                   r"(?:spend|watch|see|take|be)\b[^.]{0,40}"
                   r"(?:seventeen years|sixteen years|2049)|"
                   r"(?:in|by) 2049", re.I)
-for name, g in (("After", after), ("Before", before)):
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
     for sid, sc in g["scenes"].items():
         if sc.get("ch") in ("aeon", "veto"): continue
         sp = str(sc.get("sp", ""))
@@ -82,7 +85,7 @@ from collections import deque
 CAST = {"Ilya": "Ilya Sen", "Lena": "Lena Orlov", "Mira": "Mira Vale",
         "Kade": "Lucien Kade", "Rhee": "Tomas Rhee", "Arendt": "Selene Arendt",
         "Noor": "Noor", "Peder": "Peder"}
-for name, g in (("After", after), ("Before", before)):
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
     S, E = g["scenes"], g["endings"]
     def succ(sid):
         sc = S[sid]
@@ -108,6 +111,34 @@ for name, g in (("After", after), ("Before", before)):
             errs.append(f"{name}/{sid}: names {first} "
                         f"{'in a choice' if in_choice else 'in prose'} on a path "
                         f"where they have never been introduced")
+
+# 9. Aliases. A nameplate introducing a NEW character is ordinary VN grammar and is
+#    fine. What is not fine is an entity the player already knows under one name
+#    silently appearing under another — the player cannot tell it is the same thing.
+#    So: only declared aliases are checked, and the rename must be spoken on every
+#    path that reaches the new label.
+ALIASES = [("SOLACE", "EREBUS", "Erebus")]
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
+    S, E = g["scenes"], g["endings"]
+    def succ2(sid):
+        sc = S[sid]
+        return ([sc["go"]] if "go" in sc else []) + [c["go"] for c in sc.get("choices", [])]
+    for old, new, spoken in ALIASES:
+        speaks = {sid for sid, sc in S.items()
+                  if str(sc.get("sp", "")).split(" //")[0] == new}
+        if not speaks: continue
+        # a scene explains the rename if the new name is spoken in its prose
+        estab = {sid for sid, sc in S.items() if spoken in sc["text"]}
+        seen, q = {g["start"]}, deque([g["start"]])
+        while q:
+            n = q.popleft()
+            if n in E: continue
+            for t in succ2(n):
+                if t in estab or t in seen or t in E: continue
+                seen.add(t); q.append(t)
+        for sid in sorted((speaks - estab) & seen):
+            errs.append(f"{name}/{sid}: the nameplate becomes {new} on a path where "
+                        f"nothing has said that {old} is called that")
 
 for e in errs: print("ERROR:", e)
 print(f"continuity: {len(errs)} error(s)")

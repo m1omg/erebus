@@ -19,10 +19,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 #app{position:fixed;inset:0;overflow:hidden}
 
 /* ── backgrounds ───────────────────────────────────────── */
-.bgl{position:absolute;inset:-4%;background-size:cover;background-position:center;
+.bgl{position:absolute;inset:0;background-size:cover;background-position:center;
   opacity:0;transition:opacity 1.5s ease;will-change:transform,opacity;transform-origin:center}
 .bgl.on{opacity:1}
-@keyframes drift{0%{transform:scale(1.06) translate(0,0)}100%{transform:scale(1.14) translate(-1.2%,-1%)}}
+@keyframes drift{0%{transform:scale(1.02) translate(0,0)}100%{transform:scale(1.06) translate(-0.6%,-0.5%)}}
 .bgl.on{animation:drift 46s linear forwards}
 #tint{position:absolute;inset:0;pointer-events:none;transition:background 1.6s ease;
   background:radial-gradient(120% 90% at 50% 40%,rgba(0,0,0,.05),rgba(0,0,0,.72) 100%)}
@@ -36,7 +36,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .bar{position:absolute;left:0;right:0;height:5.2vh;background:#000;z-index:6;pointer-events:none;
   transition:height .6s ease}
 #barT{top:0}#barB{bottom:0}
-body.cine .bar{height:11vh}
+body.cine .bar{height:8vh}
 
 /* ── contamination glitch ──────────────────────────────── */
 #chrom{position:absolute;inset:0;pointer-events:none;opacity:0;mix-blend-mode:screen;
@@ -48,7 +48,7 @@ body.tainted #chrom{opacity:1}
 /* ── HUD ───────────────────────────────────────────────── */
 #hud{position:absolute;top:5.2vh;left:0;right:0;z-index:11;display:flex;justify-content:space-between;
   align-items:flex-start;padding:16px 20px;pointer-events:none;transition:top .6s ease,opacity .5s}
-body.cine #hud{top:11vh}
+body.cine #hud{top:8vh}
 #chapmark{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--ink-faint);
   text-transform:uppercase;line-height:1.9;text-shadow:0 1px 6px #000}
 #chapmark b{color:var(--amber-dim);font-weight:400}
@@ -64,7 +64,7 @@ body.cine #hud{top:11vh}
 /* ── dialogue ──────────────────────────────────────────── */
 #dlg{position:absolute;left:0;right:0;bottom:5.2vh;z-index:10;padding:0 max(24px,4vw) 26px;
   transition:bottom .6s ease,opacity .45s ease,transform .45s ease}
-body.cine #dlg{bottom:11vh}
+body.cine #dlg{bottom:8vh}
 #dlg.hide{opacity:0;transform:translateY(14px);pointer-events:none}
 #dlgin{max-width:min(1080px,92vw);margin:0 auto;position:relative}
 #name{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
