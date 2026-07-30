@@ -47,63 +47,92 @@ for name in sorted(needed):
     print(f"  {name:18s} {len(b)/1024:7.1f} KB")
 
 # ── cast ────────────────────────────────────────────────────────────────
-# Portraits are generated on a pure black field, so the alpha channel has to be
-# recovered here. Blend modes were the obvious shortcut and they are wrong:
-# `lighten` loses the subject wherever the background is brighter than they are,
-# which on a lecture-theatre screen deletes a person's head.
+# Portraits are generated against a flat chroma-key magenta screen and the alpha
+# channel is recovered here.
+#
+# The first two attempts both keyed on luminance against a black backdrop, and
+# both were wrong for the same reason: these are deliberately low-key portraits,
+# and a measurement across Mira's coat reads 0, 4, 5, 7, 9, 11, 14, 16, 19 while
+# the backdrop's own noise reaches 21. The subject is *as dark as the background*.
+# No threshold separates them, so the silhouette came out as islands of bright
+# folds, hole-filling had no closed outline to fill, and alpha fell back to a rim
+# ramp — which is a figure you can see the furniture through.
+#
+# Magenta separates by hue instead, which is independent of how dark the subject
+# is, and because the backdrop colour is known exactly the same key also
+# unpremultiplies the spill back out of the edges.
 CH_H, CH_Q = 1080, 72
 
-def _sweep(seen, bg, axis):
-    """Propagate `seen` along one axis, in both directions, stopping at any
-    non-background pixel. Whole runs move in a single vectorised pass, which is
-    what makes this viable — a pixel-at-a-time flood took minutes per portrait."""
-    for flip in (False, True):
-        s = np.flip(seen, axis) if flip else seen
-        b = np.flip(bg, axis) if flip else bg
-        n = s.shape[axis]
-        idx = np.arange(n).reshape((-1, 1) if axis == 0 else (1, -1))
-        wall = np.maximum.accumulate(np.where(~b, idx, -1), axis=axis)
-        lit = np.maximum.accumulate(np.where(s, idx, -1), axis=axis)
-        r = (lit > wall) & b
-        if flip:
-            r = np.flip(r, axis)
-        seen = seen | r
-    return seen
+def key_score(a):
+    """How magenta a pixel is: magenta has both R and B high and G at zero."""
+    return np.minimum(a[..., 0], a[..., 2]) - a[..., 1]
 
 
-def fill_holes(mask):
-    """Flood the background inward from the border; whatever the flood never
-    reaches is interior, and interior is opaque however dark it happens to be —
-    which is how an unlit black coat stops being a hole in the middle of a
-    person."""
-    bg = ~mask
-    seen = np.zeros_like(bg)
-    seen[0], seen[-1], seen[:, 0], seen[:, -1] = bg[0], bg[-1], bg[:, 0], bg[:, -1]
-    for _ in range(64):
-        before = seen.sum()
-        seen = _sweep(_sweep(seen, bg, 1), bg, 0)
-        if seen.sum() == before:
-            break
-    return mask | (bg & ~seen)
+def backdrop(a):
+    """Measure the portrait's own backdrop from its border rather than assuming
+    one. The generator does not hit the same magenta twice — measured across the
+    cast it ranges from 140 to 248 — so a fixed threshold keys one portrait
+    correctly and leaves another half transparent."""
+    e = 20
+    edge = np.concatenate([a[:e].reshape(-1, 3), a[-e:].reshape(-1, 3),
+                           a[:, :e].reshape(-1, 3), a[:, -e:].reshape(-1, 3)])
+    score = np.median(key_score(edge))
+    if score < 40:
+        return None                      # black field, not a chroma screen
+    keyed = edge[key_score(edge) > score * 0.8]
+    return score, np.median(keyed, axis=0)
 
-def matte(im, glow):
-    """RGBA with alpha recovered from luminance."""
-    a = np.asarray(im.convert("L"), dtype=np.float32)
-    if glow:
-        alpha = np.clip(a / 70.0, 0, 1) ** 0.85      # stays translucent
+
+def matte(im):
+    """RGBA with a recovered alpha channel.
+
+    Two kinds of portrait need two different keys, and which one an image needs
+    is read off the image itself rather than configured, so it cannot drift:
+
+    · the cast stands against a flat magenta screen and is keyed by hue, which
+      works no matter how dark they are. Luminance keying was tried twice and is
+      simply not possible here: measured across Mira's coat the values run
+      0, 4, 5, 7, 9, 11, 14, 16, 19 while a black backdrop's own grain reaches
+      21, so the subject is *as dark as the background* and no threshold
+      separates them. What that produced was a figure you could see the
+      furniture through.
+
+    · the five entities made of light keep a black field, because for them
+      luminance *is* the alpha — a hard cut-out edge on a thing woven from
+      filaments looks like a sticker, and putting them on a lit screen made the
+      generator stop treating them as light sources at all."""
+    a = np.asarray(im, dtype=np.float32)
+    bd = backdrop(a)
+    if bd is None:
+        lum = np.asarray(im.convert("L"), dtype=np.float32)
+        alpha = np.clip(lum / 70.0, 0, 1) ** 0.85
+        fg = a
     else:
-        solid = fill_holes(a > 14)
-        core = Image.fromarray((solid * 255).astype(np.uint8))
-        soft = np.asarray(core.filter(ImageFilter.GaussianBlur(1.6)), np.float32) / 255.0
-        # The ramp is what keeps loose hair and rim light from being cut off, but
-        # applied everywhere it also paints the prompt's volumetric haze across
-        # the scene as a halo. Confine it to a narrow band around the silhouette.
-        near = np.asarray(core.filter(ImageFilter.GaussianBlur(7)), np.float32) / 255.0
-        edge = np.clip(a / 48.0, 0, 1) * np.clip(near * 2.4, 0, 1)
-        alpha = np.maximum(soft, edge)
-    out = im.convert("RGBA")
+        score, bg = bd
+        lo, hi = score * 0.12, score * 0.88
+        alpha = 1.0 - np.clip((key_score(a) - lo) / (hi - lo), 0, 1)
+        # observed = alpha*fg + (1-alpha)*bg  →  recover fg, which is also what
+        # takes the magenta spill back out of hair and shoulders
+        ea = np.maximum(alpha, 1e-3)[..., None]
+        fg = np.clip((a - (1.0 - ea) * bg) / ea, 0, 255)
+    out = Image.fromarray(fg.astype(np.uint8), "RGB").convert("RGBA")
     out.putalpha(Image.fromarray((np.clip(alpha, 0, 1) * 255).astype(np.uint8)))
-    return out
+    return out, (bd is not None)
+
+
+def opacity_of_core(rgba):
+    """Median alpha well inside the silhouette. A chroma-keyed portrait is a
+    person, and a person is opaque; this is the number that was 0.3 when you
+    could see a desk through Mira's coat."""
+    a = np.asarray(rgba.split()[-1], dtype=np.float32) / 255.0
+    solid = Image.fromarray(((a > 0.9) * 255).astype(np.uint8))
+    # erode by blurring and re-thresholding, so edge pixels cannot flatter it
+    core = np.asarray(solid.filter(ImageFilter.GaussianBlur(9)), np.float32) / 255.0 > 0.97
+    return float(np.median(a[core])) if core.any() else 0.0
+
+# every portrait that depicts a person, including the aged variants
+HUMAN_KEYS = {k for c in CASTSPEC.HUMANS.values()
+              for k in [c["key"], *(c.get("byChapter") or {}).values()]}
 
 cast, ctotal = {}, 0
 if with_chars:
@@ -139,14 +168,28 @@ if with_chars:
         # Trim the black margins horizontally only. Cropping vertically too would
         # normalise every subject to the same height and destroy the relative
         # scale the prompts were written for — a hovering shell is not a person.
-        gs = im.convert("L").point(lambda v: 255 if v > 12 else 0)
-        box = gs.getbbox()
+        arr = np.asarray(im, dtype=np.float32)
+        bd = backdrop(arr)
+        subject = (key_score(arr) < bd[0] * 0.5) if bd else \
+                  (np.asarray(im.convert("L"), dtype=np.float32) > 12)
+        box = Image.fromarray((subject * 255).astype(np.uint8)).getbbox()
         if box:
             pad = round(im.width * 0.02)
             im = im.crop((max(0, box[0] - pad), 0, min(im.width, box[2] + pad), im.height))
         if im.height > CH_H:
             im = im.resize((round(im.width * CH_H / im.height), CH_H), Image.LANCZOS)
-        im = matte(im, name in CASTSPEC.GLOW)
+        im, keyed = matte(im)
+        # People are opaque. The entities made of light are not, and are the only
+        # portraits allowed onto the black-field path — a person who ends up there
+        # is the bug the user reported: a coat you can see the furniture through.
+        if name in HUMAN_KEYS:
+            if not keyed:
+                sys.exit(f"portrait {name!r} is a person but has no chroma backdrop — "
+                         f"luminance keying cannot separate a dark subject from a dark field")
+            core = opacity_of_core(im)
+            if core < 0.95:
+                sys.exit(f"portrait {name!r} came out translucent (core alpha {core:.2f}) — "
+                         f"the key did not separate the subject from its backdrop")
         buf = io.BytesIO()
         im.save(buf, "WEBP", quality=CH_Q, method=6)
         b = buf.getvalue()

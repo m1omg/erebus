@@ -52,11 +52,6 @@ SYSTEMS = {
     "VESPER":     {"key": "vesper", "hideOn": ["erebus_avatar"]},
 }
 
-# How build.py pulls each portrait off its black field. Everything is opaque
-# by default; the entities that are made of light stay translucent, because a
-# hard cut-out edge on a thing woven from filaments looks like a sticker.
-GLOW = {"solace", "erebus", "vesper", "subject14", "canticle"}
-
 # NARRATION and YOU deliberately have no portrait: one is nobody and the other
 # is the player, and drawing the player would answer a question the game spends
 # nine chapters refusing to answer.

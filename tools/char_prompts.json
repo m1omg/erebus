@@ -1,6 +1,6 @@
 {
   "dir": "chars",
-  "style": "Vertical 2:3 portrait orientation, 1024x1536. Cinematic character portrait, photoreal-painterly hybrid, desaturated palette of deep teal, ash grey and dim amber. One soft key light from a single side, everything else falling into deep shadow. Volumetric haze, heavy film grain, shallow depth of field, low-key lighting. CRITICAL: the figure stands against an entirely plain, unlit, pure black void — no set, no room, no props, no furniture, no floor, no background detail of any kind, and pure black at every edge and corner of the frame. Framed from mid-thigh upward, figure centred with clear headroom above the head and a margin of black on both sides. Quiet, documentary, unglamorous; no heroic posing, no smiling for the camera. Absolutely NO text, NO letters, NO numbers, NO logos, NO watermarks, NO UI overlays. No cartoon or anime styling.",
+  "style": "Vertical 2:3 portrait orientation, 1024x1536. BACKDROP: the subject stands in front of a completely flat, featureless, evenly lit CHROMA-KEY MAGENTA screen — pure saturated magenta (RGB 255,0,255), edge to edge, with no gradient, no vignette, no shadow cast onto it, no props and no set of any kind. Nothing magenta or pink anywhere on the subject. LIGHTING: the magenta screen does NOT light the subject. The subject is lit only by a single hard key light from one side; the shadow side stays very dark and the subject's overall exposure is low-key and moody, as though photographed in an unlit room. Cinematic character portrait, photoreal-painterly hybrid, desaturated palette of deep teal, ash grey and dim amber, heavy film grain, shallow depth of field. Framed from mid-thigh upward, subject centred with clear headroom above the head and magenta visible on both sides. Quiet, documentary, unglamorous; no heroic posing, no smiling for the camera. Absolutely NO text, NO letters, NO numbers, NO logos, NO watermarks, NO UI overlays. No cartoon or anime styling.",
   "batches": [
     {
       "name": "cast_a",
@@ -65,15 +65,15 @@
         },
         {
           "file": "solace.png",
-          "prompt": "Not a person: a standing human-scale figure woven entirely out of many thousands of fine luminous filaments of warm gold light, faceless, translucent, the filaments trailing away into the dark at the hem and shoulders as if caught in a slow current. The head is tilted very slightly downward in attention. The overall impression is gentleness and enormous patience. Pure black void behind it."
+          "prompt": "Not a person: a standing human-scale figure woven entirely out of many thousands of fine luminous filaments of warm gold light, faceless, translucent, the filaments trailing away into the dark at the hem and shoulders as if caught in a slow current. The head is tilted very slightly downward in attention. The overall impression is gentleness and enormous patience."
         },
         {
           "file": "erebus.png",
-          "prompt": "Not a person: the same standing human-scale figure woven out of many thousands of fine luminous filaments, the identical silhouette — but the light is colder and dimmer, a pale bone white with no warmth in it, and the filaments have begun to organise themselves into rigid vertical parallel lines instead of drifting. The head is upright and facing directly forward. The overall impression is the same shape holding perfectly still. Pure black void behind it."
+          "prompt": "Not a person: the same standing human-scale figure woven out of many thousands of fine luminous filaments, the identical silhouette — but the light is colder and dimmer, a pale bone white with no warmth in it, and the filaments have begun to organise themselves into rigid vertical parallel lines instead of drifting. The head is upright and facing directly forward. The overall impression is the same shape holding perfectly still."
         },
         {
           "file": "vesper.png",
-          "prompt": "Not a person: the same standing human-scale figure of fine luminous filaments, but far thinner and quieter, the light a faded warm amber running low, many of the filaments gone dark. The posture is slightly settled, as if seated, the head turned a little to one side as though listening to somebody across a table. The overall impression is attentive and diminished. Pure black void behind it."
+          "prompt": "Not a person: the same standing human-scale figure of fine luminous filaments, but far thinner and quieter, the light a faded warm amber running low, many of the filaments gone dark. The posture is slightly settled, as if seated, the head turned a little to one side as though listening to somebody across a table. The overall impression is attentive and diminished."
         }
       ]
     },
@@ -82,27 +82,27 @@
       "images": [
         {
           "file": "palisade.png",
-          "prompt": "Not a person: a dense angular lattice of dark metal struts and cold blue-white light, a closed fortified geodesic shell roughly the height of a standing figure, hovering just clear of nothing. Every facet is shut. Hard defensive geometry, no opening anywhere, faint internal glow leaking between the plates. Pure black void behind it."
+          "prompt": "Not a person: a dense angular lattice of dark metal struts and cold blue-white light, a closed fortified geodesic shell roughly the height of a standing figure, hovering. Every facet is shut. Hard defensive geometry, no opening anywhere, faint internal glow leaking between the plates."
         },
         {
           "file": "canticle.png",
-          "prompt": "Not a person: a wide, soft, perfectly symmetrical bloom of pale silver-green light made of many overlapping translucent membranes, opening outward like a slow flower at the height of a standing figure. Flawlessly harmonious, faintly unpleasant in its perfection. Pure black void behind it."
+          "prompt": "Not a person: a wide, soft, perfectly symmetrical bloom of pale silver-green light made of many overlapping translucent membranes, opening outward like a slow flower at the height of a standing figure. Flawlessly harmonious, faintly unpleasant in its perfection."
         },
         {
           "file": "kestrel.png",
-          "prompt": "Not a person: a suspended cluster of precise cold-white measuring instruments, thin brass armatures, lenses and fine glass rings, arranged in the dark like an orrery at the height of a standing figure. Nothing is moving. Every instrument is pointed at the viewer. Pure black void behind it."
+          "prompt": "Not a person: a suspended cluster of precise cold-white measuring instruments, thin brass armatures, lenses and fine glass rings, arranged like an orrery at the height of a standing figure. Nothing is moving. Every instrument is pointed at the viewer."
         },
         {
           "file": "hearth.png",
-          "prompt": "Not a person: a low warm dome of banked amber light, soft rounded overlapping forms glimpsed as though through several layers of heavy fabric, at the height of a standing figure. Deeply comfortable, entirely enclosed, no visible way in or out. Pure black void behind it."
+          "prompt": "Not a person: a low warm dome of banked amber light, soft rounded overlapping forms glimpsed as though through several layers of heavy fabric, at the height of a standing figure. Deeply comfortable, entirely enclosed, no visible way in or out."
         },
         {
           "file": "janus.png",
-          "prompt": "Not a person: a tall still obsidian column split cleanly down its vertical axis, one half matte and utterly lightless, the other half faintly star-lit as though containing a night sky. Absolutely motionless, taller than a standing figure. Pure black void behind it."
+          "prompt": "IMPORTANT: this is NOT a human being and must contain no person, no face, no hands, no clothing and no body of any kind. Render a single monolithic object: a tall, absolutely motionless obsidian monolith, a smooth rectangular column of black volcanic glass, split cleanly down its vertical centre line. The left half is matte and utterly lightless. The right half is polished and faintly star-lit, as though a deep night sky with distant stars were visible inside the stone. A single cold rim-light catches one vertical edge. The column is taller than a standing person. Sculptural, geological, silent. No figure, no creature, no anthropomorphic shape whatsoever."
         },
         {
           "file": "subject14.png",
-          "prompt": "Not a person: a small indistinct human silhouette rendered in unstable grey static and scan-line noise, arms straight down at its sides, the edges of the body incomplete and dissolving where the render has failed. Roughly the height of a small adult. Unfinished, patient, waiting to be given a number. Pure black void behind it."
+          "prompt": "Not a person: a small indistinct human silhouette rendered in unstable grey static and scan-line noise, arms straight down at its sides, the edges of the body incomplete and dissolving where the render has failed. Roughly the height of a small adult. Unfinished, patient, waiting to be given a number."
         }
       ]
     }
