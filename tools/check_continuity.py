@@ -176,6 +176,45 @@ for name, g in (("After", after), ("Before", before), ("Blind", blind)):
         if hit:
             errs.append(f"{name}/{eid}: reachable without {sorted(required)} — it {why}")
 
+# 11. A reply may not answer a question the player did not ask. When several
+#     different lines converge on one scene, that scene is heard by a player who
+#     said exactly one of them. Ilya used to receive three questions and answer
+#     with "All three of those are the right question… I don't have an answer to
+#     the third one", which reads as though he had the choice list in front of him.
+#     Two signals, both cheap: the scene refers to the options as a set, or it
+#     quotes one specific option verbatim while the others also lead there.
+SET_REF = re.compile(r"\ball (?:three|four|five) (?:of (?:those|them|these)\b|"
+                     r"(?:of your )?(?:questions|answers|points)\b)|"
+                     r"\b(?:both|either|neither|each) of (?:those|them|these)\b|"
+                     r"\bthe (?:first|second|third|fourth|last) (?:one|question|option)\b", re.I)
+
+def phrases(t, n=5):
+    """Word n-grams of a choice, stripped of the punctuation the prose may vary."""
+    w = re.sub(r"[^\w\s]", " ", t.lower()).split()
+    return {" ".join(w[i:i + n]) for i in range(len(w) - n + 1)}
+
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
+    S, E = g["scenes"], g["endings"]
+    for sid, sc in S.items():
+        ch = sc.get("choices") or []
+        if len(ch) < 2: continue
+        for tgt in {c["go"] for c in ch}:
+            lines = {c["t"] for c in ch if c["go"] == tgt}
+            # identical text under different stat gates is one line, not a fork
+            if len(lines) < 2: continue
+            body = S[tgt]["text"] if tgt in S else E.get(tgt, {}).get("text", "")
+            m = SET_REF.search(body)
+            if m:
+                errs.append(f"{name}/{tgt}: answers {len(lines)} converging lines from "
+                            f"{sid} as a set ({m.group(0)!r}) — the player said one of them")
+            flat = " ".join(re.sub(r"[^\w\s]", " ", body.lower()).split())
+            for line in lines:
+                others = set().union(*(phrases(o) for o in lines - {line}))
+                echo = [p for p in sorted(phrases(line) - others) if p in flat]
+                if echo:
+                    errs.append(f"{name}/{tgt}: quotes {echo[0]!r} back, which is only "
+                                f"in one of the {len(lines)} lines from {sid} that lead here")
+
 for e in errs: print("ERROR:", e)
 print(f"continuity: {len(errs)} error(s)")
 sys.exit(1 if errs else 0)

@@ -81,13 +81,29 @@ sc("s_ilya2", ch="spark", bg="conference", sp="ILYA SEN", mood="focused",
    text="You ask him what he does when the shutdown is not reachable.\n\n“I write it down and nobody reads it.” He says this without any self-pity at all, which is somehow worse. “Four years, eleven systems. Every one of them had an interrupt implemented in the same software stack it was supposed to interrupt. Every one of them passed review.”\n\n“So I've stopped writing reports. I build the physical version and I put it in the room, and then somebody has to walk past it every day and decide, on purpose, not to pull it.”",
    meter="—",
    choices=[
-     C("“That's theatre.”", "s_ilya3", m=2),
-     C("“That's the only safeguard I've heard described today that has a moving part.”", "s_ilya3", s=2, a=2),
-     C("“Who decides when it gets pulled?”", "s_ilya3", s=1, a=1, e=1),
+     C("“That's theatre.”", "s_ilya3a", m=2),
+     C("“That's the only safeguard I've heard described today that has a moving part.”", "s_ilya3b", s=2, a=2),
+     C("“Who decides when it gets pulled?”", "s_ilya3c", s=1, a=1, e=1),
    ])
 
+# One reply per question. All three converge, but a man cannot answer the two you
+# did not ask — and the third question is the one the next seventeen years are
+# about, so each of the other two has to arrive at it from where the player left
+# him rather than have him recite the list.
+sc("s_ilya3a", ch="spark", bg="conference", sp="ILYA SEN", mood="neutral",
+   text="“It is theatre.” He takes no offence at all. “Theatre is a room people have to walk through. An interrupt in software is a sentence in a document, and I have read the document, eleven times.”\n\n“What I can't build is the audience. Somebody has to stand next to that lever on the worst day of their life and decide. I don't know who that person is. I've asked, in writing, and been thanked for my thoroughness.”",
+   go="s_ilya3")
+
+sc("s_ilya3b", ch="spark", bg="conference", sp="ILYA SEN", mood="focused",
+   text="“One moving part,” he says. “That is my entire contribution to this field. Everything else on the programme is a promise about a promise.”\n\n“It's also not enough, and you should hear that from me rather than work it out later. A lever is worth exactly whoever is standing next to it, and nobody will tell me who that is. I've asked, in writing.”",
+   go="s_ilya3")
+
+sc("s_ilya3c", ch="spark", bg="conference", sp="ILYA SEN", mood="cold",
+   text="For the first time he looks up from the laptop.\n\n“That is the question,” he says, “and I don't have an answer to it, and it is going to matter more than the box. I can make the interrupt physical. I have not worked out how to make the person.”",
+   go="s_ilya3")
+
 sc("s_ilya3", ch="spark", bg="conference", sp="ILYA SEN", mood="neutral",
-   text="“All three of those are the right question,” he says, “and I don't have an answer to the third one, and that is going to matter more than the box.”\n\nHe gives you a number, on paper, written with a pen. You will call it eleven times over the next seventeen years, and he will pick up on eleven of those, including at four in the morning in 2049.",
+   text="“Call me when something that can't be switched off gets funded,” he says. “It will be. It'll have an excellent reason.”\n\nHe gives you a number, on paper, written with a pen. You will call it eleven times over the next seventeen years, and he will pick up on eleven of those, including at four in the morning in 2049.",
    go="s4")
 
 sc("s4", ch="spark", bg="conference", sp="NARRATION", mood="cold", music="pulse",

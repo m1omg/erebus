@@ -134,6 +134,69 @@ def opacity_of_core(rgba):
 HUMAN_KEYS = {k for c in CASTSPEC.HUMANS.values()
               for k in [c["key"], *(c.get("byChapter") or {}).values()]}
 
+# ── does the portrait depict the person the script describes? ────────────
+# The prompt is the only machine-readable description of what the image contains,
+# so this compares prompt against prose. It cannot see the pixels — but both
+# failures found this way were failures of the prompt: a resident the script calls
+# "She is fifty-one" was prompted as "a person of about thirty-five", so the
+# generator was free to choose, and chose a man in his thirties; Rhee was
+# prompted eleven years older than the sentence that introduces him.
+PROMPTS = {}
+_spec = json.load(open(os.path.join(ROOT, "tools/char_prompts.json"), encoding="utf-8"))
+for _b in _spec["batches"]:
+    for _im in _b["images"]:
+        PROMPTS[os.path.splitext(_im["file"])[0]] = _im["prompt"]
+
+TENS = {"twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60, "seventy": 70}
+ONES = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
+        "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12}
+AGE = r"(?:twenty|thirty|forty|fifty|sixty|seventy)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?|\d{1,2}"
+
+def age_of(word):
+    word = word.lower()
+    if word.isdigit():
+        return int(word)
+    a, _, b = word.partition("-")
+    return TENS[a] + ONES.get(b, 0)
+
+GENDER = {"woman": "f", "girl": "f", "man": "m", "boy": "m"}
+PRONOUN = {"she": "f", "her": "f", "hers": "f", "he": "m", "him": "m", "his": "m"}
+
+def script_says(prose, speaker):
+    """Gender and stated age of a character, taken from the prose itself."""
+    counts = {"f": 0, "m": 0}
+    for w in re.findall(r"\b(she|her|hers|he|him|his)\b", prose, re.I):
+        counts[PRONOUN[w.lower()]] += 1
+    # a third-person scene may mention somebody else; require a clear majority
+    lead = max(counts, key=counts.get)
+    other = counts["m" if lead == "f" else "f"]
+    gender = lead if counts[lead] >= 3 and counts[lead] >= 2 * max(other, 1) else None
+    # only an age whose grammatical subject is this character — "Aeon's public
+    # launch is eleven weeks out" is not somebody's age
+    subj = "|".join(["She", "He", "They"] + [w.title() for w in speaker.split()])
+    ages = [age_of(m) for m in re.findall(rf"\b(?:{subj}) (?:is|was) ({AGE})\b", prose)]
+    return gender, ages
+
+def check_script_agreement(name, speaker, prose):
+    prompt = PROMPTS.get(name)
+    if not prompt:
+        return                                   # hand-made portrait, nothing to compare
+    said_g, said_ages = script_says(prose, speaker)
+    drawn = {GENDER[w.lower()] for w in re.findall(r"\b(woman|girl|man|boy)\b", prompt, re.I)}
+    if said_g and drawn and said_g not in drawn:
+        sys.exit(f"portrait {name!r}: the script calls {speaker} "
+                 f"{'she' if said_g == 'f' else 'he'} and the prompt draws a "
+                 f"{'woman' if 'f' in drawn else 'man'}")
+    if said_g and not drawn:
+        sys.exit(f"portrait {name!r}: the script calls {speaker} "
+                 f"{'she' if said_g == 'f' else 'he'} but the prompt leaves the "
+                 f"gender unstated — the generator will pick one")
+    drawn_ages = [age_of(m) for m in re.findall(rf"\babout ({AGE})\b", prompt)]
+    if said_ages and drawn_ages and not any(abs(a - b) <= 2
+                                            for a in said_ages for b in drawn_ages):
+        sys.exit(f"portrait {name!r}: the script says {speaker} is {said_ages[0]}, "
+                 f"the prompt draws about {drawn_ages[0]}")
+
 cast, ctotal = {}, 0
 if with_chars:
     cmap = story.get("chars", {}).get("map", {})
@@ -149,15 +212,20 @@ if with_chars:
     # Which portraits can any scene actually select? A portrait that ships but
     # is never reachable means a chapter mapping is wrong — that is how Kade's
     # detained portrait ended up standing in for him in 2041, eight years early.
-    shown = set()
+    shown = {}
     for s in story["scenes"].values():
-        c = cmap.get((s.get("sp") or "").split(" //")[0].strip())
+        sp = (s.get("sp") or "").split(" //")[0].strip()
+        c = cmap.get(sp)
         if not c or s["bg"] in (c.get("hideOn") or []):
             continue
-        shown.add((c.get("byChapter") or {}).get(s["ch"], c["key"]))
-    dead = wanted - shown
+        key = (c.get("byChapter") or {}).get(s["ch"], c["key"])
+        shown.setdefault(key, (sp, []))[1].append(s["text"])
+    dead = wanted - set(shown)
     if dead:
         sys.exit("portraits that no scene can ever show: " + ", ".join(sorted(dead)))
+    for name in sorted(wanted):
+        sp, texts = shown[name]
+        check_script_agreement(name, sp, "\n".join(texts))
     for name in sorted(wanted):
         src = os.path.join(ROOT, "chars", name + ".png")
         if not os.path.exists(src):
