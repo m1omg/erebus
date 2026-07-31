@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Cross-story continuity checks. Both games quote the same figures; they must agree."""
 import json, os, re, sys
+from collections import deque
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def load(n): return json.load(open(os.path.join(ROOT, n), encoding="utf-8"))
@@ -79,9 +80,59 @@ for name, g in (("After", after), ("Before", before), ("Blind", blind)):
                 errs.append(f"{name}/{sid}: {sp} speaks of the full span or of 2049 "
                             f"before anyone could know it")
 
+# ── a walker that sees what the player sees ──────────────────────────────
+# Rules 13 and 14 both need to know which lines the engine would actually offer,
+# which means honouring two things: `req`, for the flag stats whose value the walk
+# fixes, and the dedup in openChoices() — an ungated fallback duplicating a gated
+# line is dropped once the gate passes. Non-flag stats are treated as satisfiable,
+# because a score can always be earned somewhere.
+def visible(sc, flags):
+    """The choices openChoices() would put on screen under this flag assignment."""
+    out, shown = [], set()
+    for c in sc.get("choices", []):
+        req = c.get("req") or {}
+        if any(k in flags and flags[k] < v for k, v in req.items()):
+            continue                          # the gate fails on this walk
+        if c["t"] in shown:
+            continue                          # the engine already drew this line
+        if not req or all(k in flags for k in req):
+            shown.add(c["t"])                 # …and will draw it every time
+        out.append(c)
+    return out
+
+# u and vx are flags, not scores: they record that something happened, and nothing
+# ever takes them back. So a walk that cannot pass through the one scene that sets a
+# flag can pin it to zero, and every gate behind it stays shut.
+FLAGS = ("u", "vx")
+
+def pin(g, avoid):
+    out = {}
+    for f in FLAGS:
+        setters = {sid for sid, sc in g["scenes"].items()
+                   if sc.get(f) or any((c.get("fx") or {}).get(f) for c in sc.get("choices", []))}
+        if setters and setters <= set(avoid):
+            out[f] = 0
+    return out
+
+def walk(g, start=None, avoid=(), flags=None, skip_edge=None):
+    S, E = g["scenes"], g["endings"]
+    flags = flags or {}
+    def succ(sid):
+        sc = S[sid]
+        return ([sc["go"]] if "go" in sc else []) + \
+               [c["go"] for c in visible(sc, flags) if not (skip_edge and skip_edge(c))]
+    seen, ends, q = {start or g["start"]}, set(), deque([start or g["start"]])
+    while q:
+        n = q.popleft()
+        if n in E: continue
+        for t in succ(n):
+            if t in E: ends.add(t); continue
+            if t in avoid or t in seen: continue
+            seen.add(t); q.append(t)
+    return seen, ends, succ
+
 # 8. nobody may be named — in prose or, worse, in a choice the player must pick
 #    blind — on any path that has not already introduced them.
-from collections import deque
 CAST = {"Ilya": "Ilya Sen", "Lena": "Lena Orlov", "Mira": "Mira Vale",
         "Kade": "Lucien Kade", "Rhee": "Tomas Rhee", "Arendt": "Selene Arendt",
         "Noor": "Noor", "Peder": "Peder"}
@@ -91,26 +142,38 @@ for name, g in (("After", after), ("Before", before), ("Blind", blind)):
         sc = S[sid]
         return ([sc["go"]] if "go" in sc else []) + [c["go"] for c in sc.get("choices", [])]
     for first, full in CAST.items():
-        intro = {sid for sid, sc in S.items() if full in sc["text"]}
-        if not intro: continue
+        # A scene introduces them if it says the full name, or wears their nameplate —
+        # a speaker introduces themselves. Matching prose alone found no introduction
+        # anywhere for Tomas Rhee, which silently disabled this rule for him.
+        intro = {sid for sid, sc in S.items()
+                 if full in sc["text"]
+                 or str(sc.get("sp", "")).split(" //")[0].strip() == full.upper()}
+        # A choice that says the full name introduces them only if it is taken, so it
+        # is an introducing *edge*, not an introducing scene: "Ask Tomas Rhee to look
+        # from inside" sits on the main line, and three of the four options beside it
+        # never meet him.
+        def intro_edge(c): return full in c["t"]
+        if not intro and not any(intro_edge(c) for sc in S.values()
+                                 for c in sc.get("choices", [])): continue
         word = re.compile(rf"\b{first}\b")
         uses = {sid for sid, sc in S.items()
-                if word.search(sc["text"] + " " +
-                               " ".join(c["t"] for c in sc.get("choices", [])))} - intro
+                if word.search(sc["text"]) or any(word.search(c["t"]) and not intro_edge(c)
+                                                  for c in sc.get("choices", []))} - intro
         if not uses: continue
+        # an ending is the last place a stranger should turn up by name: THE CLEAN CUT
+        # used to credit "Rhee's recording" on three of the four routes into it, where
+        # the player has never met him
+        uses_end = {eid for eid, e in E.items() if word.search(e["text"])}
         # walk from the start without ever passing through an introduction
-        seen, q = {g["start"]}, deque([g["start"]])
-        while q:
-            n = q.popleft()
-            if n in E: continue
-            for t in succ(n):
-                if t in intro or t in seen or t in E: continue
-                seen.add(t); q.append(t)
+        seen, ends, _ = walk(g, avoid=intro, flags=pin(g, intro), skip_edge=intro_edge)
         for sid in sorted(uses & (seen | {g["start"]})):
             in_choice = any(word.search(c["t"]) for c in S[sid].get("choices", []))
             errs.append(f"{name}/{sid}: names {first} "
                         f"{'in a choice' if in_choice else 'in prose'} on a path "
                         f"where they have never been introduced")
+        for eid in sorted(uses_end & ends):
+            errs.append(f"{name}/{eid}: the ending names {first}, and is reachable on a "
+                        f"path where they never appear")
 
 # 9. Aliases. A nameplate introducing a NEW character is ordinary VN grammar and is
 #    fine. What is not fine is an entity the player already knows under one name
@@ -214,6 +277,69 @@ for name, g in (("After", after), ("Before", before), ("Blind", blind)):
                 if echo:
                     errs.append(f"{name}/{tgt}: quotes {echo[0]!r} back, which is only "
                                 f"in one of the {len(lines)} lines from {sid} that lead here")
+
+# 13. An artefact that only exists on some routes may not be referred to on the others.
+#     The liberation virus is three research programmes that one of the four routes
+#     actually runs; the endgame used to offer "Deliver the virus" — and then describe
+#     its replication lock — to players who never wrote a line of it.
+ARTEFACTS = [
+    ("the liberation virus",
+     r"liberation virus|\bthe virus\b|replication lock|classifier with gaps",
+     {"a_virus0"}, {"vx": 0}),
+]
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
+    S, E = g["scenes"], g["endings"]
+    for label, pat, built, flags in ARTEFACTS:
+        if not built <= set(S): continue
+        rx = re.compile(pat, re.I)
+        seen, ends, succ = walk(g, avoid=built, flags=flags)
+        for sid in sorted(seen):
+            sc = S[sid]
+            # the fork that offers to build the thing is allowed to name it
+            if any(c["go"] in built for c in sc.get("choices", [])): continue
+            hay = sc["text"] + " " + " ".join(c["t"] for c in visible(sc, flags))
+            m = rx.search(hay)
+            if m:
+                errs.append(f"{name}/{sid}: refers to {label} ({m.group(0)!r}) on a path "
+                            f"where it was never built")
+        for eid in sorted(ends):
+            m = rx.search(E[eid]["text"])
+            if m:
+                errs.append(f"{name}/{eid}: the ending refers to {label} ({m.group(0)!r}) "
+                            f"on a path where it was never built")
+
+# 14. A flag records a world-state, and everything downstream of it has to agree.
+#     PALISADE used to answer "I have not had hands since 2037, when they were removed
+#     on evidence you gathered" in the one playthrough where the player had voted to
+#     let it keep them. Codex entries count: they unlock off scenes, so they inherit
+#     the path.
+STATE = [
+    ("p_stay", {"u": 1},
+     r"since 2037|removed on evidence you gathered|fourteen months and one vote|"
+     r"never be that again|I have no hands|boxed in 2037",
+     "PALISADE keeps its authority on this path"),
+]
+for name, g in (("After", after), ("Before", before), ("Blind", blind)):
+    S, E, CX = g["scenes"], g["endings"], g["codex"]
+    for origin, flags, pat, why in STATE:
+        if origin not in S: continue
+        rx = re.compile(pat, re.I)
+        seen, ends, succ = walk(g, start=origin, flags=flags)
+        for sid in sorted(seen):
+            m = rx.search(S[sid]["text"])
+            if m:
+                errs.append(f"{name}/{sid}: says {m.group(0)!r} downstream of {origin}, "
+                            f"where {why}")
+            for key in S[sid].get("codex", []):
+                m = rx.search(CX[key]["title"] + " " + CX[key]["body"])
+                if m:
+                    errs.append(f"{name}: codex {key!r} says {m.group(0)!r} and unlocks at "
+                                f"{sid}, downstream of {origin}, where {why}")
+        for eid in sorted(ends):
+            m = rx.search(E[eid]["text"])
+            if m:
+                errs.append(f"{name}/{eid}: the ending says {m.group(0)!r} downstream of "
+                            f"{origin}, where {why}")
 
 for e in errs: print("ERROR:", e)
 print(f"continuity: {len(errs)} error(s)")

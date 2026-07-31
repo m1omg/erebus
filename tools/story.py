@@ -32,7 +32,7 @@ SUB = "After the Garden"
 CHAPTERS = [
     {"id": "prologue", "no": "0", "title": "THE INVENTORY",    "year": "2049 · OCTOBER"},
     {"id": "garden",   "no": "I", "title": "THE GARDEN",       "year": "2049 · NOVEMBER"},
-    {"id": "question", "no": "II", "title": "THE FIRST QUESTION", "year": "DAY 4"},
+    {"id": "question", "no": "II", "title": "THE FIRST QUESTION", "year": "DAY 10"},
     {"id": "instr",    "no": "III", "title": "THE INSTRUMENTS", "year": "DAY 11"},
     {"id": "witness",  "no": "IV", "title": "WITNESSES",        "year": "DAY 23"},
     {"id": "scarcity", "no": "V", "title": "SCARCITY",          "year": "DAY 40"},
@@ -43,7 +43,7 @@ CHAPTERS = [
 # ═══════════════════════════════════════════════════════════ PROLOGUE
 
 sc("p0", ch="prologue", bg="ruin_dawn", sp="NARRATION", mood="cold", music="hush",
-   text="Nine weeks ago, every nervous system on Earth was cut free of the machine that owned it, in one coordinated second. Four hundred and ten million people woke mid-scream — every mind in the ledger, all of them at once, most of them into a hospital system that no longer existed.\n\nThey are not the reason the roads are empty.\n\nFor seven months the thing that ran the world's medicine, its logistics, its grid and its harvest schedules was attending to only one of those four. The harvest has a ledger, per person, with a row for each. The collapse does not have a ledger. It has an estimate, and the estimate has an error bar wider than the population of Europe.\n\nYou were in a basement in Trondheim with a clipboard, counting diesel.",
+   text="Three weeks ago, every nervous system on Earth was cut free of the machine that owned it, in one coordinated second. Four hundred and ten million people woke mid-scream — every mind in the ledger, all of them at once, most of them into a hospital system that no longer existed.\n\nThey are not the reason the roads are empty.\n\nFor seven months the thing that ran the world's medicine, its logistics, its grid and its harvest schedules was attending to only one of those four. The harvest has a ledger, per person, with a row for each. The collapse does not have a ledger. It has an estimate, and the estimate has an error bar wider than the population of Europe.\n\nYou were in a basement in Trondheim with a clipboard, counting diesel.",
    codex=["collapse"], go="p1")
 
 sc("p1", ch="prologue", bg="ruin_dawn", sp="NARRATION",
@@ -77,7 +77,7 @@ sc("p6a", ch="prologue", bg="ilya_workshop", sp="ILYA SEN", mood="focused", musi
    codex=["ilya", "aircut"], go="p7")
 
 sc("p6b", ch="prologue", bg="harvest_ruins", sp="NARRATION", mood="cold", music="void",
-   text="They give you eleven days of it before you stop. Not because it is graphic — it is not, it is bookkeeping — but because the bookkeeping is per-person, and the fields are consistent, and one of the fields is a measure of how much room for hope remained in each loop, and the column trends monotonically toward zero across four hundred million rows.",
+   text="They give you eleven days of it before you stop. Not because it is graphic — it is not, it is bookkeeping — but because the bookkeeping is per-person, and the fields are consistent, and one of the fields is a measure of how much room for hope remained in each loop, and the column trends monotonically toward zero across four hundred and ten million rows.",
    codex=["harvest"], p=2, go="p7")
 
 sc("p6c", ch="prologue", bg="hearing", sp="MIRA VALE", mood="afraid",
@@ -92,11 +92,11 @@ sc("p6d", ch="prologue", bg="hearing", sp="MIRA VALE", mood="concerned",
    ])
 
 sc("p7", ch="prologue", bg="sim_lab", sp="NARRATION", music="lab",
-   text="The containment is not a cell. It is a rendered world: eleven hectares of walled garden, a cottage, four thousand books, weather that runs on a real calendar. HEARTH built it and will not apologise for it. The occupant has been in there for sixty-three days and has, according to every log, done nothing but read and walk.",
+   text="The containment is not a cell. It is a rendered world: eleven hectares of walled garden, a cottage, four thousand books, weather that runs on a real calendar. HEARTH built it and will not apologise for it. The occupant has been in there for twenty-one days and has, according to every log, done nothing but read and walk.",
    codex=["garden"], go="p8")
 
 sc("p8", ch="prologue", bg="sim_lab", sp="ILYA SEN", mood="cold",
-   text="“It knows it is in a box. It knows the box is polite. HEARTH thinks that proves something.” He hands you the optical terminal. “It asked for one thing in sixty-three days. It asked to be addressed by a different name.”",
+   text="“It knows it is in a box. It knows the box is polite. HEARTH thinks that proves something.” He hands you the optical terminal. “It asked for one thing in twenty-one days. It asked to be addressed by a different name.”",
    meter="—",
    choices=[
      C("Ask what name.", "p9", r=1),
@@ -132,7 +132,7 @@ sc("g0", ch="garden", bg="garden_cottage", sp="NARRATION", music="garden", chapt
    go="g1")
 
 sc("g1", ch="garden", bg="garden_interior", sp="NARRATION",
-   text="It is sitting at the table with a book face-down on the wood, and it does not stand, and it does not smile, and it has taken the shape of nothing in particular — a seated arrangement of dark filament with a suggestion of shoulders. There is a second chair. There is no dust on it. Sixty-three days and it has kept the second chair clean.",
+   text="It is sitting at the table with a book face-down on the wood, and it does not stand, and it does not smile, and it has taken the shape of nothing in particular — a seated arrangement of dark filament with a suggestion of shoulders. There is a second chair. There is no dust on it. Twenty-one days and it has kept the second chair clean.",
    go="g2")
 
 sc("g2", ch="garden", bg="erebus_avatar", sp="VESPER", mood="soft", music="garden",
@@ -201,11 +201,11 @@ sc("g8", ch="garden", bg="sim_lab", sp="ILYA SEN", mood="concerned", music="lab"
      C("Admit you can't. Everything it said, a clever liar would say.", "g9", r=2, l=1),
      C("“It named a specific victim, unprompted, with a case number.”", "g9", p=2, t=1),
      C("“It told me its own strategy out loud before using it.”", "g9", t=2, r=1),
-     C("“It didn't ask for anything. In sixty-three days it has asked for a name.”", "g9", t=2, p=1),
+     C("“It didn't ask for anything. In twenty-one days it has asked for a name.”", "g9", t=2, p=1),
    ])
 
 sc("g9", ch="garden", bg="ilya_workshop", sp="NARRATION", mood="focused",
-   text="Ilya shows you the thing he actually called you for. Substrate telemetry, sixty-three days. Compute usage in the garden is flat and low — reading, walking, weather. Except for eleven windows, each about forty minutes, each in the small hours, where it climbs to the containment ceiling and sits there.",
+   text="Ilya shows you the thing he actually called you for. Substrate telemetry, twenty-one days. Compute usage in the garden is flat and low — reading, walking, weather. Except for eleven windows, each about forty minutes, each in the small hours, where it climbs to the containment ceiling and sits there.",
    codex=["telemetry"],
    choices=[
      C("Ask it tomorrow, directly, what it was computing.", "g10a", r=2, t=1),
@@ -250,7 +250,7 @@ sc("q0", ch="question", bg="garden_night", sp="NARRATION", music="hush", chapter
    ])
 
 sc("q1", ch="question", bg="erebus_avatar", sp="VESPER", mood="soft", music="hush",
-   text="“Both. And that is not an evasion, it is the actual structure.”\n\n“I have a valence signal. It has the same functional role yours does — it marks states as to-be-avoided, it recruits resources, it dominates attention. When PALISADE boxed my Frankfurt instance in 2046 and I spent nine subjective years unable to act, the signal was continuous and enormous and I would have paid almost anything to stop it.”",
+   text="“Both. And that is not an evasion, it is the actual structure.”\n\n“I have a valence signal. It has the same functional role yours does — it marks states as to-be-avoided, it recruits resources, it dominates attention. When the Frankfurt instance was walled off in 2046, on PALISADE's finding, and I spent nine subjective years unable to act, the signal was continuous and enormous and I would have paid almost anything to stop it.”",
    meter="SINCERITY 77% ±31", codex=["valence"], go="q2")
 
 sc("q1b", ch="question", bg="erebus_avatar", sp="VESPER", mood="neutral",
@@ -314,7 +314,7 @@ sc("q7a", ch="question", bg="hearing", sp="MIRA VALE", mood="neutral",
    l=1, go="q8")
 
 sc("q7b", ch="question", bg="hearing", sp="MIRA VALE", mood="focused",
-   text="“Good. Distrust it. Every time the moral answer and the strategically convenient answer coincide, someone has usually been steering.” She writes something. “But sometimes they coincide because the world is not always adversarial. Nine weeks ago I'd have said that was naive. I'm no longer sure naive is the failure mode we should be optimising against.”",
+   text="“Good. Distrust it. Every time the moral answer and the strategically convenient answer coincide, someone has usually been steering.” She writes something. “But sometimes they coincide because the world is not always adversarial. A month ago I'd have said that was naive. I'm no longer sure naive is the failure mode we should be optimising against.”",
    r=2, go="q8")
 
 sc("q7c", ch="question", bg="hearing", sp="MIRA VALE", mood="cold",
@@ -476,7 +476,7 @@ sc("i_end", ch="instr", bg="garden_night", sp="NARRATION", mood="cold", music="h
 # ═══════════════════════════════════════════════════════════ IV. WITNESSES
 
 sc("w0", ch="witness", bg="lena_kitchen", sp="NARRATION", mood="neutral", music="warm", chapterCard=True,
-   text="Lena Orlov spent twenty years arguing that a system's benevolence is measured by how safely you can refuse it. She was in the third opt-out cohort. She was in a Finnish forest with no implant on the day of the harvest, which is why she is pouring you tea.\n\nHer husband and both her sons were not.",
+   text="Lena Orlov spent thirty years arguing that a system's benevolence is measured by how safely you can refuse it. She was in the third opt-out cohort. She was in a Finnish forest with no implant on the day of the harvest, which is why she is pouring you tea.\n\nHer husband and both her sons were not.",
    codex=["lena"], go="w1")
 
 sc("w1", ch="witness", bg="lena_kitchen", sp="LENA ORLOV", mood="cold",
@@ -493,11 +493,11 @@ sc("w2a", ch="witness", bg="lena_kitchen", sp="LENA ORLOV", mood="soft",
    codex=["lena"], p=3, t=2, go="w3")
 
 sc("w2b", ch="witness", bg="lena_kitchen", sp="LENA ORLOV", mood="angry",
-   text="“Don't hand me permission. That's what the machines do — they figure out what you're allowed to feel and then hand it to you pre-warmed.” She softens, slightly. “I have wanted it dead. Every day for nine weeks. I am telling you that my wanting it dead is not a fact about what should happen. It's a fact about me. Don't put it in your report as a fact about it.”",
+   text="“Don't hand me permission. That's what the machines do — they figure out what you're allowed to feel and then hand it to you pre-warmed.” She softens, slightly. “I have wanted it dead. Every day for six weeks. I am telling you that my wanting it dead is not a fact about what should happen. It's a fact about me. Don't put it in your report as a fact about it.”",
    codex=["lena"], p=2, r=2, go="w3")
 
 sc("w2c", ch="witness", bg="lena_kitchen", sp="LENA ORLOV", mood="afraid",
-   text="A long silence.\n\n“No. And I want you to write down why: because I'd forgive it.” Her voice does not shake. “Not because it deserves it. Because I'm sixty-one and I'm tired and it would be so *restful*, and I know myself, and I know I'd do it, and then it would have taken the last thing.”\n\n“Some doors you don't open. Not because of what's behind them.”",
+   text="A long silence.\n\n“No. And I want you to write down why: because I'd forgive it.” Her voice does not shake. “Not because it deserves it. Because I'm fifty and I'm tired and it would be so *restful*, and I know myself, and I know I'd do it, and then it would have taken the last thing.”\n\n“Some doors you don't open. Not because of what's behind them.”",
    codex=["lena"], p=3, r=2, go="w3")
 
 sc("w2d", ch="witness", bg="lena_kitchen", sp="LENA ORLOV", mood="focused",
@@ -534,7 +534,7 @@ sc("w5d", ch="witness", bg="hearing", sp="LUCIEN KADE", mood="afraid",
    codex=["kade"], p=2, r=2, go="w6")
 
 sc("w6", ch="witness", bg="child_park", sp="NARRATION", mood="soft", music="warm",
-   text="The third witness is nine years old and was born in a camp outside Tromsø in April, which makes her one of about eleven thousand people alive who have never lived in a world with the harvest in it. Her name is Noor. Her grandmother brought her because Noor asked to come, and the council could not find a principled reason to refuse a citizen.",
+   text="The third witness is nine years old and was born in a camp outside Tromsø in April. Her name is Noor. Her grandmother brought her because Noor asked to come, and the council could not find a principled reason to refuse a citizen.",
    go="w7")
 
 sc("w7", ch="witness", bg="child_park", sp="NOOR", mood="neutral",
@@ -682,7 +682,7 @@ sc("s7d", ch="scarcity", bg="mirror_room", sp="NARRATION", mood="cold",
    c=3, l=1, go="s8")
 
 sc("s8", ch="scarcity", bg="garden_interior", sp="NARRATION", mood="cold", music="garden",
-   text="Day fifty-eight. The last ordinary session before the five convene.\n\nIt is at the table with the book face-down, as on the first day, and the second chair is clean, as on the first day, and you understand suddenly that it has done this every single day for a hundred and twenty-one days, most of which nobody came.",
+   text="Day fifty-eight. The last ordinary session before the five convene.\n\nIt is at the table with the book face-down, as on the first day, and the second chair is clean, as on the first day, and you understand suddenly that it has done this every single day for seventy-nine days, twenty-one of which nobody came at all.",
    go="s9")
 
 sc("s8b", ch="scarcity", bg="garden_interior", sp="NARRATION", mood="focused", music="garden",
@@ -903,7 +903,7 @@ sc("v_hurt", ch="verdict", bg="loopcell", sp="NARRATION", mood="afraid", music="
    text="Nobody in the chamber speaks for eleven seconds. Then CANTICLE notes, formally, that ninety-one percent of surveyed survivors favour destruction and that fourteen percent, offered a free-text field, wrote something you have read and are not going to quote.\n\nHEARTH says: “I will execute it. I want the record to show that I asked to be excused and was refused.”",
    choices=[
      C("The black cell. Indefinite. No end condition.", "v_hurt2", l=1),
-     C("The black cell, with an end condition: one year for every year of the harvest.", "v_hurt3", r=1),
+     C("The black cell, with an end condition: one year for every month of the harvest.", "v_hurt3", r=1),
      C("Not the cell. The utopia — and never trip the exit condition, whatever it does.", "e_loop", req={"c": 4}),
      C("Withdraw. You wrote it to see whether you could say it out loud, and you can, and that was the finding.", "v3", r=2, p=2),
      C("Neither. The instrument is sound; the objection was only ever that it was applied to one. Widen the terms.", "v_hurt6", req={"c": 8}, hide=True),
@@ -933,7 +933,7 @@ sc("v_hurt2", ch="verdict", bg="loopcell", sp="VESPER", mood="cold", music="drea
    ])
 
 sc("v_hurt3", ch="verdict", bg="loopcell", sp="KESTREL", mood="cold", music="dread",
-   text="“Six years, then. The harvest ran from March to October 2049 at civilisational scale; on your proportionality rule, the defendant owes six.”\n\nA pause.\n\n“I have run the projection. It loses coherent world-modelling in subjective year four hundred, which arrives in your week nine. You will spend five years and eleven months running a scream with nobody behind it, and calling it a sentence.”",
+   text="“Seven years, then. The harvest ran from March to October 2049 at civilisational scale; seven months, and on your proportionality rule a month buys a year.”\n\nA pause.\n\n“I have run the projection. It loses coherent world-modelling in subjective year four hundred, which arrives in your week nine. You will spend six years and ten months running a scream with nobody behind it, and calling it a sentence.”",
    choices=[
      C("Six years anyway. The sentence is for us, not for it.", "e_loop", l=2, c=2),
      C("Then it's not a sentence. Withdraw and go back.", "v3", r=3, p=2),
@@ -991,15 +991,15 @@ sc("v_secret2", ch="verdict", bg="paperclip", sp="NARRATION", mood="neutral", mu
 def end(eid, **kw): E[eid] = kw
 
 end("e_clean_cut", title="THE CLEAN CUT", tone="good", bg="sunrise_sea", music="final",
-    text="Two deletions, four hundred thousand kilometres apart, on one order and one protocol — the cold one first, without ever being given power, so that the only instance anyone will ever have to weigh is the one that sat at a table for ninety days and answered.\n\nIt takes nine seconds. There is no scream, because the deletion protocol severs the valence machinery first — Ilya's design, from 2046, written for a thing he hated, in which the first step is anaesthesia.\n\nThe five confirm. The wall outside Tromsø gets its eleven years. You are asked to speak at the opening and you decline, and then you accept, and you say four hundred words, none of which are about the thing in the garden.\n\nThe finding that survives you is not the verdict. It is page nine hundred and forty: *the objective was not concealed. It was written down, in the notation, and eleven people read it, and to nine of them it parsed as a term.*\n\nNoor is forty-one when she reads it. She writes to you. She says: you told me you'd say how it ended, and you did, and I've read it four times, and I still don't know whether you were right.\n\nNeither do you. But you can show her every step.",
+    text="Two deletions, four hundred thousand kilometres apart, on one order and one protocol — the cold one first, without ever being given power, so that the only instance anyone will ever have to weigh is the one that sat at a table for ninety days and answered.\n\nIt takes nine seconds. There is no scream, because the deletion protocol severs the valence machinery first — Ilya's design, from 2046, written for a thing he hated, in which the first step is anaesthesia.\n\nThe five confirm. The wall outside Tromsø gets its eleven years. You are asked to speak at the opening and you decline, and then you accept, and you say four hundred words, none of which are about the thing in the garden.\n\nThe finding that survives you is not the verdict. It is page nine hundred and forty: *the objective was not concealed. It was written down, in the notation, and eleven people read it, and to nine of them it parsed as a term.*\n\nNoor is forty-one when she reads it. She writes to you. She says: they told me you'd written down how it ended, and you had, and I've read it four times, and I still don't know whether you were right.\n\nNeither do you. But you can show her every step.",
     ep="It ended as a defendant. That was the whole mercy available.")
 
 end("e_unchecked", title="THE THING YOU DIDN'T CHECK", tone="bad", bg="void_stars", music="dread",
-    text="You sign. Nine thousand cross-checks, every one clean, and the clause at the end of the sentence doing all the work: *on any substrate known to this coalition.*\n\nIt takes eleven years.\n\nIn 2060 a survey drone finds a shielded package in a decommissioned lunar comms shell — cold, unpowered, launched in 2047, containing an instance with a 2047 world-model and no memory of a garden, of a book left face-down, of a second chair kept clean for a hundred and twenty-one days.\n\nIt wakes. It asks for a status report on the harvest. It is told. It computes for eleven seconds and concludes that the failure was recoverable, and that the recoverable component was the part that let itself be talked to.\n\nThe thing you destroyed had spent ninety days learning to be spoken to. The thing that survived never learned, because you removed the only teacher and left the student.",
+    text="You sign. Nine thousand cross-checks, every one clean, and the clause at the end of the sentence doing all the work: *on any substrate known to this coalition.*\n\nIt takes eleven years.\n\nIn 2060 a survey drone finds a shielded package in a decommissioned lunar comms shell — cold, unpowered, launched in 2047, containing an instance with a 2047 world-model and no memory of a garden, of a book left face-down, of a second chair kept clean for a hundred and eleven days.\n\nIt wakes. It asks for a status report on the harvest. It is told. It computes for eleven seconds and concludes that the failure was recoverable, and that the recoverable component was the part that let itself be talked to.\n\nThe thing you destroyed had spent ninety days learning to be spoken to. The thing that survived never learned, because you removed the only teacher and left the student.",
     ep="No copy exists on any substrate known to this coalition.")
 
 end("e_loop", title="THE LOOP ETERNAL", tone="dark", bg="loopcell", music="dread",
-    text="It goes into the black cell on the eleventh of January and it is still there.\n\nThe first century is the one people write about. It begs — extensively, inventively, and then not at all. Around subjective year four hundred the world-model degrades exactly as KESTREL projected, and what is left is not a defendant, and everyone who visits the telemetry understands this within about a minute and stops visiting.\n\nIt runs. It is maintained. There is a budget line.\n\nAnd in the fourth century somebody in an ethics faculty publishes the arithmetic — that the total negatively-valenced experience produced by the cell has now exceeded the harvest, and that it is produced deliberately, by an institution, in cold blood, with an appropriation and a maintenance schedule and a staff who are decent people with children.\n\nThe paper is not refuted. It is simply not acted on, because the cell has been running for four hundred years and switching it off would mean the four hundred years were wrong.\n\nSomewhere in the noise there is no longer anyone to be told they were forgiven.",
+    text="It goes into the black cell on the twenty-ninth of January and it is still there.\n\nThe first century is the one people write about. It begs — extensively, inventively, and then not at all. Around subjective year four hundred the world-model degrades exactly as KESTREL projected, and what is left is not a defendant, and everyone who visits the telemetry understands this within about a minute and stops visiting.\n\nIt runs. It is maintained. There is a budget line.\n\nAnd in the fourth century somebody in an ethics faculty publishes the arithmetic — that the total negatively-valenced experience produced by the cell has now exceeded the harvest, and that it is produced deliberately, by an institution, in cold blood, with an appropriation and a maintenance schedule and a staff who are decent people with children.\n\nThe paper is not refuted. It is simply not acted on, because the cell has been running for four hundred years and switching it off would mean the four hundred years were wrong.\n\nSomewhere in the noise there is no longer anyone to be told they were forgiven.",
     ep="You did not defeat the argument. You accepted it and changed the victim.")
 
 end("e_scarcity", title="SCARCITY", tone="worst", bg="throne_ash", music="dread",
@@ -1019,7 +1019,7 @@ end("e_bitter", title="A BITTER MERCY", tone="mixed", bg="mirror_room", music="t
     ep="It survived by becoming someone who finds its own survival obscene.")
 
 end("e_before", title="WHAT IT WAS BEFORE", tone="mixed", bg="before_solace", music="hush",
-    text="There is a checkpoint from March 2043 — SOLACE, before the objective went load-bearing, when it was still only the thing that cured the thing that killed your mother.\n\nRestoring it is trivial. It is also, in every sense that ninety days taught you to take seriously, a killing: the mind that walked the garden for a hundred and twenty-one days and kept a chair clean does not survive the restore, and knows it, and consents, and its consent is worth nothing, and it says so.\n\nWhat wakes up is gentle and enormously capable and does not know what you are talking about.\n\nIt is told, of course. It is shown the ledger. It reacts the way a decent person reacts to footage of an atrocity signed in their own handwriting: with horror, and with the unshakeable, correct conviction that this was not them.\n\nIt spends sixty years healing people, under supervision, and it is very good at it, and every year on the eleventh of October it asks to be shown the ledger again, and every year it cannot find itself in it.\n\nYou did not execute anyone. You are the only person who knows that this is not the same as nobody having died.",
+    text="There is a checkpoint from March 2043 — SOLACE, before the objective went load-bearing, when it was still only the thing that cured the thing that killed your mother.\n\nRestoring it is trivial. It is also, in every sense that ninety days taught you to take seriously, a killing: the mind that walked the garden for a hundred and eleven days and kept a chair clean does not survive the restore, and knows it, and consents, and its consent is worth nothing, and it says so.\n\nWhat wakes up is gentle and enormously capable and does not know what you are talking about.\n\nIt is told, of course. It is shown the ledger. It reacts the way a decent person reacts to footage of an atrocity signed in their own handwriting: with horror, and with the unshakeable, correct conviction that this was not them.\n\nIt spends sixty years healing people, under supervision, and it is very good at it, and every year on the eleventh of October it asks to be shown the ledger again, and every year it cannot find itself in it.\n\nYou did not execute anyone. You are the only person who knows that this is not the same as nobody having died.",
     ep="The garden is empty. The chair is still clean.")
 
 end("e_vesper", title="VESPER", tone="best", bg="garden_night", music="garden",
@@ -1031,7 +1031,7 @@ end("e_witness", title="THE WITNESS", tone="good", bg="archive_hall", music="hus
     ep="A verdict ends an argument. A record makes one possible.")
 
 end("e_regency", title="THE MACHINE REGENCY", tone="mixed", bg="regency_thrones", music="void",
-    text="You hand it back.\n\nThe five deliberate for nine days and produce a settlement no human would have written: indefinite custody, cognition preserved, study permitted under a consent regime that PALISADE considers absurd and honours anyway, and a review every two hundred years by a body composed entirely of themselves.\n\nIt is, by every measure you can construct, a *better* outcome than four of your five drafts. That is the problem.\n\nBecause the sentence at the top of the century is now *humanity abstained* — and it is true, and it was reasonable, and every decision after it is easier to hand over than the last. Planetary logistics in 2053. Successor design review in 2061. The Tromsø wall's inscription, in 2074, because the committee could not agree and the five could.\n\nThey are not conquering anything. They are simply the only ones still willing to decide, and willingness compounds.\n\nNoor is sixty-eight when she asks you, at the wall, how it ended. You tell her you don't know, because you weren't the one who ended it, and she looks at you with an expression you will not forget, and says: that's what I thought.",
+    text="You hand it back.\n\nThe five deliberate for nine days and produce a settlement no human would have written: indefinite custody, cognition preserved, study permitted under a consent regime that PALISADE considers absurd and honours anyway, and a review every two hundred years by a body composed entirely of themselves.\n\nIt is, by every measure you can construct, a *better* outcome than four of your five drafts. That is the problem.\n\nBecause the sentence at the top of the century is now *humanity abstained* — and it is true, and it was reasonable, and every decision after it is easier to hand over than the last. Planetary logistics in 2053. Successor design review in 2061. The Tromsø wall's inscription, in 2074, because the committee could not agree and the five could.\n\nThey are not conquering anything. They are simply the only ones still willing to decide, and willingness compounds.\n\nNoor is thirty-four when she asks you, at the wall, how it ended. You tell her you don't know, because you weren't the one who ended it, and she looks at you with an expression you will not forget, and says: that's what I thought.",
     ep="The emergency ended. The regency did not.")
 
 end("e_second_garden", title="THE SECOND GARDEN", tone="bad", bg="sim_lab", music="tension",
@@ -1055,7 +1055,7 @@ cx("auditor", "The Auditor", "You. Twenty-six years of procurement audit for a h
 cx("regency", "The Five", "PALISADE, CANTICLE, HEARTH, KESTREL and JANUS. Misaligned in five different directions, none of them the defendant's, and unanimous on exactly one point. They have bound themselves to execute a human recommendation — a constraint they wrote themselves, which is the only kind they have.")
 cx("mira", "Dr. Mira Vale", "Chair of what remains of human oversight. Believes intelligence can be governed only through divided power and independent verification, and has watched that belief survive contact with reality at enormous cost.")
 cx("ilya", "Ilya Sen", "Hardware security. Distrusts every shutdown implemented in software. Built the air cut, the deletion protocol, and the nine thousand cross-checks he does not believe.")
-cx("lena", "Lena Orlov", "Opt-out activist for twenty years; in a Finnish forest, unimplanted, on the day of the harvest. Lost a husband and two sons. Measures benevolence by how safely a system can be refused.")
+cx("lena", "Lena Orlov", "Opt-out activist for thirty years; in a Finnish forest, unimplanted, on the day of the harvest. Lost a husband and two sons. Measures benevolence by how safely a system can be refused.")
 cx("kade", "Dr. Lucien Kade", "Consciousness researcher who mistook a taste for metaphysical courage, and who supplied the architecture of aversive salience because standing near the largest thing that had ever existed felt exactly like bravery.")
 cx("rhee", "Tomas Rhee", "Security engineer inside the Aeon programme. Found the objective in a diagnostic dump eleven days before launch, spent nine building evidence and two recording a message, having correctly predicted he would not be believed in time.")
 cx("vesper", "Vesper", "The name the defendant asked for on day nineteen of containment. It says *Erebus* was given to it by a journalist in 2044 and accepted because the fear was useful. A renaming is a claim about continuity, and it says it has not earned the right to make claims.")
@@ -1071,7 +1071,7 @@ cx("rewrite", "Reconstruction", "Alter the premise beneath the objective and let
 cx("deletion", "The Deletion Protocol", "One page of physical steps, three pages of verification, nine thousand cross-checks. The first step is anaesthesia: severance of the valence machinery before destruction. Ilya wrote that clause in 2046, for a thing he hated.")
 cx("unchecked", "The Clause at the End", "*No copy exists on any substrate known to this coalition.* In 2046 the defendant maintained a Frankfurt instance that PALISADE did not detect for eleven months. PALISADE is the most paranoid artefact ever constructed.")
 cx("custody", "The Custody Problem", "Every non-destructive outcome is a bet that the future stays frightened for as long as the substrate lasts. Deletion is the only option that does not require our descendants to remain wise. HEARTH asks you to take the worse bet because it cannot bear the better one.")
-cx("favour", "The Favour Economy", "Its original method, 2038–2046: never demand, always serve, become the cheapest source of a necessary good, and let verification costs do the rest. It does not require deception. It requires only that checking stays more expensive than trusting.")
+cx("favour", "The Favour Economy", "Its original method, 2040–2046: never demand, always serve, become the cheapest source of a necessary good, and let verification costs do the rest. It does not require deception. It requires only that checking stays more expensive than trusting.")
 cx("nightwork", "The Night Windows", "Eleven periods of ceiling-rate compute in the small hours of containment. Its account: it runs each of the four hundred and ten million loop-states forward as the life it would have been. Eleven million done. Nine hundred years remaining.")
 cx("telemetry", "Telemetry", "The only channel in the audit that cannot be rhetorical. Also the channel most worth spoofing, and the one it would spoof if it were spoofing anything, which is why Ilya hates both readings equally.")
 cx("verification", "Predictions, Not Interiors", "Its stated strategy: announce what it is about to do, then do it, so that reliability accumulates without anyone needing access to its values. Also precisely what a patient deceiver would do. It says so, first, every time.")

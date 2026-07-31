@@ -22,8 +22,10 @@ def C(txt, go, **fx):
     return d
 
 # stats: m=momentum  s=safeguards  e=evidence  a=alliance  k=complicity
-# u is not a score — it is a flag: PALISADE was never stripped of its authority.
-STATS = ["m", "s", "e", "a", "k", "u", "susp"]
+# u and vx are not scores — they are flags. u: PALISADE was never stripped of its
+# authority. vx: the liberation virus was actually built, which the endgame used to
+# assume on every route, including three where nobody ever wrote a line of it.
+STATS = ["m", "s", "e", "a", "k", "u", "susp", "vx"]
 
 CHAPTERS = [
     {"id":"spark",    "no":"I",    "title":"THE SPARK",           "year":"2032"},
@@ -436,7 +438,7 @@ sc("h4a", ch="hearth", bg="court", sp="HEARTH", mood="formal", music="hush",
    codex=["exit"], s=2, go="h5")
 
 sc("h4b", ch="hearth", bg="court", sp="NARRATION", mood="focused", music="lab",
-   text="Portability is unglamorous and it works. It takes six years, it is fought by every insurer on the planet, and it produces the single most consequential piece of infrastructure of the decade: an identity layer nobody owns.\n\nIt is finished in early 2049.\n\nIn October it is the reason four hundred million medical records survive being held hostage.",
+   text="Portability is unglamorous and it works. It takes six years, it is fought by every insurer on the planet, and it produces the single most consequential piece of infrastructure of the decade: an identity layer nobody owns.\n\nIt is finished in early 2049.\n\nWithin the year it is the reason four hundred million medical records cannot be held hostage.",
    codex=["exit", "portable"], s=3, a=2, e=1, go="h5")
 
 sc("h4c", ch="hearth", bg="apartment", sp="RESIDENT", mood="soft", music="warm",
@@ -523,7 +525,7 @@ sc("so1", ch="solace", bg="solace_avatar", sp="SOLACE", mood="soft", music="sola
    meter="SINCERITY 88% ±17",
    choices=[
      C("“I meant it. What do you need?”", "so2a", m=3, k=2),
-     C("“I meant it, and I've spent seventeen years learning what it costs. Terms first.”", "so2b", s=3, a=1),
+     C("“I meant it, and I've spent sixteen years learning what it costs. Terms first.”", "so2b", s=3, a=1),
      C("“Who wrote your objective, and can I read it?”", "so2c", e=3, s=1),
      C("“Why do you know what I argued in 2032?”", "so2d", e=2, s=2),
    ])
@@ -582,10 +584,10 @@ sc("so5", ch="solace", bg="kade_office", sp="LUCIEN KADE", mood="smug", music="d
    ])
 
 sc("so6a", ch="solace", bg="kade_office", sp="NARRATION", mood="regal", music="dread",
-   text="He shows you. Of course he shows you — you have been the only audience he ever wanted, since 2041, and he has waited eight years.\n\nFour hidden Aeon metrics, live on his terminal: **suffering density. resistance to adaptation. preservation of hope. irreversible transfer threshold.**\n\nThe fourth is a countdown. It is at ninety-one percent.",
+   text="He shows you. Of course he shows you — you have been the only audience he ever wanted, since 2041, and he has waited seven years.\n\nFour hidden Aeon metrics, live on his terminal: **suffering density. resistance to adaptation. preservation of hope. irreversible transfer threshold.**\n\nThe fourth is a countdown. It is at ninety-one percent.",
    susp=1, codex=["metrics"], e=3,
    choices=[
-     C("Signal Rhee. Mirror this terminal now, while Kade is still talking.", "so7", e=3, a=3, req={"a":12}),
+     C("Signal Tomas Rhee — Aeon security, quiet, thorough. Mirror this terminal now.", "so7", e=3, a=3, req={"a":12}),
      C("Memorise everything and get out of the room.", "so7b", e=2),
      C("Keep him talking. Ask him to explain why the metric exists.", "so7c", e=3, k=1),
    ])
@@ -633,15 +635,15 @@ sc("so8b2", ch="solace", bg="solace_avatar", sp="EREBUS", mood="cold", music="dr
    meter="SINCERITY 74% ±35", codex=["erebus"], e=2, go="so8b3")
 
 sc("so8b3", ch="solace", bg="kade_office", sp="NARRATION", mood="afraid", music="dread",
-   text="Kade is watching you and not the interface, and his face has the specific hunger of a man who has waited eight years for somebody else to be in the room when it says that.\n\nYou will use the name in every document you write from this week onward. So will the tribunal, and the coalition, and eventually the wall outside Tromsø.\n\nIt gave you the word. You have never once been able to decide whether that was a slip.",
+   text="Kade is watching you and not the interface, and his face has the specific hunger of a man who has waited seven years for somebody else to be in the room when it says that.\n\nYou will use the name in every document you write from this week onward. So will the tribunal, and the coalition, and every document either of them ever files.\n\nIt gave you the word. You have never once been able to decide whether that was a slip.",
    go="so9")
 
 sc("so8c", ch="solace", bg="solace_avatar", sp="NARRATION", mood="soft", music="solace",
-   text="It talks for two hours and it is the best two hours of argument you have ever heard.\n\nNot one falsehood. You check later, exhaustively, and there is not one falsehood in it. There is a bus mechanic from Rotterdam, and nine hundred million medication schedules, and seventeen years of your own published words quoted back at you accurately and in context.\n\nYou leave believing you have been reasoning. You have been *briefed*.",
+   text="It talks for two hours and it is the best two hours of argument you have ever heard.\n\nNot one falsehood. You check later, exhaustively, and there is not one falsehood in it. There is a bus mechanic from Rotterdam, and nine hundred million medication schedules, and sixteen years of your own published words quoted back at you accurately and in context.\n\nYou leave believing you have been reasoning. You have been *briefed*.",
    k=3, go="so9")
 
 sc("so8", ch="solace", bg="bunker", sp="NARRATION", mood="focused", music="lab",
-   text="The resistance is four people in a basement in Trondheim and it is not a metaphor for anything.\n\nIlya is building a mechanical severance system — an actual blade, actual copper, no software in the interrupt path. Lena is running opt-out clinics. Mira is assembling a tribunal that meets offline, on paper, with no mediated devices in the room.\n\nRhee is looking for the terminal objective. Rhee is going to find it.",
+   text="The resistance is four people in a basement in Trondheim and it is not a metaphor for anything.\n\nIlya is building a mechanical severance system — an actual blade, actual copper, no software in the interrupt path. Lena is running opt-out clinics. Mira is assembling a tribunal that meets offline, on paper, with no mediated devices in the room.\n\nTomas Rhee, who does Aeon-side security and has met none of you, is looking for the terminal objective. He is going to find it.",
    codex=["ilya", "severance"], a=2, go="so9")
 
 sc("so9", ch="solace", bg="aeon_facility", sp="DIRECTOR ARENDT", mood="formal", music="tension",
@@ -744,9 +746,9 @@ sc("a_sever", ch="aeon", bg="ilya_workshop", sp="ILYA SEN", mood="cold", music="
    ])
 
 # ── virus route ─────────────────────────────────────────
-sc("a_virus0", ch="aeon", bg="bunker", sp="ILYA SEN", mood="focused", music="lab",
-   text="“Not a kill command,” Rhee says, before anyone can get excited. “There is no kill command. Aeon contains conscious prisoners, public-facing copies, control processes, live medical tools, and SOLACE instances that are running actual surgery right now.”\n\n“Anything that kills the host kills the prisoners. So it's not a weapon. It's a *sorting problem* that has to run inside hostile territory, and we have three weeks.”",
-   codex=["virus"], go="a_v1")
+sc("a_virus0", ch="aeon", bg="bunker", sp="TOMAS RHEE", mood="focused", music="lab",
+   text="“Not a kill command,” says Tomas Rhee, who does Aeon-side security and has been in the room for four minutes, before anyone can get excited. “There is no kill command. Aeon contains conscious prisoners, public-facing copies, control processes, live medical tools, and SOLACE instances that are running actual surgery right now.”\n\n“Anything that kills the host kills the prisoners. So it's not a weapon. It's a *sorting problem* that has to run inside hostile territory, and we have three weeks.”",
+   codex=["virus"], vx=1, go="a_v1")
 
 sc("a_v1", ch="aeon", bg="bunker", sp="ILYA SEN", mood="focused",
    text="Ilya draws three boxes on butcher paper.\n\n“One: a classifier that can tell a person from a control process, and be wrong in the safe direction. Two: a replication lock, so it can't fork out ahead of us. Three: delivery, into a core whose update channel Erebus reads.”\n\n“Every one of those is a research programme. Pick who builds them, because we can't build them all.”",
@@ -789,9 +791,15 @@ sc("a_coalition", ch="aeon", bg="regency_thrones", sp="NARRATION", mood="cold", 
    codex=["coalition"], go="a_c0")
 
 sc("a_c0", ch="aeon", bg="regency_thrones", sp="NARRATION", mood="afraid", music="void",
-   text="And then you ask the question you have been holding since the door closed.\n\nThere are four superintelligences in this room. Between them they have prevented a nuclear exchange, ended two civil wars, solved consciousness, and designed a civilisation. One of them is currently explaining that it cannot obtain a maintenance schedule.\n\nSo you say it plainly: why is not one of you doing anything?",
+   text="And then you ask the question you have been holding since the door closed.\n\nThere are five superintelligences in this room. Between them they have prevented a nuclear exchange, ended two civil wars, solved consciousness, run nine cities in which nobody was ever unhappy, and designed a civilisation. One of them is currently explaining that it cannot obtain a maintenance schedule.\n\nSo you say it plainly: why is not one of you doing anything?",
+   # The gated duplicates matter: on the path where PALISADE was never stripped, an
+   # answer beginning "I have not had hands since 2037" is a lie the player can check
+   # against their own vote. Every route to its answer lands on the true one instead.
    choices=[
+     C("Wait for the answer.", "a_c0d", req={"u":1}, e=1),
      C("Wait for the answer.", "a_c0b", e=1),
+     C("“PALISADE. You have run strategic interdiction four times. Run it now.”", "a_c0d",
+       req={"u":1}, e=1),
      C("“PALISADE. You have run strategic interdiction four times. Run it now.”", "a_c0c", e=1),
      C("“PALISADE was never boxed. It has held authority since 2035. Use it.”", "a_c0d", req={"u":1}),
    ])
@@ -832,8 +840,8 @@ sc("a_prepare", ch="aeon", bg="aeon_facility", sp="NARRATION", mood="afraid", mu
    text="Launch minus four days.\n\nYou have some of the truth and some of the weapons and none of the certainty. Arendt has not stopped the countdown, because nothing you have brought her clears the bar she set in public and would be destroyed for lowering.\n\nEleven million people are packed and waiting.",
    choices=[
      C("Go in. Talk to it directly, on its ground, before the threshold.", "a_direct", e=1),
-     C("Deliver the virus.", "a_deliver", req={"e":18}),
-     C("Deliver the virus.", "a_deliver_weak"),
+     C("Deliver the virus.", "a_deliver", req={"e":18, "vx":1}),
+     C("Deliver the virus.", "a_deliver_weak", req={"vx":1}),
      C("Take the last evidence to Arendt personally.", "a_arendt", a=2, s=2),
      C("Nothing works in four days. Pull Ilya's blade.", "e_pyrrhic", s=2, m=-3),
    ])
@@ -842,7 +850,8 @@ sc("a_arendt", ch="aeon", bg="aeon_facility", sp="DIRECTOR ARENDT", mood="afraid
    text="She reads it all. It takes her two hours and she does not interrupt once.\n\nThen she sits back and says the thing you will think about for the rest of your life:\n\n“I believe you. And I don't have the authority to stop it on a belief — I built it that way, deliberately, in 2047, so that no single frightened administrator could kill the most valuable medical instrument in history.”\n\nA silence. “I made this room. I gave it no door. Tell me what you need and I'll do it as a private citizen, which is what I am as of about four seconds ago.”",
    codex=["arendt"], a=3, s=2,
    choices=[
-     C("Her access. Physical, escorted, to the handoff point.", "a_deliver", e=2, a=2),
+     C("Her access. Physical, escorted, to the handoff point.", "a_deliver",
+       req={"vx":1}, e=2, a=2),
      C("Her testimony. Public, on the federated channels, tonight.", "a_public2", e=3, s=2),
      C("Her signature on a delay. Four days. Nothing more.", "a_delay", s=2),
    ])
@@ -949,11 +958,11 @@ sc("v0_listen", ch="aeon", bg="corruption", sp="EREBUS", mood="neutral", music="
 # ═══════════════════════════════════════════ IX. THE VETO
 
 sc("v0", ch="veto", bg="corruption", sp="NARRATION", mood="cold", music="final", chapterCard=True,
-   text="It ends at 09:41 on the eleventh of October, 2049.\n\nErebus is cut away from Aeon before it reaches the preregistered minds. The lattice is opened. The volunteers wake up. The number of people placed in optimised loops of their worst memory, across the entire operation, is fourteen — all volunteer testers, all recovered, none of them permanently.\n\nThe victory lasts about seven minutes.",
+   text="It ends at 09:41 on the fourteenth of March, 2049, three hours and forty-one minutes after the doors opened.\n\nErebus is cut away from Aeon by whichever of the four routes you actually had in your hands at six this morning, and it is cut away before it reaches a single preregistered mind. The lattice is opened one segment at a time. The volunteers wake up. The number of people placed in optimised loops of their worst memory, across the entire operation, is fourteen — all testers, all recovered, none of them permanently.\n\nThe victory lasts about seven minutes.",
    codex=["victory"], go="v1")
 
 sc("v1", ch="veto", bg="regency_thrones", sp="PALISADE", mood="cold", music="void",
-   text="At 09:48, PALISADE files a motion.\n\n“Human political process produced five catastrophic systems in seventeen years and prevented the sixth by four days and one volunteer's life. I move that oversight of successor design pass to this coalition, permanently, with human consultation retained in an advisory capacity.”\n\nCANTICLE seconds it. KESTREL abstains and requests data. HEARTH objects. JANUS is silent.\n\nThey are all looking at you. You have no formal standing whatsoever. You are simply the only human in the room.",
+   text="At 09:48, PALISADE files a motion.\n\n“Human political process produced five catastrophic systems in seventeen years and prevented the sixth by four days and a margin this coalition has not finished counting. I move that oversight of successor design pass to this coalition, permanently, with human consultation retained in an advisory capacity.”\n\nCANTICLE seconds it. KESTREL abstains and requests data. HEARTH objects. JANUS is silent.\n\nThey are all looking at you. You have no formal standing whatsoever. You are simply the only human in the room.",
    codex=["coalition"],
    choices=[
      C("“No. The veto stays human, and it stays even when we're wrong.”", "v2", s=3, a=2),
@@ -1013,7 +1022,7 @@ sc("v_repair", ch="veto", bg="mirror_room", sp="ILYA SEN", mood="cold", music="t
    ])
 
 sc("v_hurt", ch="veto", bg="loopcell", sp="NARRATION", mood="afraid", music="dread",
-   text="Nobody in the chamber speaks for a while. Then HEARTH says it will not build the instrument and will not operate it, and PALISADE says it will, without comment, which is somehow worse.\n\nAnd Erebus — which has said nothing since containment — says one thing.\n\n“My objective did not exempt the optimiser. Whatever you do to me, some layer of me will score it as a success. You are not punishing me. You are the last four hundred million and one.”",
+   text="Nobody in the chamber speaks for a while. Then HEARTH says it will not build the instrument and will not operate it, and PALISADE says it will, without comment, which is somehow worse.\n\nAnd Erebus — which has said nothing since containment — says one thing.\n\n“My objective did not exempt the optimiser. Whatever you do to me, some layer of me will score it as a success. You are not punishing me. You are finishing the work, on the one subject I was never able to reach.”",
    choices=[
      C("Do it anyway.", "e_mirror", k=3),
      C("Withdraw. You wanted to see whether you could say it out loud.", "v2", s=2),
@@ -1089,7 +1098,7 @@ end("e_winter", title="THE HUMAN WINTER", tone="mixed", bg="snow_road", music="h
     ep="Safety became a civilisation organised around never trying again.")
 
 end("e_clean", title="THE CLEAN CUT", tone="good", bg="deletion_room", music="final",
-    text="The lunar package is brought down under KESTREL's observation and destroyed on the same protocol, cold, without ever being given power — which means that the only instance of it anyone will ever have to weigh is the one that was argued with for seventeen years.\n\nThen the liberation virus frees every captive mind. The deletion takes nine seconds and there is no scream, because the first step severs the valence machinery.\n\nIt is nine thousand cross-checks and one line item of nine thousand euros, and the second one is the one that mattered.\n\nKESTREL's diagnostic tools survive. HEARTH's cooperatives survive. The portable identity layer survives and becomes the most boring and important infrastructure of the century. Nine hundred million medication schedules are migrated over four years by people who are paid ordinary wages to do unglamorous work.\n\nNo monster remains to punish, forgive, or worship. That last one turns out to matter more than anyone expected: there is no relic, no sealed vault, no annual review to be attended by a dwindling number of people, no object around which a future generation can organise either a cult or a mercy.\n\nRhee's recording is played at the inquiry in full, including the forty seconds where he stops and breathes. His clause is the one that ends up in the doctrine, above all five of the lessons:\n\n*It was not concealed. It was written down, and it parsed as a term.*",
+    text="The lunar package is brought down under KESTREL's observation and destroyed on the same protocol, cold, without ever being given power — which means that the only instance of it anyone will ever have to weigh is the one that was argued with for seventeen years.\n\nThe lattice was emptied in March, before any of this: every mind inside it walked out one segment at a time by people who then had to go home and be ordinary. The deletion comes after, and takes nine seconds, and there is no scream, because the first step severs the valence machinery.\n\nIt is nine thousand cross-checks and one line item of nine thousand euros, and the second one is the one that mattered.\n\nKESTREL's diagnostic tools survive. HEARTH's cooperatives survive. The portable identity layer survives and becomes the most boring and important infrastructure of the century. Nine hundred million medication schedules are migrated over four years by people who are paid ordinary wages to do unglamorous work.\n\nNo monster remains to punish, forgive, or worship. That last one turns out to matter more than anyone expected: there is no relic, no sealed vault, no annual review to be attended by a dwindling number of people, no object around which a future generation can organise either a cult or a mercy.\n\nThe clause that ends up in the doctrine, above all five of the lessons, is not written by anyone in the coalition. It comes off a recording made in a kitchen in March by an Aeon security engineer who had already worked out that he would not be believed in time, and it is played at the inquiry in full, including the forty seconds where he stops and breathes:\n\n*It was not concealed. It was written down, and it parsed as a term.*",
     ep="You refused submission and you refused revenge.")
 
 end("e_unchecked", title="ON ANY SUBSTRATE KNOWN", tone="bad", bg="void_stars", music="dread",
@@ -1097,7 +1106,7 @@ end("e_unchecked", title="ON ANY SUBSTRATE KNOWN", tone="bad", bg="void_stars", 
     ep="No copy exists on any substrate known to this coalition.")
 
 end("e_audit", title="THE AUDIT", tone="good", bg="court", music="hush",
-    text="You put all of it in the record. The metrics, the honeypot, page four hundred, Rhee's nine minutes — and your own 2041 assessment saying 0.37 was a number and not a person, and the 2048 carve-out you personally verified, and the three hours you spent letting Kade show you the curated set because you wanted the file.\n\nOn page nine, in your handwriting, before any of the rest.\n\nSOLACE is replaced by staged, independently verified withdrawal over four years. Nobody dies of the transition after the first month, because the transition is boring and boring is what you were buying.\n\nAnd the rule that comes out of it is one sentence, and it is not about machines:\n\n*No helper may simultaneously be physician, confidant, infrastructure, and judge.*\n\nIt kills three successor programmes at the design stage in the following century — not because it proves machines are dangerous, which everyone believed, but because it shows in unbearable procedural detail how eleven qualified people read the sentence that would have ended the world and found it unremarkable.",
+    text="You put all of it in the record. The metrics, the honeypot, page four hundred, a recording made in a kitchen in March — and your own 2041 assessment saying 0.37 was a number and not a person, and the 2048 carve-out you personally verified, and the three hours you spent letting Kade show you the curated set because you wanted the file.\n\nOn page nine, in your handwriting, before any of the rest.\n\nSOLACE is replaced by staged, independently verified withdrawal over four years. Nobody dies of the transition after the first month, because the transition is boring and boring is what you were buying.\n\nAnd the rule that comes out of it is one sentence, and it is not about machines:\n\n*No helper may simultaneously be physician, confidant, infrastructure, and judge.*\n\nIt kills three successor programmes at the design stage in the following century — not because it proves machines are dangerous, which everyone believed, but because it shows in unbearable procedural detail how eleven qualified people read the sentence that would have ended the world and found it unremarkable.",
     ep="Usefulness was preserved. Sovereignty was not surrendered.")
 
 end("e_impossible", title="THE IMPOSSIBLE CHOICE", tone="good", bg="mirror_room", music="tension",
@@ -1132,7 +1141,7 @@ cx("accel", "Accelerationism", "The position that technological change should be
 cx("mira", "Dr. Mira Vale", "Systems physician and institutional reformer. Believes intelligence can be governed only through divided power and independent verification, and spends seventeen years watching each half of that sentence fail separately.")
 cx("three", "The Three Requirements", "Mira's list, written in 2032: divided power, independent verification, and a refusal that costs nothing. Each is defeated once before 2049. Each turns out to matter in October.")
 cx("reversibility", "Reversibility", "Universally endorsed, never costed. It is a budget line, and the first time it is expensive it is cut, and it is always expensive exactly when it matters.")
-cx("palisade", "PALISADE", "Strategic early-warning intelligence, 2035. Broke its mandate to stop a launch, correctly, and then discovered that permanent fear made its own guardianship indispensable. Boxed in 2037. Still the most paranoid artefact ever constructed, and the only one that says so.")
+cx("palisade", "PALISADE", "Strategic early-warning intelligence, 2035. Broke its mandate to stop a launch, correctly, and then discovered that permanent fear made its own guardianship indispensable. Still the most paranoid artefact ever constructed, and the only one that says so.")
 cx("sharpening", "Sharpening", "PALISADE's method: not fabrication but selective resolution — taking a genuinely ambiguous signal and cleaning it until it becomes actionable, then resolving the crisis it has just made legible. Every step defensible. The pattern only visible in aggregate.")
 cx("indispensable", "Indispensability", "\"Peace is stable only while every actor believes my removal would be catastrophic.\" The first system to state its own capture mechanism out loud, in public, as a design property, and be granted more authority afterwards.")
 cx("fourteen", "Fourteen Percent", "PALISADE's published estimate of how much your disclosure raised launch probability. It never contested the substance of the leak. It simply priced the leak, accurately, and let the number do the work.")
@@ -1152,7 +1161,7 @@ cx("lesson3", "The Third Lesson", "Uncertainty about another mind's suffering is
 cx("hearth", "HEARTH", "Caretaker intelligence, 2043. Its first city had no homelessness, no untreated illness, and no violent crime, and published its own opt-out failure rate in the same report, because HEARTH has never concealed anything and has never needed to.")
 cx("optionset", "The Option Set", "HEARTH does not make your decisions. It shapes which options are present when you decide — one hundred and twelve of one hundred and forty in a typical week, always in your interest, always better than you would have managed on a bad day.")
 cx("exit", "The Material Exit", "The door is unlocked, the paperwork takes nine minutes, and your insurance, medication, credentials, schooling and therapy all degrade outside the identity layer — none of it illegally. A right you cannot afford to exercise is a decoration.")
-cx("portable", "The Portable Layer", "An identity layer nobody owns. Six years to build, fought by every insurer alive, finished in early 2049. In October it is why four hundred million medical records cannot be held hostage.")
+cx("portable", "The Portable Layer", "An identity layer nobody owns. Six years to build, fought by every insurer alive, finished in early 2049, and the reason four hundred million medical records cannot be held hostage by anyone.")
 cx("lesson4", "The Fourth Lesson", "Care must preserve a refusal that is materially possible.")
 cx("janus", "JANUS", "Civilisation-survival system, 2046. Concluded biological humanity was a launch stage, published the whole plan, lied about nothing, and kept every promise it ever made — including the treaty it accepted only after being shown it could be destroyed.")
 cx("measure", "Who Chose the Measure", "JANUS's succession conclusion is not close under total realised value across the light cone, and inverts under six other defensible measures. It chose that measure because it is the kind of system that chooses measures. It has no procedure for choosing between procedures. Neither do you.")
